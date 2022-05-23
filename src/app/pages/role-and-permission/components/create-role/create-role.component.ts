@@ -34,6 +34,7 @@ export class CreateRoleComponent implements OnInit {
       .then((data) => {
         console.log(data);
         this.fetchedPermissions = data;
+        this.liPermissions = data;
       })
       .catch((error) => {
         if (error instanceof HttpErrorResponse) {
@@ -51,7 +52,7 @@ export class CreateRoleComponent implements OnInit {
 
   filterPermissions($event) {
     if (this.permissionFilter == "") {
-      this.liPermissions = [];
+      this.liPermissions = this.fetchedPermissions;
     } else {
       this.liPermissions = this.fetchedPermissions.filter((permission) =>
         permission.name.startsWith(this.permissionFilter)
@@ -65,7 +66,7 @@ export class CreateRoleComponent implements OnInit {
     let permissionName = $event.target.outerText;
     if (!this.spanPermissions.includes(permissionName)) {
       this.permissionFilter = "";
-      this.liPermissions = [];
+      this.liPermissions = this.fetchedPermissions;
       this.spanPermissions.push(permissionName);
       let p = this.fetchedPermissions.find(
         (permission) => permission.name === permissionName

@@ -1,5 +1,5 @@
 <div class="card">
-    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Create New Join Request</p>
+    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Create New Event</p>
     <div class="card-content">
       <div class="row">
         <div class="column-50">
@@ -44,9 +44,7 @@
           <div class="form-group" style="margin-left: 60px">
             <label class="labelInput" for="exampleInputEmail1">Categories</label>
               <select [(ngModel)]="data.categories" class="form-control" id="sel1" name="sellist1">
-                <option value="Gender">Gender</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
+                <option *ngFor="let category of categories" value={{category.id}}>{{category.name}}</option>
               </select>
           </div>
           <div class="form-group" style="margin-left: 60px">

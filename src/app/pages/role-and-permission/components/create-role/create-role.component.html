@@ -4,18 +4,20 @@
   <div>
     <div class="form-group" style="margin-left: auto; margin-right: 0px;">
       <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Role Name</label>
-      <input style="text-align: left" [(ngModel)]="data.roleName" type="email" class="form-control"
+      <input style="text-align: left" [(ngModel)]="data.roleName" type="text" class="form-control"
         id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter role name">
     </div>
-    <div class="form-group" style="margin-left: auto; margin-right: 0px;">
+    <div class="form-group" style="margin-left: auto; margin-right: 0px; margin-bottom: 0px;">
       <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Role's Permissions</label>
-      <input (keyup)="filterPermissions($event)" [(ngModel)]="permissionFilter" style="text-align: left" type="email" class="form-control"
-        id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter role name">
+      <input (keyup)="filterPermissions($event)" [(ngModel)]="permissionFilter" style="text-align: left" type="text" class="form-control"
+        id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter permission name">
     </div>
     <span (click)="removePermission($event)" class="role-span" *ngFor="let permission of spanPermissions">{{permission}}</span>
-    <ul id="myUL">
-      <li (click)="addPermissions($event)" *ngFor="let permission of liPermissions"><a>{{permission.name}}</a></li>
-    </ul>
+    <div class="permission-drop-down">
+      <ul id="myUL">
+        <li (click)="addPermissions($event)" *ngFor="let permission of liPermissions"><a>{{permission.name}}</a></li>
+      </ul>
+    </div>
     <div class="form-group">
       <label style="float:left; color: rgb(82, 82, 82);" for="inputGroupSelect01">Discription</label>
       <br>
