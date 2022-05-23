@@ -1,0 +1,25 @@
+<div class="card">
+    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Create New Category</p>
+    <div class="card-content">
+      <div class="row">
+        <div class="column-50">
+          <div class="form-group" style="margin-left: 60px">
+            <label class="labelInput" for="exampleInputEmail1">Category name</label>
+            <input type="email" [(ngModel)]="data.name" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Enter">
+          </div>
+        </div>
+        <div class="column-50">
+            <div class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Description</label>
+              <input type="email" [(ngModel)]="data.description" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter">
+            </div>
+          </div>
+      </div>
+    </div>
+    <div style="float: left; position: relative; top: 20px;">
+      <button class="btn btn-primary" [mat-dialog-close]="data">Save</button>
+      <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
+    </div>
+  </div>

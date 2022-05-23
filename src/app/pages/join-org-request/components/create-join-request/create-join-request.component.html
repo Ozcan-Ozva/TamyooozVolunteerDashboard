@@ -1,0 +1,66 @@
+<div class="card">
+  <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Create New Join Request</p>
+  <div class="card-content">
+    <div class="row">
+      <div class="column-50">
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Full name</label>
+          <input type="email" [(ngModel)]="data.name" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Email</label>
+          <input type="email" [(ngModel)]="data.email" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Birth Date</label>
+          <input type="date" [(ngModel)]="data.date_of_birth" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <!--<div class="form-group" style="margin-left: 60px">
+          <mat-form-field appearance="fill">
+            <mat-label style="color: black;">Choose a date</mat-label>
+            <input type="date" [(ngModel)]="data.date_of_birth" class="form-control" style="color: black;" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle style="color: black;" matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>-->
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Phone</label>
+          <input type="email" [(ngModel)]="data.phone" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+      </div>
+      <div class="column-50">
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Gender</label>
+            <select [(ngModel)]="data.gender" class="form-control" id="sel1" name="sellist1">
+              <option value="Gender">Gender</option>
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+            </select>
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">location</label>
+          <input type="email" [(ngModel)]="data.location" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Job</label>
+          <input type="email" [(ngModel)]="data.job" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">volunteering History</label>
+          <input type="email" [(ngModel)]="data.volunteering_history" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="float: left; position: relative; top: 20px;">
+    <button class="btn btn-primary" [mat-dialog-close]="data">Save</button>
+    <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
+  </div>
+</div>

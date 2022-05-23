@@ -1,0 +1,68 @@
+@import './vars.scss';
+@import './palette.scss';
+
+@mixin hidden-scroll-bar {
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+@mixin make-card {
+    & {
+        border-radius: $card-border-radius;
+        background-color: white;
+    }
+}
+
+@mixin make-scroll-bar($w: 5px, $h: 5px) {
+    &::-webkit-scrollbar {
+        border-top-right-radius: inherit;
+        border-bottom-right-radius: inherit;
+        width: $w or 5px;
+        height: $h or 5px;
+        background-color: wheat;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-top-right-radius: inherit;
+        border-bottom-right-radius: inherit;
+        width: 5px;
+        height: 5px;
+        background-color: rgb(6, 6, 57);
+    }
+}
+
+@mixin make-tl-drop-shadow($box-shadow: #00000040 0 5px 5px, $top: 0) {
+    & {
+        position: absolute;
+        z-index: 1;
+        width: 90%;
+        height: 100%;
+        box-shadow: $box-shadow;
+        top: $top;
+        left: 5%;
+    }
+}
+
+@mixin from-theme {
+    @content ($primary, $secondary, $warn);
+}
+
+@mixin make-unselectable {
+    & {
+        user-select: none;
+    }
+}
+
+@mixin make-dark-shadow {
+    & {
+        box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+    }
+}
+
+@mixin make-pink-shadow {
+    & {
+        box-shadow: 0 15px 20px rgb(249 82 111 / 25%);
+    }
+}

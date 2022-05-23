@@ -1,0 +1,99 @@
+@import './vars.scss';
+@import './core.scss';
+
+$treelancsers-primary: (
+    default: #00dd8e,
+    darker: #00c07b,
+    darkest: #0c9369,
+    lighter: #00d188,
+    lightest: #51e5bb,
+    contrast: (
+        default: white,
+        darker: white,
+        lighter: white,
+    ),
+);
+$treelancsers-pink: (
+    default: #f9526f,
+    lighter: #f774b9,
+    contrast: (
+        default: white,
+        darker: white,
+        lighter: white,
+    ),
+);
+$treelancsers-blue: (
+    default: #5e93fc,
+    lighter: #14b6e7,
+    contrast: (
+        default: white,
+        darker: white,
+        lighter: white,
+    ),
+);
+
+$treelancsers-dark: (
+    default: #333333,
+    darker: #000,
+    lighter: #646468,
+    lightest: #f2f2f2,
+    contrast: (
+        default: white,
+        darker: white,
+        lighter: white,
+    ),
+);
+$treelancsers-secondary: (
+    default: #fbb612,
+    darker: #e6a200,
+    lighter: #ffd267,
+    lightest: #f2e077,
+    contrast: (
+        default: white,
+        darker: white,
+        lighter: white,
+    ),
+);
+$treelancsers-purple: (
+    default: #9457fe,
+    darker: #9b51e0,
+    lighter: #9d6afe,
+    contrast: (
+        default: white,
+        darker: white,
+        lighter: white,
+    ),
+);
+
+$treelancsers-warn: (
+    50: #ffebee,
+    100: #ffcdd2,
+    200: #ef9a9a,
+    300: #e57373,
+    400: #ef5350,
+    500: #f44336,
+    600: #e53935,
+    700: #d32f2f,
+    800: #c62828,
+    900: #b71c1c,
+    A100: #ff8a80,
+    A200: #ff5252,
+    A400: #ff1744,
+    A700: #d50000,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $dark-primary-text,
+        400: $dark-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $light-primary-text,
+        A400: white,
+        A700: $light-primary-text,
+    ),
+);
