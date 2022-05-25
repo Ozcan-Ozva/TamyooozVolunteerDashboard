@@ -57,7 +57,7 @@ export class AuthService {
 
     get Token(): TokenPayload | null {
         try {
-            return JSON.parse(localStorage.getItem(this.LOCATION_KEY)) as TokenPayload;
+            return JSON.parse(localStorage.getItem(this.LOCATION_KEY)) /* as TokenPayload */;
         } catch (error) {
             return null;
         }

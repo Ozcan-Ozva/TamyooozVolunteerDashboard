@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   public focus;
+  private LOCATION_KEY = 'access_token';
   public listTitles: any[];
   public location: Location;
   constructor(location: Location,  private element: ElementRef, private router: Router) {
@@ -31,6 +32,10 @@ export class NavbarComponent implements OnInit {
         }
     }
     return 'Dashboard';
+  }
+
+  logout() {
+    localStorage.removeItem(this.LOCATION_KEY);
   }
 
 }
