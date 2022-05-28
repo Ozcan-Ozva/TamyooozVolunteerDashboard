@@ -4,7 +4,7 @@
       <div class="row">
         <div class="column-50">
           <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Point Role Name</label>
+            <label class="labelInput" for="exampleInputEmail1">Badge Name</label>
             <input type="text" [(ngModel)]="data.rule_name" class="form-control" id="exampleInputEmail1"
               aria-describedby="emailHelp" placeholder="Enter">
           </div>
@@ -15,7 +15,7 @@
           </div>
           <div class="form-group" style="margin-left: 60px">
             <label class="labelInput" for="exampleInputEmail1">ُEvents</label>
-              <select [disabled]="selectedMetric == null || selectedOperation == null" (change)="selectEventOpeation()" [(ngModel)]="eventValue" class="form-control" id="sel1" name="sellist1">
+              <select [disabled]="selectedMetric == null || selectedOperation == null" (change)="getEventOperation()" [(ngModel)]="eventValue" class="form-control" id="sel1" name="sellist1">
                 <option value="1">One Event</option>
                 <option value="2">All Event</option>
               </select>
@@ -31,7 +31,7 @@
           <div *ngIf="selectedMetricsOperation && selectedMetricsOperation.operations.length > 0 " class="form-group" style="margin-left: 60px">
             <label class="labelInput" for="exampleInputEmail1">Metric Operations</label>
               <select (change)="onChangeOperation()" [(ngModel)]="selectedOperationId" class="form-control" id="sel1" name="sellist1">
-                <option *ngFor="let operation of selectedMetricsOperation.operations" value={{operation.id}}>{{operation.label}}</option>
+                <option *ngFor="let operation of selectedMetricOperation.operations" value={{operation.id}}>{{operation.label}}</option>
               </select>
           </div>
           <div *ngIf="eventValue == 2" class="form-group" style="margin-left: 60px">
@@ -43,7 +43,7 @@
           <div *ngIf="selectedMetricsOperation && selectedMetricsOperation.compareOperations.length > 0 " class="form-group" style="margin-left: 60px">
             <label class="labelInput" for="exampleInputEmail1">Compare To</label>
               <select class="form-control" id="sel1" name="sellist1">
-                <option *ngFor="let compareOf of selectedMetricsOperation.compareOperations" value={{compareOf.id}}>{{compareOf.label}}</option>
+                <option *ngFor="let compareOf of selectedMetricOperationCopmare" value={{compareOf.id}}>{{compareOf.label}}</option>
               </select>
           </div>
           <div class="form-group" style="margin-left: 60px">
