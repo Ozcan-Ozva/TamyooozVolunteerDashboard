@@ -1,41 +1,48 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component, OnInit, ElementRef } from "@angular/core";
+import { ROUTES } from "../sidebar/sidebar.component";
+import {
+  Location,
+  LocationStrategy,
+  PathLocationStrategy,
+} from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
   public focus;
-  private LOCATION_KEY = 'access_token';
+  private LOCATION_KEY = "access_token";
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  constructor(
+    location: Location,
+    private element: ElementRef,
+    private router: Router
+  ) {
     this.location = location;
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.listTitles = ROUTES.filter((listTitle) => listTitle);
   }
-  getTitle(){
+  getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#'){
-        titlee = titlee.slice( 1 );
+    if (titlee.charAt(0) === "#") {
+      titlee = titlee.slice(1);
     }
 
-    for(var item = 0; item < this.listTitles.length; item++){
-        if(this.listTitles[item].path === titlee){
-            return this.listTitles[item].title;
-        }
+    for (var item = 0; item < this.listTitles.length; item++) {
+      if (titlee.includes(this.listTitles[item].path)) {
+        return this.listTitles[item].title;
+      }
     }
-    return 'Dashboard';
+    return "Dashboard";
   }
 
   logout() {
     localStorage.removeItem(this.LOCATION_KEY);
   }
-
 }

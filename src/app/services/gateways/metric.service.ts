@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { API } from "../api.service";
 import { Metric } from "../../model/metric";
+import { MetricOperation } from "../../model/metric-operation";
 
 const ENDPOINTS = {
   getMetric: "metrics",
   postMetric: "metrics",
   putMetric: (id: number) => `metrics/${id}`,
   deleteMetric: (id: number) => `metrics/${id}`,
+  getMetricOperation: "getMetricsOperations",
 };
 
 @Injectable()
@@ -19,6 +21,15 @@ export class MetricGateway {
       .toPromise()
       .then((data) => {
         return Metric.fromDTOArray(data.data.data);
+      });
+  }
+
+  getMetricsOperation(filter: any): Promise<MetricOperation[]> {
+    return this.api
+      .get<any>(ENDPOINTS.getMetricOperation, {}, null, null, filter)
+      .toPromise()
+      .then((data) => {
+        return MetricOperation.fromDTOArray(data);
       });
   }
 

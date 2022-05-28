@@ -1,0 +1,94 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="scrolling-wrapper">
+          <div class="row">
+            <div class="row-card">
+              <div *ngFor="let x of fackeList" style="margin-left: 10px;">
+                <div class="card card-stats mb-4 mb-xl-0" style="margin-left: 10px;">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                        <span class="h2 font-weight-bold mb-0">350,897</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                          <i class="fas fa-chart-bar"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                      <span class="text-nowrap">Since last month</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row" style="justify-content: center; align-items: center;">
+      <div>
+        <div class="card shadow">
+          <div *ngIf="loader" class="loader"></div>
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">Badges</h3>
+              </div>
+              <div class="col text-right">
+                <button (click)="openDialog()" class="btn btn-sm btn-primary">New Badge</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">User name</th>
+                  <th scope="col">Admin name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Created at</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let badge of badges">
+                  <th scope="row">
+                    {{badge.name}}
+                  </th>
+                  <td>
+                    {{badge.name}}
+                  </td>
+                  <td>
+                    {{badge.name}}
+                  </td>
+                  <td>
+                    {{badge.created_at | date:'short'}}
+                  </td>
+                  <td class="text-right">
+                    <div ngbDropdown placement="bottom-right">
+                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                        <a (click)="updateJoinRequest(joinRequest)" class="dropdown-item">Update join-request</a>
+                        <a (click)="deleteJoinRequest(joinRequest.id)" class="dropdown-item">Delete join-request</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

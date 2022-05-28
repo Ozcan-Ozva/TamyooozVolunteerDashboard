@@ -9,18 +9,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CreateEventComponent } from './components/create-event/create-event.component';
-import { CarouselImageComponent } from './components/carousel-image/carousel-image.component';
-import { EventManagementComponent } from './event-management/event-management.component';
-import { EventComponent } from './events-view/event.component';
-import { EventRouting } from './event.route';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { PointRuleComponent } from './point-rule.component';
+import { CreatePointRoleComponent } from './components/create-point-role/create-point-role.component';
 
 @NgModule({
-    declarations: [EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent],
+    declarations: [PointRuleComponent, CreatePointRoleComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,
+        MatNativeDateModule,
         DragDropModule,
+        MatDatepickerModule,
         MatButtonModule,
         MatInputModule,
         OverlayModule,
@@ -28,7 +29,6 @@ import { EventRouting } from './event.route';
         FormsModule,
         MatDialogModule,
         NgbModule,
-        EventRouting,
     ],
 })
-export class EventViewModule {}
+export class PointRuleViewModule {}

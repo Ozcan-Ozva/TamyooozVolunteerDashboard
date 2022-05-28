@@ -60,7 +60,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let event of events">
+                <tr (click)="navigateToEvent(event.id)" *ngFor="let event of events">
                   <th scope="row">
                     {{event.name}}
                   </th>

@@ -1,13 +1,13 @@
-import { DatePipe } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Event } from "../../model/event";
-import { EventGateway } from "../../services/gateways/event.service";
+import { EventGateway } from "../../../services/gateways/event.service";
 import {
   CreateEventComponent,
   EventtDialogData,
-} from "./components/create-event/create-event.component";
+} from "../components/create-event/create-event.component";
+import { Event } from "../../../model/event";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-event",
@@ -41,7 +41,11 @@ export class EventComponent implements OnInit {
     1,
   ];
 
-  constructor(public _eventGateway: EventGateway, public dialog: MatDialog) {}
+  constructor(
+    public _eventGateway: EventGateway,
+    public dialog: MatDialog,
+    public router: Router
+  ) {}
 
   ngOnInit() {
     this.fetchEvent({})
@@ -136,5 +140,9 @@ export class EventComponent implements OnInit {
           });
       }
     });
+  }
+
+  navigateToEvent(id: number) {
+    this.router.navigate(["event/manage-event", id]);
   }
 }
