@@ -22,6 +22,7 @@ import { ProgressBarComponent } from '../../pages/dashboard/components/progress-
 import { EventCardComponent } from '../../pages/dashboard/components/event-card/event-card.component';
 import { PointRuleViewModule } from '../../pages/point-rule/point-rule.module';
 import { BadgeViewModule } from '../../pages/badget/badget.module';
+import { NewsFeedViewModule } from '../../pages/news-feed/news-feed.module';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -41,7 +42,8 @@ import { BadgeViewModule } from '../../pages/badget/badget.module';
     VolunteersViewModule,
     CategoryViewModule,
     PointRuleViewModule,
-    BadgeViewModule
+    BadgeViewModule,
+    NewsFeedViewModule,
   ],
   declarations: [
     DashboardComponent,

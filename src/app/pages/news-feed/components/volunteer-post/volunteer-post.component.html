@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500,700'>
+<script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+
+<div class="container">
+  <div class="row">
+    <div style="width: 60%">
+      <div style="width: auto" id="post">
+        <header>
+          <img src="https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-64.png" alt="">
+          <p><a href="#" class="name">Daniel Svensson</a> uploaded a new photo to the album <a href="#">Beautiful
+              Nature</a>.<span>20.04.2015 @ 12:00 PM</span></p>
+          <div class="option"></div>
+        </header>
+
+        <div class="content">
+          <p>Nautre’s beauty can’t be described in words.</p>
+          <img
+            src="data:image/jpeg;base64,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"
+            alt="">
+          <div style="margin-top: 15px;" id="social">
+            <div class="row">
+              <i style="margin-right: 5px;" class="fal fa-comment">&nbsp; 402</i>
+              <i class="far fa-heart">&nbsp; 2k</i>
+            </div>
+          </div>
+        </div>
+
+        <div (click)="showHideComments()" class="hide-comments">
+          <input [(ngModel)]="checkBoxHideButtonValue" type="checkbox" value="" id="hide-button" name="check" checked />
+          <label id="hide-button-label" for="hide-button" class="button">{{hideCommentsButtonLabel}}</label>
+        </div>
+
+        <div [@openClose]="checkBoxHideButtonValue ? 'open' : 'closed'" class="comments">
+          <ul>
+            <li>
+              <div class="user-comment">
+                <img src="https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png" alt="">
+                <header><a href="#" class="name">Josephine Bowler</a><span>20.02.2015 @ 09:01</span></header>
+                <div class="content">
+                  <p>This picture is absolutely amazing! You are such a good photographer :)</p>
+                </div>
+                <a href="" class="reply">Reply</a>
+              </div>
+            </li>
+
+            <li>
+              <div class="user-comment">
+                <img src="https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png" alt="">
+                <header><a href="#" class="name">Damian Markovic</a><span>20.02.2015 @ 12:46</span></header>
+                <div class="content">
+                  <p>Dude, this has got to be one of the most outstanding photo I’ve ever seen! Love this album
+                    and love your work! Keep up the good work!</p>
+                </div>
+                <a href="" class="reply">Reply</a>
+              </div>
+              <ul>
+                <li>
+                  <div class="user-comment">
+                    <img src="https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png" alt="">
+                    <header><a href="#" class="name">Daniel Svensson</a><span>20.02.2015 @ 13:46</span></header>
+                    <div class="content">
+                      <p>Thank you so much for your compliments! I try my best :)</p>
+                    </div>
+                    <a href="" class="reply">Reply</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <div class="user-comment">
+                <img src="https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png" alt="">
+                <header><a href="#" class="name">Jennifer Lee</a><span>21.02.2015 @ 14:00</span></header>
+                <div class="content">
+                  <p>Wow!!! Cool shot, Daniel! You should post more often =)</p>
+                </div>
+                <a href="" class="reply">Reply</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div style="width: 30%; margin-left: 50px;">
+      <div style="width: auto" id="profile">
+        <div id="close"></div>
+        <img src="https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-128.png" alt="">
+        <h3>Daniel Svensson</h3>
+        <a href="">UI/UX designer</a>
+        <div id="desc">
+          <div class="trophies">204</div>
+          <div class="friends">2k</div>
+          <div class="photos">68</div>
+        </div>
+        <a href="" class="button">Follow</a>
+      </div>
+    </div>
+  </div>
+</div>

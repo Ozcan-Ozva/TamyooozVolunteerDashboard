@@ -12,6 +12,7 @@ import { JoinOrgRequestComponent } from "../../pages/join-org-request/join-org-r
 import { MetricComponent } from "../../pages/metric/metric.component";
 import { PointRuleComponent } from "../../pages/point-rule/point-rule.component";
 import { BadgetComponent } from "../../pages/badget/badget.component";
+import { NewsFeedComponent } from "../../pages/news-feed/news-feed.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -20,6 +21,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "badge", component: BadgetComponent },
   { path: "join-request", component: JoinOrgRequestComponent },
   { path: "metric", component: MetricComponent },
+  { path: "news-feed", component: NewsFeedComponent },
   {
     path: "event",
     loadChildren: () =>

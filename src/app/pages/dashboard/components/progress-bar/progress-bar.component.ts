@@ -15,10 +15,6 @@ export class ProgressBarComponent implements OnInit {
   ngOnInit(): void {
     this.progress = document.getElementById("progress");
     this.stepCircles = document.querySelectorAll(".circle");
-    console.log("this is progress");
-    console.log(this.progress);
-    console.log("this is stepCircles");
-    console.log(this.stepCircles);
   }
 
   ngAfterViewInit() {
@@ -35,7 +31,14 @@ export class ProgressBarComponent implements OnInit {
     });
   
     const activeCircles = document.querySelectorAll(".active");
+    console.log("this is activeCircles");
+    console.log(activeCircles);
+    console.log("this is stepCircles");
+    console.log(this.stepCircles);
+    console.log("this is width");
+    console.log(((activeCircles.length - 1) / (this.stepCircles.length - 1)) * 100);
+    
     this.progress.style.width =
-      ((activeCircles.length - 1) / (this.stepCircles.length - 1)) * 100 + "%";  
+      ((activeCircles.length - 1) / (this.stepCircles.length + 1)) * 100 + "%";  
   }
 }
