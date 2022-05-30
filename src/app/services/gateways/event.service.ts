@@ -4,6 +4,7 @@ import { API } from "../api.service";
 
 const ENDPOINTS = {
   getEvents: "events",
+  getEvent: (id: number) => `events/${id}`,
   postEvent: "events",
   putRole: (id: number) => `events/${id}`,
   deleteRole: (id: number) => `events/${id}`,
@@ -19,6 +20,15 @@ export class EventGateway {
       .toPromise()
       .then((data) => {
         return Event.fromDTOArray(data.data.data);
+      });
+  }
+
+  getEvent(id: number): Promise<Event> {
+    return this.api
+      .get<any>(ENDPOINTS.getEvent(id), {}, null, null, {})
+      .toPromise()
+      .then((data) => {
+        return Event.fromDTO(data.data);
       });
   }
 

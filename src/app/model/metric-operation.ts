@@ -60,12 +60,14 @@ export class CompareOperation {
     id?:    string;
     label?: string;
     to?:    string;
+    hasValue? : boolean;
 
     constructor(compareOperations: Partial<CompareOperation>) {
         if (!compareOperations) compareOperations = {};
         this.id = compareOperations.id;
         this.label = compareOperations.label;
         this.to = compareOperations.to;
+        this.hasValue = compareOperations.hasValue;
     }
 
     public static fromDTO(dto : any) : CompareOperation | null {
@@ -74,6 +76,7 @@ export class CompareOperation {
             id: dto.id,
             label: dto.label,
             to: dto.to,
+            hasValue: dto.hasValue,
         });
     }
 

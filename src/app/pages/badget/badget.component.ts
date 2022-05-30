@@ -129,23 +129,17 @@ export class BadgetComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result !== undefined) {
         console.log(result);
-        /* this._joinRequestGateway
-        .postJoinRequest({
+        this._badgeGateway
+        .postBadge({
             name: result.name,
-            username :"hassaMnsew",
-            email : result.email,
-            date_of_birth: formattedDate,
-            phone: result.phone,
-            gender: result.gender,
-            location: result.location,
-            job : result.job,
-            volunteering_history: result.volunteering_history,
+            description: result.description,
+            metric_queries: result.metric_queries,
         })
         .subscribe((result: any) => {
           if (result.status_code === 200) {
-            this.joinRequests.push(JoinRequest.fromDTO(result.data));
+            this.badges.push(Badge.fromDTO(result.data));
           }
-        }); */
+        });
       }
     });
   }

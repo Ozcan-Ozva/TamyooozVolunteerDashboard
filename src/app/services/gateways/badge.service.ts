@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { API } from "../api.service";
 import { Badge } from "../../model/badge";
+import { MetricQuery } from "../../model/metric-query";
 
 const ENDPOINTS = {
   getBadges: "getAllBadges",
-  postPointRule: "newPointRule",
+  postBadge: "newBadge",
   putJoinRequest: (id: number) => `join-requests/${id}`,
   patchJoinRequest: (id: number) => `join-requests/${id}`,
   deleteJoinRequest: (id: number) => `join-requests/${id}`,
@@ -23,18 +24,14 @@ export class BadgeGateway {
       });
   }
 
-  postPointRule(pointRole: PointRoleDto) {
+  postBadge(badge: BadgeDto) {
     return this.api.post(
-      ENDPOINTS.postPointRule,
+      ENDPOINTS.postBadge,
       {},
       {
-        rule_name: pointRole.rule_name,
-        description: pointRole.description,
-        points: pointRole.points,
-        metric_queries: {
-            metric_id: pointRole.metric_queries.metric_id,
-            first_operation: pointRole.metric_queries.first_operation,
-        }
+        name: badge.name,
+        description: badge.description,
+        metric_queries: badge.metric_queries,
       }
     );
   }
@@ -52,12 +49,8 @@ export class BadgeGateway {
   } */
 }
 
-export interface PointRoleDto {
-    rule_name: string;
-    description: string;
-    points: number;
-    metric_queries: {
-      metric_id: number,
-      first_operation: string,
-    };
-  }
+export interface BadgeDto {
+  name: string;
+  description: string;
+  metric_queries: MetricQuery[];
+}

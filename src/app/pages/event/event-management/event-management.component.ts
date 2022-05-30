@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { EventGateway } from "../../../services/gateways/event.service";
+import { Event } from "../../../model/event";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-event-management",
@@ -9,6 +12,20 @@ import { ActivatedRoute } from "@angular/router";
 export class EventManagementComponent implements OnInit {
   private sub: any;
   private id;
+  public event: Event = {
+    id: 0,
+    name: "",
+    categories: [],
+    created_at: new Date(),
+    description: "",
+    end_date: new Date(),
+    media: null,
+    required_volunteers_number: 0,
+    start_date: new Date(),
+    status: null,
+    updated_at: new Date(),
+  };
+  public loader: boolean = true;
 
   images = [
     {
@@ -48,13 +65,29 @@ export class EventManagementComponent implements OnInit {
     },
   ];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private _eventGateway: EventGateway) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params["id"];
       console.log("this is id");
       console.log(this.id);
+      this.fetchEvent(this.id)
+      .then((data) => {
+        console.log("this is event");
+        console.log(data);
+        this.event = data;
+        this.loader = false;
+      })
+      .catch((error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 401) alert("Wrong Password");
+        }
+      });
     });
+  }
+
+  private async fetchEvent(id: number) {
+    return this._eventGateway.getEvent(id);
   }
 }

@@ -2,95 +2,116 @@
 
 
 .card {
-    padding: 10px;
-    max-width: 750px;
-    width: 100%;
-    @include make-card;
-    @include make-scroll-bar;
-    overflow-y: auto;
-    position: relative;
-    padding: 50px 30px;
-    max-height: 600px;
+  padding: 10px;
+  max-width: 800px;
+  width: 100%;
+  @include make-card;
+  @include make-scroll-bar;
+  overflow-y: auto;
+  position: relative;
+  padding: 50px 30px;
+  max-height: 600px;
 
-    .saveButton {
-        background-color: rgb(6, 6, 57);
-        color: white;
-        margin-left: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .saveButton {
+    background-color: rgb(6, 6, 57);
+    color: white;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
-    .cancelButton {
-        background-color: white;
-        color: rgb(6, 6, 57);
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-left: 20px;
-        border-color: rgb(6, 6, 57);
-    }
+  .cancelButton {
+    background-color: white;
+    color: rgb(6, 6, 57);
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 20px;
+    border-color: rgb(6, 6, 57);
+  }
 
-    .card-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+  .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .footer {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: flex-end;
-        padding: 25px 0 0 0;
-        margin-bottom: -25px;
-    }
+  .footer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    padding: 25px 0 0 0;
+    margin-bottom: -25px;
+  }
 }
 
 /* Create two equal columns that floats next to each other */
 .column-50 {
-    float: left;
-    width: 50%;
-    padding: 10px;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
 
-  #myUL {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  #myUL li a {
-    border: 1px solid #ddd;
-    margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6;
-    padding: 12px;
-    text-decoration: none;
-    font-size: 14px;
-    color: black;
-    display: block
-  }
-  
-  #myUL li a:hover:not(.header) {
-    background-color: #eee;
-  }
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-  .role-span {
-    background-color: #5E72E4;
-    color: white;
-    border-radius: 25px;
-    padding: 5px;
-    margin-right: 5px;
-    white-space: nowrap;
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 12px;
-  }
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .labelInput {
-    float:left; color: rgb(82, 82, 82)
-  }
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+.role-span {
+  background-color: #5E72E4;
+  color: white;
+  border-radius: 25px;
+  padding: 5px;
+  margin-right: 5px;
+  white-space: nowrap;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.labelInput {
+  float: left;
+  color: rgb(82, 82, 82)
+}
+
+.divider {
+  height: 1px;
+  background-color: #f55540;
+  width: 100%;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

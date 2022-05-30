@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Metric } from '../../../../model/metric';
+import { MetricQuery } from '../../../../model/metric-query';
 import { CompareOperation, MetricOperation, Operation } from '../../../../model/metric-operation';
 import { MetricGateway } from '../../../../services/gateways/metric.service';
 
@@ -12,36 +13,35 @@ import { MetricGateway } from '../../../../services/gateways/metric.service';
 })
 export class CreateBadgeComponent implements OnInit {
 
-  metrics: Metric[];
-  metricsOperations: MetricOperation[] = [];
-  selectedMetricType: number;
+  metrics: Metric[]; // fetched Metrics.
+  metricsOperations: MetricOperation[] = []; // fetched Metrics operation.
+  selectedMetricType: number; // id of selected metric.
+  selectedEventOperationId: string; // id of selected event operation.
   selectedOperationId: string;
-  sMetric : Metric;
-  selectOperationID : string = "";
-  selectedMetricsOperation: MetricOperation;
+  selectedCompareOfId: string;
   eventValue : number = 0;
   //
   selectedMetric : Metric;
   selectedMetricOperation: MetricOperation;
+  selectedCompareTo: CompareOperation;
   selectedMetricOperationCopmare: CompareOperation[] = [];
   selectedEventOperation: MetricOperation;
   selectedOperation: Operation;
+  selectedOperationOfEvent: Operation;
+  compareValue: number = 0;
+  metricQueries: MetricQuery[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CreateBadgeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PointRoleDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: BadgeDialogData,
     public _metricGateway: MetricGateway,
   ) { }
 
   ngOnInit(): void {
     this.data = {
-      rule_name: "",
+      name: "",
       description: "",
-      points: 0,
-      metric_queries: {
-        metric_id: 0,
-        first_operation: "sum"
-      }
+      metric_queries: [],
     };
     this.fetchMetrics({})
       .then((data) => {
@@ -74,34 +74,25 @@ export class CreateBadgeComponent implements OnInit {
     return this._metricGateway.getMetricsOperation({});
   }
 
-  selectMetric() {
-    let metric = this.metrics.find((m) => m.id == this.selectedMetricType);
-    console.log("this is metric");
-    console.log(metric);
-    this.selectedMetricsOperation = this.metricsOperations.find((mo) => mo.type == metric.type);
-    this.data.metric_queries.metric_id = metric.id;
-  }
-
-  selectOperation() {
-    console.log("this is selectOperationID");
-    console.log(this.selectOperationID);
-    this.data.metric_queries.first_operation = this.selectOperationID;
-  }
-
-  selectEventOpeation() {
-    let metric = this.metrics.find((m) => m.id == this.selectedMetricType);
-    let eventMetricType = metric.type + 1;
-    this.selectedEventOperation = this.metricsOperations.find((mo) => mo.type == eventMetricType);
-  }
-
-
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   onChangeGetMetric() {
+    this.selectedMetricOperationCopmare = [];
+    this.selectedOperation = undefined;
+    this.selectedEventOperationId =  "";
+    this.selectedOperationId  = "";
+    this.selectedCompareOfId = "";
     this.selectedMetric = this.metrics.find((m) => m.id == this.selectedMetricType);
     this.getOperation();
+    if (this.selectedMetric.type %2 != 0 || this.selectedOperation !== undefined) {
+      this.getCompareTo();
+      this.onChangeEvent();
+    }
+    if (this.selectedMetric.type %2 == 0) {
+      this.eventValue = 0;
+    }
   }
 
   getOperation() {
@@ -145,14 +136,111 @@ export class CreateBadgeComponent implements OnInit {
     }
   }
 
+  onChangeSelectEventOperation() {
+    this.selectedOperationOfEvent = this.selectedEventOperation.operations.find((o) => o.id == this.selectedEventOperationId);
+  }
+
+  onChangeCompareTo() {
+    this.selectedCompareTo = this.selectedMetricOperationCopmare.find(
+      (compareTo) => compareTo.id == this.selectedCompareOfId
+    );
+  }
+
+  disableEventButton() {
+    if (this.selectedMetric == null) {
+      return true;
+    }
+    else if (this.selectedMetric.type % 2 == 0 && this.selectedOperation == undefined) {
+      return true;
+    }
+    else return false;
+  }
+
+  addMetricQuery() {
+    let metricQuery : MetricQuery;
+    if (this.selectedMetric != null) {
+      if (this.selectedMetric.type %2 != 0) {
+        console.log("it's odd");
+        if (this.eventValue != 2 ) {
+          console.log("there is no event operation");
+          metricQuery = new MetricQuery({
+            metric_id: this.selectedMetric.id,
+            first_operation: "x",
+            second_operation: "x",
+            compare_operation: this.selectedCompareTo.id,
+            compare_value: this.compareValue,
+          });
+          this.metricQueries.push(metricQuery);
+          this.reAssignValue(true);
+        }
+        else {
+          console.log("there is event operation");
+          metricQuery = new MetricQuery({
+            metric_id: this.selectedMetric.id,
+            first_operation: this.selectedOperationOfEvent.id,
+            second_operation: "x",
+            compare_operation: this.selectedCompareTo.id,
+            compare_value: this.compareValue,
+          });
+          this.metricQueries.push(metricQuery);
+          this.reAssignValue(true);
+        }
+      }
+      else {
+        console.log("it's even");
+        if (this.eventValue != 2 ) {
+          console.log("there is no event operation");
+          metricQuery = new MetricQuery({
+            metric_id: this.selectedMetric.id,
+            first_operation: this.selectedOperation.id,
+            second_operation: "x",
+            compare_operation: this.selectedCompareTo.id,
+            compare_value: this.compareValue,
+          });
+          this.metricQueries.push(metricQuery);
+          this.reAssignValue(true);
+        }
+        else {
+          console.log("there is event operation");
+          metricQuery = new MetricQuery({
+            metric_id: this.selectedMetric.id,
+            first_operation: this.selectedOperation.id,
+            second_operation: this.selectedOperationOfEvent.id,
+            compare_operation: this.selectedCompareTo.id,
+            compare_value: this.compareValue,
+          });
+          this.metricQueries.push(metricQuery);
+          this.reAssignValue(true);
+        }
+      }
+    }
+  }
+
+  reAssignValue(reAssignMetricValue: boolean = false) {
+    if (reAssignMetricValue) {
+      this.selectedMetric = undefined;
+      this.selectedMetricType = 0;
+    }
+    this.selectedMetricOperationCopmare = [];
+    this.selectedOperation = undefined;
+    this.selectedEventOperationId =  "";
+    this.selectedOperationId  = "";
+    this.selectedCompareOfId = "";
+    this.compareValue = 0;
+  }
+
+  onDeleteMetricQuery($event) {
+    this.metricQueries.splice($event,1);
+  }
+
+  onSave() {
+    this.data.metric_queries = this.metricQueries;
+  }
+
 }
 
-export interface PointRoleDialogData {
-  rule_name: string;
+export interface BadgeDialogData {
+  name: string;
   description: string;
-  points: number;
-  metric_queries: {
-    metric_id: number,
-    first_operation: string,
-  };
+  metric_queries: MetricQuery[];
 }

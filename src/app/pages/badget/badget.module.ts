@@ -13,9 +13,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BadgetComponent } from './badget.component';
 import { CreateBadgeComponent } from './components/create-badge/create-badge.component';
+import { MetricQueryCardComponent } from './components/metric-query-card/metric-query-card.component';
 
 @NgModule({
-    declarations: [BadgetComponent, CreateBadgeComponent],
+    declarations: [BadgetComponent, CreateBadgeComponent, MetricQueryCardComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,

@@ -1,0 +1,56 @@
+<div class="main-container">
+    <div class="cards">
+      <div *ngFor="let metricQuery of metricQueries let index = index" class="card card-1">
+        <!-- <div class="card__icon"><i class="fas fa-bolt"></i></div> -->
+        <p (click)="removeMetricQuery(index)" class="card__exit"><i class="fas fa-times"></i></p>
+        <h3 class="card__title">Metric Query Name</h3>
+        <p>First operation: {{metricQuery.first_operation}}</p>
+        <p>Second operation: {{metricQuery.second_operation}}</p>
+        <p>Compare operation: {{metricQuery.compare_operation}}</p>
+        <p>Compare value: {{metricQuery.compare_value}}</p>
+        <!-- <p class="card__apply">
+          <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </p> -->
+      </div>
+      <!-- <div class="card card-2">
+        <div class="card__icon"><i class="fas fa-bolt"></i></div>
+        <p class="card__exit"><i class="fas fa-times"></i></p>
+        <h2 class="card__title">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h2>
+        <p class="card__apply">
+          <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </p>
+      </div>
+      <div class="card card-3">
+        <div class="card__icon"><i class="fas fa-bolt"></i></div>
+        <p class="card__exit"><i class="fas fa-times"></i></p>
+        <h2 class="card__title">Ut enim ad minim veniam.</h2>
+        <p class="card__apply">
+          <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </p>
+      </div>
+      <div class="card card-4">
+        <div class="card__icon"><i class="fas fa-bolt"></i></div>
+        <p class="card__exit"><i class="fas fa-times"></i></p>
+        <h2 class="card__title">Quis nostrud exercitation ullamco laboris nisi.</h2>
+        <p class="card__apply">
+          <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </p>
+      </div>
+      <div class="card card-5">
+        <div class="card__icon"><i class="fas fa-bolt"></i></div>
+        <p class="card__exit"><i class="fas fa-times"></i></p>
+        <h2 class="card__title">Ut aliquip ex ea commodo consequat. Duis aute irure dolor.</h2>
+        <p class="card__apply">
+          <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </p>
+      </div>
+      <div class="card card-1">
+        <div class="card__icon"><i class="fas fa-bolt"></i></div>
+        <p class="card__exit"><i class="fas fa-times"></i></p>
+        <h2 class="card__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+        <p class="card__apply">
+          <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </p>
+      </div> -->
+    </div>
+  </div>
