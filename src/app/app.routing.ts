@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LoginGuard } from './guard/login.guard';
+import { ProfileResolver } from './resolver/resolver.service';
 
 const routes: Routes =[
   {
@@ -17,6 +18,7 @@ const routes: Routes =[
     path: '',
     component: AdminLayoutComponent,
     canActivateChild: [AuthGuard],
+    resolve: { me: ProfileResolver },
     children: [
       {
         path: '',
@@ -49,5 +51,6 @@ const routes: Routes =[
   ],
   exports: [
   ],
+  providers: [ProfileResolver]
 })
 export class AppRoutingModule { }

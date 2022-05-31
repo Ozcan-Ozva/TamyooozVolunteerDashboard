@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-admin-layout',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  constructor() { }
+  me : User;
+
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(
+      'Activated route data in Component:::',
+      this.activatedRoute.data
+    );
+    this.activatedRoute.data.subscribe((response: any) => {
+      console.log('My Profile FETCHING', response);
+      this.me = response.me.data;
+      console.log('My Profile FETCHED');
+      console.log(this.me);
+    });
   }
 
 }

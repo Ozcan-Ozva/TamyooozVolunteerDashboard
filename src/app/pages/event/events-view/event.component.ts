@@ -118,7 +118,16 @@ export class EventComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateEventComponent, {
-      data: {},
+      data: {
+        name: "",
+        description: "",
+        start_date: "",
+        required_volunteers_number: 0,
+        end_date: "",
+        users: [],
+        metrics: [],
+        categories: [],
+      },
     });
     dialogRef.afterClosed().subscribe((eventResult: EventtDialogData) => {
       if (eventResult !== undefined) {

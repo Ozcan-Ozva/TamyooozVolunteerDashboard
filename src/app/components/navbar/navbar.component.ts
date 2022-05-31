@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from "@angular/core";
+import { Component, OnInit, ElementRef, Input } from "@angular/core";
 import { ROUTES } from "../sidebar/sidebar.component";
 import {
   Location,
@@ -6,6 +6,7 @@ import {
   PathLocationStrategy,
 } from "@angular/common";
 import { Router } from "@angular/router";
+import { User } from "../../model/user";
 
 @Component({
   selector: "app-navbar",
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit {
   private LOCATION_KEY = "access_token";
   public listTitles: any[];
   public location: Location;
+  @Input() user: User;
   constructor(
     location: Location,
     private element: ElementRef,

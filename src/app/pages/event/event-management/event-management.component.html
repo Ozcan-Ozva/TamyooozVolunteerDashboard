@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="header-body">
       <h1 class="event-name-header"> {{event.name}}
-        <div>{{event.description}}</div>
+        <div class="event-description">{{event.description}}</div>
       </h1>
       <!-- Card stats -->
       <div *ngIf="loader" class="loader"></div>
@@ -13,7 +13,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Volunteers Num</h5>
-                  <span class="h2 font-weight-bold mb-0">33</span>
+                  <span class="h2 font-weight-bold mb-0">{{event.required_volunteers_number}}</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -30,7 +30,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Category</h5>
-                  <span class="h2 font-weight-bold mb-0">Social</span>
+                  <span style="font-size: 15px" *ngFor="let category of event.categories "class="h2 font-weight-bold mb-0">{{category.name}},</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -119,7 +119,7 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Page visits</h3>
+              <h3 class="mb-0">Volunteers</h3>
             </div>
             <div class="col text-right">
               <a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -131,81 +131,32 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Page name</th>
-                <th scope="col">Visitors</th>
-                <th scope="col">Unique users</th>
-                <th scope="col">Bounce rate</th>
+                <th scope="col">Name</th>
+                <th scope="col">Goal</th>
+                <th scope="col">Points</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">
-                  /argon/
+                  Ahmad
                 </th>
                 <td>
-                  4,569
+                  Master chef
                 </td>
                 <td>
                   340
                 </td>
-                <td>
-                  <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                </td>
               </tr>
               <tr>
                 <th scope="row">
-                  /argon/index.html
+                  Fayz
                 </th>
                 <td>
-                  3,985
+                  chef
                 </td>
                 <td>
-                  319
-                </td>
-                <td>
-                  <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  /argon/charts.html
-                </th>
-                <td>
-                  3,513
-                </td>
-                <td>
-                  294
-                </td>
-                <td>
-                  <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  /argon/tables.html
-                </th>
-                <td>
-                  2,050
-                </td>
-                <td>
-                  147
-                </td>
-                <td>
-                  <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  /argon/profile.html
-                </th>
-                <td>
-                  1,795
-                </td>
-                <td>
-                  190
-                </td>
-                <td>
-                  <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
+                  130
                 </td>
               </tr>
             </tbody>
@@ -218,7 +169,7 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Social traffic</h3>
+              <h3 class="mb-0">Event Managers</h3>
             </div>
             <div class="col text-right">
               <a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -230,105 +181,32 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Referral</th>
-                <th scope="col">Visitors</th>
-                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Goal</th>
+                <th scope="col">Points</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">
-                  Facebook
+                  Yazan
                 </th>
+                <td>
+                  health care
+                </td>
                 <td>
                   1,480
                 </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="mr-2">60%</span>
-                    <div>
-                      <div class="progress">
-                        <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60"
-                          aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
               </tr>
               <tr>
                 <th scope="row">
-                  Facebook
+                  Hamdi
                 </th>
                 <td>
-                  5,480
+                  health care
                 </td>
                 <td>
-                  <div class="d-flex align-items-center">
-                    <span class="mr-2">70%</span>
-                    <div>
-                      <div class="progress">
-                        <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70"
-                          aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Google
-                </th>
-                <td>
-                  4,807
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="mr-2">80%</span>
-                    <div>
-                      <div class="progress">
-                        <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80"
-                          aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Instagram
-                </th>
-                <td>
-                  3,678
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="mr-2">75%</span>
-                    <div>
-                      <div class="progress">
-                        <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75"
-                          aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  twitter
-                </th>
-                <td>
-                  2,645
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="mr-2">30%</span>
-                    <div>
-                      <div class="progress">
-                        <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30"
-                          aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-                      </div>
-                    </div>
-                  </div>
+                  1,440
                 </td>
               </tr>
             </tbody>

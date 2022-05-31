@@ -1,9 +1,11 @@
 import { User } from './../../model/user';
 import { Injectable } from "@angular/core";
 import { API } from "../api.service";
+import { Observable } from 'rxjs';
 
 const ENDPOINTS = {
   getUsers: "users",
+  getMe: "me",
   postRole: "roles",
   putRole: (id: number) => `roles/${id}`,
   deleteRole: (id: number) => `roles/${id}`,
@@ -19,12 +21,25 @@ export class UserGateway {
       .toPromise()
       .then((data) => {
         return {
-            users: User.fromDTOArray(data.data.data),
-            current_page: data.data.current_page,
-            links: data.data.links,
-            total: data.data.total,
+          users: User.fromDTOArray(data.data.data),
+          current_page: data.data.current_page,
+          links: data.data.links,
+          total: data.data.total,
         };
       });
+  }
+
+  getMe(filter: any): Promise<User> {
+    return this.api
+      .get<any>(ENDPOINTS.getMe, {}, null, null, filter)
+      .toPromise()
+      .then((data) => {
+        return User.fromDTO(data.data);
+      });
+  }
+
+  getMyProfile(): Observable<User> {
+    return this.api.get<User>(ENDPOINTS.getMe, {}, null, null, {});
   }
 
   /* postRole(role: RoleDto) {

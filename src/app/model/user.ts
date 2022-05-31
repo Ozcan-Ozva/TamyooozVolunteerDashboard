@@ -1,16 +1,16 @@
 export class User {
     id: number;
     name: string;
-    email: string;
-    username: string;
-    date_of_birth: Date;
-    phone: string;
-    gender: number;
-    location: string;
-    job: string;
-    volunteering_history: string;
-    is_active: boolean;
-    created_at: Date;
+    email?: string;
+    username?: string;
+    date_of_birth?: Date;
+    phone?: string;
+    gender?: number;
+    location?: string;
+    job?: string;
+    volunteering_history?: string;
+    is_active?: boolean;
+    created_at?: Date;
 
     constructor(user: Partial<User>) {
         if (!user) user = {};

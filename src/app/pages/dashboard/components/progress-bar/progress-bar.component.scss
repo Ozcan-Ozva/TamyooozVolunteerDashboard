@@ -14,21 +14,26 @@
     content: "";
     background-color: #fb6340;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 0;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
     height: 4px;
     width: 100%;
     z-index: -1;
   }
 }
+.progress-date {
+  font-size: 12px;
+  font-weight: bolder;
+  color: #5e72e4;
+}
 
 .progress {
   background-color: #5e72e4;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 0;
-  transform: translateY(-50%);
+  transform: translateY(-40%);
   height: 4px;
   width: 0%;
   z-index: -1;
@@ -49,7 +54,7 @@
   transition: .4s ease;
 }
 
-.active {
+.active-circle {
     background-color: #5e72e4;
 }
 

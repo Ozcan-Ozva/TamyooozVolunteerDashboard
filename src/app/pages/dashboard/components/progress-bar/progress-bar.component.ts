@@ -8,7 +8,6 @@ import { Component, OnInit } from "@angular/core";
 export class ProgressBarComponent implements OnInit {
   progress : HTMLElement;
   stepCircles : NodeListOf<Element>;
-  currentActive = 1;
 
   constructor() {}
 
@@ -18,27 +17,31 @@ export class ProgressBarComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.update(2);
+    this.update(1);
   }
 
   update(currentActive) {
     this.stepCircles.forEach((circle, i) => {
+      console.log("this is i");
+      console.log(i);
       if (i < currentActive) {
-        circle.classList.add("active");
+        console.log("i am here");
+        circle.classList.add("active-circle");
       } else {
-        circle.classList.remove("active");
+        console.log("i am not here");
+        circle.classList.remove("active-circle");
       }
     });
   
-    const activeCircles = document.querySelectorAll(".active");
+    const activeCircles = document.querySelectorAll(".active-circle");
     console.log("this is activeCircles");
     console.log(activeCircles);
     console.log("this is stepCircles");
     console.log(this.stepCircles);
     console.log("this is width");
-    console.log(((activeCircles.length - 1) / (this.stepCircles.length - 1)) * 100);
+    console.log(((activeCircles.length -1) / (this.stepCircles.length)) * 100);
     
     this.progress.style.width =
-      ((activeCircles.length - 1) / (this.stepCircles.length + 1)) * 100 + "%";  
+      ((activeCircles.length - 0.3) / (this.stepCircles.length)) * 100 + "%";  
   }
 }

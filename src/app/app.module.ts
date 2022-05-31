@@ -18,6 +18,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { ProfileService } from './services/profile.service';
+import { ProfileResolver } from './resolver/resolver.service';
 
 @NgModule({
   imports: [
@@ -40,7 +42,7 @@ import {MatButtonModule} from '@angular/material/button';
     AdminLayoutComponent,
     AuthLayoutComponent,
   ],
-  providers: [AuthService],
+  providers: [AuthService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,6 +23,7 @@ import { EventCardComponent } from '../../pages/dashboard/components/event-card/
 import { PointRuleViewModule } from '../../pages/point-rule/point-rule.module';
 import { BadgeViewModule } from '../../pages/badget/badget.module';
 import { NewsFeedViewModule } from '../../pages/news-feed/news-feed.module';
+import { ProfileService } from '../../services/profile.service';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -53,7 +54,7 @@ import { NewsFeedViewModule } from '../../pages/news-feed/news-feed.module';
     ProgressBarComponent,
     EventCardComponent,
     MapsComponent
-  ]
+  ],
 })
 
 export class AdminLayoutModule {}

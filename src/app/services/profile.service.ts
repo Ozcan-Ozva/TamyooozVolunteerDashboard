@@ -1,34 +1,32 @@
-// import { Injectable } from '@angular/core';
-// import { Store } from '@ngrx/store';
-// import { loggedProfileFacade } from '@store/user/user.actions';
-// import { selectOneUser } from '@store/user/user.selectors';
-// import { UserEntity } from '@store/user/user.state';
-// import { Observable } from 'rxjs';
-// import { map } from 'rxjs/operators';
-// import { AuthService } from './auth.service';
-// import { UsersFacade } from './facade/Users/users-facade.service';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { User } from '../model/user';
+import { AuthService } from './auth.service';
+import { UserGateway } from './gateways/user.service';
 
-// @Injectable({ providedIn: 'root' })
-// export class ProfileService {
-//     private LOCATION_KEY = 'access_token';
+@Injectable({ providedIn: 'root' })
+export class ProfileService {
+    private LOCATION_KEY = 'access_token';
 
-//     constructor(private _store: Store, private _auth: AuthService, private readonly _usersFacade: UsersFacade) {}
+    constructor(private _store: Store, private _auth: AuthService, private readonly _userGate : UserGateway) {}
 
-//     // get the owner data.
-//     get Me(): Observable<UserEntity> {
-//         return this._store.select(selectOneUser, { user_id: this._auth.Token.userId }).pipe(map(({ user }) => user));
-//     }
-//     // get the owner id.
-//     get Id(): number {
-//         return this._auth.Token.userId;
-//     }
+    // get the owner data.
+    get Me(): Observable<User> {
+        return this._userGate.getMyProfile();
+    }
+    // get the owner id.
+    get Id(): number {
+        return this._auth.Token.userId;
+    }
 
-//     fetchMe(): void {
-//         this._store.dispatch(loggedProfileFacade({ user_id: this._auth.Token.userId }));
-//         this._usersFacade.fetchMyProfile().subscribe(() => {});
-//     }
+    /* fetchMe(): void {
+        this._store.dispatch(loggedProfileFacade({ user_id: this._auth.Token.userId }));
+        this._usersFacade.fetchMyProfile().subscribe(() => {});
+    } */
 
-//     logout() {
-//         localStorage.removeItem(this.LOCATION_KEY);
-//     }
-// }
+    logout() {
+        localStorage.removeItem(this.LOCATION_KEY);
+    }
+}

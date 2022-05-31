@@ -1,3 +1,5 @@
+import { Category } from './category';
+
 export class Event {
     id:                         number;
     name:                       string;
@@ -9,7 +11,7 @@ export class Event {
     created_at:                 Date;
     updated_at:                 Date;
     media:                      any[];
-    categories:                 number[];
+    categories:                 Category[];
 
     constructor(event: Partial<Event>) {
         if (!event) event = {};
@@ -23,7 +25,7 @@ export class Event {
         this.created_at = event.created_at;
         this.updated_at = event.updated_at;
         this.media = event.media;
-        this.categories = event.categories;
+        this.categories = Category.fromArray(event.categories);
     }
 
     public static fromDTO(dto : any) : Event | null {
@@ -39,7 +41,7 @@ export class Event {
             created_at: new Date(dto.created_at),
             updated_at: new Date(dto.updated_at),
             media: dto.media,
-            categories: dto.categories,
+            categories: Category.fromDTOArray(dto.categories),
         });
     }
 
