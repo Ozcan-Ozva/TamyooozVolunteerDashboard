@@ -6,7 +6,8 @@ const ENDPOINTS = {
   getJoinRequest: "join-requests",
   postJoinRequest: "join-requests",
   putJoinRequest: (id: number) => `join-requests/${id}`,
-  patchJoinRequest: (id: number) => `join-requests/${id}`,
+  patchUserJoinRequest: (id: number) => `activate-volunteer/${id}`,
+  patchJoinRequest: (id: number) => `join-requests/change-status/${id}`,
   deleteJoinRequest: (id: number) => `join-requests/${id}`,
 };
 
@@ -29,7 +30,6 @@ export class JoinRequestGateway {
       {},
       {
         name: joinRequest.name,
-        username: joinRequest.username,
         email: joinRequest.email,
         date_of_birth: joinRequest.date_of_birth,
         phone: joinRequest.phone,
@@ -51,6 +51,9 @@ export class JoinRequestGateway {
 
   acceptJoinRequest(joinRequestId: number) {
     return this.api.patch(ENDPOINTS.patchJoinRequest(joinRequestId), {}, {});
+  }
+  acceptUserJoinRequest(userId: number) {
+    return this.api.patch(ENDPOINTS.patchUserJoinRequest(userId), {}, {});
   }
 }
 

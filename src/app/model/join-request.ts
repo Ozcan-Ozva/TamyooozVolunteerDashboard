@@ -1,7 +1,7 @@
 import { Admin } from "./admin";
 import { User } from "./user";
 
-enum JOIN_REQUEST_STATUS {
+export enum JOIN_REQUEST_STATUS {
     WAITING_FOR_HRM = "Waiting for HMR",
     WAITING_FOR_HR_OFFICER = "Waiting for HR Officer",
     ACCEPTED = "Accepted",

@@ -3,6 +3,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { JoinRequest } from "../../model/join-request";
+import { JOIN_REQUEST_STATUS } from "../../model/join-request";
 import { JoinRequestGateway } from "../../services/gateways/join-request.service";
 import {
   CreateJoinRequestComponent,
@@ -73,11 +74,33 @@ export class JoinOrgRequestComponent implements OnInit {
   }
 
   acceptJoinRequest(joinRequestId: number) {
-    this._joinRequestGateway.acceptJoinRequest(joinRequestId).subscribe((result: any) => {
-      if (result.status_code === 200) {
-        console.log("this is worked");
-      }
-    });
+    this._joinRequestGateway
+      .acceptJoinRequest(joinRequestId)
+      .subscribe((result: any) => {
+        if (result.status_code === 200) {
+          console.log("this is worked");
+          let joinRequest = this.joinRequests.find(
+            (jR) => jR.id == joinRequestId
+          );
+          this.joinRequests[this.joinRequests.indexOf(joinRequest)].status =
+            this.checkJoinRequestStatus(2);
+        }
+      });
+  }
+
+  acceptUserJoinRequest(userId: number) {
+    this._joinRequestGateway
+      .acceptUserJoinRequest(userId)
+      .subscribe((result: any) => {
+        if (result.status_code === 200) {
+          console.log("this is worked");
+          let joinRequest = this.joinRequests.find(
+            (jR) => jR.user.id == userId
+          );
+          this.joinRequests[this.joinRequests.indexOf(joinRequest)].status =
+            this.checkJoinRequestStatus(3);
+        }
+      });
   }
 
   updateJoinRequest(editJoinRequest: JoinRequest) {
@@ -150,5 +173,35 @@ export class JoinOrgRequestComponent implements OnInit {
         });
       }
     });
+  }
+
+  checkJoinRequestStatus(state: number) : JOIN_REQUEST_STATUS {
+    if (state == 1) {
+      return JOIN_REQUEST_STATUS.WAITING_FOR_HRM;
+    }
+    else if (state == 2) {
+      return JOIN_REQUEST_STATUS.WAITING_FOR_HR_OFFICER;
+    }
+    else if (state == 3) {
+      return JOIN_REQUEST_STATUS.ACCEPTED;
+    }
+    else if (state == 4) {
+      return JOIN_REQUEST_STATUS.DECLINED;
+    }
+  }
+
+  checkNumberOfJoinRequestStatus(state: JOIN_REQUEST_STATUS) : number {
+    if (state == JOIN_REQUEST_STATUS.WAITING_FOR_HRM) {
+      return 1;
+    }
+    else if (state == JOIN_REQUEST_STATUS.WAITING_FOR_HR_OFFICER) {
+      return 2;
+    }
+    else if (state == JOIN_REQUEST_STATUS.ACCEPTED) {
+      return 3;
+    }
+    else if (state == JOIN_REQUEST_STATUS.DECLINED) {
+      return 4;
+    }
   }
 }
