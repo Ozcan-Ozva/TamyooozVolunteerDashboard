@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { ProfileService } from './services/profile.service';
 import { ProfileResolver } from './resolver/resolver.service';
+import { BadgesBoxComponent } from './pages/user-profile/components/badges-box/badges-box.component';
 
 @NgModule({
   imports: [

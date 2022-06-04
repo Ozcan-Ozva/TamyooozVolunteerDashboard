@@ -24,6 +24,7 @@ import { PointRuleViewModule } from '../../pages/point-rule/point-rule.module';
 import { BadgeViewModule } from '../../pages/badget/badget.module';
 import { NewsFeedViewModule } from '../../pages/news-feed/news-feed.module';
 import { ProfileService } from '../../services/profile.service';
+import { UserProfileViewModule } from '../../pages/user-profile/user-profile.module';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -45,10 +46,10 @@ import { ProfileService } from '../../services/profile.service';
     PointRuleViewModule,
     BadgeViewModule,
     NewsFeedViewModule,
+    UserProfileViewModule,
   ],
   declarations: [
     DashboardComponent,
-    UserProfileComponent,
     TablesComponent,
     IconsComponent,
     ProgressBarComponent,
