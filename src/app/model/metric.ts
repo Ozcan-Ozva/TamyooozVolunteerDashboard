@@ -1,8 +1,17 @@
+export enum METRIC_TYPES {
+    BOOLEAN = 1,
+    LIST_BOOLEAN = 2,
+    STRING = 3,
+    LIST_STRING = 4,
+    NUMBER = 5,
+    LIST_NUMBER = 6,
+}
+
 export class Metric {
     id: number;
     name: string;
     description: string;
-    type: number;
+    type: METRIC_TYPES;
     created_at: Date
 
     constructor(metric: Partial<Metric>) {
@@ -20,7 +29,13 @@ export class Metric {
             id: dto.id,
             name: dto.name,
             description: dto.description,
-            type: dto.type,
+            type: dto.type == 1 ? METRIC_TYPES.BOOLEAN
+            : dto.type == 2 ? METRIC_TYPES.LIST_BOOLEAN
+            : dto.type == 3 ? METRIC_TYPES.STRING
+            : dto.type == 4 ? METRIC_TYPES.LIST_STRING
+            : dto.type == 5 ? METRIC_TYPES.NUMBER
+            : dto.type == 6 ? METRIC_TYPES.LIST_NUMBER
+            : METRIC_TYPES.BOOLEAN,
             created_at: dto.created_at,
         });
     }

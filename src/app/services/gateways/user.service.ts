@@ -25,6 +25,8 @@ export class UserGateway {
           current_page: data.data.current_page,
           links: data.data.links,
           total: data.data.total,
+          last_page: data.data.last_page,
+          from: data.data.from,
         };
       });
   }
@@ -68,4 +70,6 @@ export interface GetUserDto {
   current_page: number;
   links: any[];
   total: number;
+  last_page: number;
+  from: number;
 }

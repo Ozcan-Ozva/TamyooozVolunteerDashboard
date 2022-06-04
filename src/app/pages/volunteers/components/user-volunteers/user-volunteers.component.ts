@@ -1,3 +1,4 @@
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,13 +7,15 @@ import { User } from '../../../../model/user';
 import { UserGateway } from '../../../../services/gateways/user.service';
 
 @Component({
-  selector: 'app-user-volunteers',
-  templateUrl: './user-volunteers.component.html',
-  styleUrls: ['./user-volunteers.component.scss']
+  selector: "app-user-volunteers",
+  templateUrl: "./user-volunteers.component.html",
+  styleUrls: ["./user-volunteers.component.scss"],
 })
 export class UserVolunteersComponent implements OnInit {
   public users: User[];
   public isUserActive = true;
+
+  /* These attributes is sharable */
   public per_page: number = 10;
   valueChanged: Subject<number> = new Subject<number>();
   inputSub: Subscription;
@@ -20,26 +23,25 @@ export class UserVolunteersComponent implements OnInit {
   public links: any[] = [];
   public total: number = 0;
   public loader: boolean = true;
+  public lastPage: number = 0;
+  public from = 1;
+  /* End sharable attributes */
 
-  constructor(
-    public _userGateway: UserGateway,
-    public dialog: MatDialog
-  ) {}
+
+  constructor(public _userGateway: UserGateway, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getUsers({
-        status: Number(this.isUserActive),
-        per_page: this.per_page,
-        page: 1,
-      });
+      status: Number(this.isUserActive),
+      per_page: this.per_page,
+      page: 1,
+    });
   }
 
   ngAfterViewInit() {
     this.inputSub = this.valueChanged
-      .pipe(
-        debounceTime(1000),
-      )
-      .subscribe(value => {
+      .pipe(debounceTime(1000))
+      .subscribe((value) => {
         this.per_page = value;
         console.log(value);
         if (this.per_page !== null && this.per_page !== 0) {
@@ -71,6 +73,7 @@ export class UserVolunteersComponent implements OnInit {
         this.links.pop();
         this.total = data.total;
         this.loader = false;
+        this.lastPage = data.last_page;
       })
       .catch((error) => {
         if (error instanceof HttpErrorResponse) {
@@ -95,6 +98,58 @@ export class UserVolunteersComponent implements OnInit {
       per_page: this.per_page,
       page: this.current_page,
     });
+  }
+
+  checkHidden(index) {
+    if (index - this.current_page <= 2 && index - this.current_page >= -2) {
+      return "visible";
+    }
+    else {
+      return "hidden";
+    }
+  }
+
+  checkFirstIndex() {
+    if (this.current_page - 1 > 2) {
+      return "visible"
+    }
+    else {
+      return "hidden";
+    }
+  }
+
+  checkLastIndex() {
+    if (this.lastPage - this.current_page > 2) {
+      return "visible"
+    }
+    else {
+      return "hidden";
+    }
+  }
+
+  nextPage(next: boolean) {
+    if (
+      (this.current_page != this.lastPage && next) ||
+      (this.current_page != this.from && !next)
+    ) {
+      if (next) this.current_page++;
+      else this.current_page--;
+      this.getUsers({
+        status: Number(this.isUserActive),
+        per_page: this.per_page,
+        page: this.current_page,
+      });
+    }
+  }
+
+  checkPreviousClass() {
+    if (this.from == this.current_page)
+      return "disable-pagination-button";
+  }
+
+  checkNextClass() {
+    if (this.lastPage == this.current_page)
+      return "disable-pagination-button";
   }
 
   changePerPage() {

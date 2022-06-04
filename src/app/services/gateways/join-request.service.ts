@@ -15,12 +15,19 @@ const ENDPOINTS = {
 export class JoinRequestGateway {
   constructor(private api: API) {}
 
-  getJoinRequest(filter: any): Promise<JoinRequest[]> {
+  getJoinRequest(filter: any): Promise<GetJoinRequestDto> {
     return this.api
       .get<any>(ENDPOINTS.getJoinRequest, {}, null, null, filter)
       .toPromise()
       .then((data) => {
-        return JoinRequest.fromDTOArray(data.data.data);
+        return {
+          joinRequests: JoinRequest.fromDTOArray(data.data.data),
+          current_page: data.data.current_page,
+          links: data.data.links,
+          total: data.data.total,
+          last_page: data.data.last_page,
+          from: data.data.from,
+        };
       });
   }
 
@@ -67,4 +74,14 @@ export interface JoinRequestDto {
   location: string;
   job: string;
   volunteering_history: string;
+}
+
+
+export interface GetJoinRequestDto {
+  joinRequests: JoinRequest[];
+  current_page: number;
+  links: any[];
+  total: number;
+  last_page: number;
+  from: number;
 }

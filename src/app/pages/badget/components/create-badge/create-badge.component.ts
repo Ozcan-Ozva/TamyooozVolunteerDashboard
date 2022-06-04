@@ -45,7 +45,7 @@ export class CreateBadgeComponent implements OnInit {
     };
     this.fetchMetrics({})
       .then((data) => {
-        this.metrics = data;
+        this.metrics = data.metrics;
       })
       .catch((error) => {
         if (error instanceof HttpErrorResponse) {
@@ -165,8 +165,8 @@ export class CreateBadgeComponent implements OnInit {
           console.log("there is no event operation");
           metricQuery = new MetricQuery({
             metric_id: this.selectedMetric.id,
-            first_operation: "x",
-            second_operation: "x",
+            first_operation: "null",
+            second_operation: "null",
             compare_operation: this.selectedCompareTo.id,
             compare_value: this.compareValue,
           });
@@ -178,7 +178,7 @@ export class CreateBadgeComponent implements OnInit {
           metricQuery = new MetricQuery({
             metric_id: this.selectedMetric.id,
             first_operation: this.selectedOperationOfEvent.id,
-            second_operation: "x",
+            second_operation: "null",
             compare_operation: this.selectedCompareTo.id,
             compare_value: this.compareValue,
           });
@@ -193,7 +193,7 @@ export class CreateBadgeComponent implements OnInit {
           metricQuery = new MetricQuery({
             metric_id: this.selectedMetric.id,
             first_operation: this.selectedOperation.id,
-            second_operation: "x",
+            second_operation: "null",
             compare_operation: this.selectedCompareTo.id,
             compare_value: this.compareValue,
           });

@@ -14,6 +14,8 @@ export class CreateMetricComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("this is data");
+    console.log(this.data);
     
   }
 

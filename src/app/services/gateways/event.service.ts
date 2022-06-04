@@ -14,12 +14,19 @@ const ENDPOINTS = {
 export class EventGateway {
   constructor(private api: API) {}
 
-  getEvents(filter: any): Promise<Event[]> {
+  getEvents(filter: any): Promise<GetEventDto> {
     return this.api
       .get<any>(ENDPOINTS.getEvents, {}, null, null, filter)
       .toPromise()
       .then((data) => {
-        return Event.fromDTOArray(data.data.data);
+        return {
+          events: Event.fromDTOArray(data.data.data),
+          current_page: data.data.current_page,
+          links: data.data.links,
+          total: data.data.total,
+          last_page: data.data.last_page,
+          from: data.data.from,
+        };
       });
   }
 
@@ -68,4 +75,13 @@ export interface EventDto {
   users: number[];
   metrics: number[];
   categories: number[];
+}
+
+export interface GetEventDto {
+  events: Event[];
+  current_page: number;
+  links: any[];
+  total: number;
+  last_page: number;
+  from: number;
 }

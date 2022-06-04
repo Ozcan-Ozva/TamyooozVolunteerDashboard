@@ -15,12 +15,19 @@ const ENDPOINTS = {
 export class MetricGateway {
   constructor(private api: API) {}
 
-  getMetrix(filter: any): Promise<Metric[]> {
+  getMetrix(filter: any): Promise<GetMetricstDto> {
     return this.api
       .get<any>(ENDPOINTS.getMetric, {}, null, null, filter)
       .toPromise()
       .then((data) => {
-        return Metric.fromDTOArray(data.data.data);
+        return {
+          metrics: Metric.fromDTOArray(data.data.data), 
+          current_page: data.data.current_page,
+          links: data.data.links,
+          total: data.data.total,
+          last_page: data.data.last_page,
+          from: data.data.from,
+        };
       });
   }
 
@@ -46,7 +53,11 @@ export class MetricGateway {
   }
 
   updateMetric(metricId: number, data: MetricDto) {
-    return this.api.put(ENDPOINTS.putMetric(metricId), {}, { data });
+    return this.api.put(ENDPOINTS.putMetric(metricId), {}, {
+      name: data.name,
+      type: data.type,
+      description: data.description
+    });
   }
 
   deleteMetric(metricId : number) {
@@ -58,4 +69,13 @@ export interface MetricDto {
   name: string;
   description?: string;
   type: number;
+}
+
+export interface GetMetricstDto {
+  metrics: Metric[];
+  current_page: number;
+  links: any[];
+  total: number;
+  last_page: number;
+  from: number;
 }

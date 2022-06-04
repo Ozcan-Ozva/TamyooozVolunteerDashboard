@@ -26,11 +26,12 @@
         <div class="row">
           <p style="text-align:left; font-size: 24px; font-weight:bold; color:black; margin-left: 34px;">Create Metric Query</p>
         </div>
+        <br>
         <div *ngIf="metrics && metrics.length > 0" class="row">
           <div class="column">
             <div class="form-group" style="margin-left: 60px">
               <label class="labelInput" for="exampleInputEmail1">ُEvents</label>
-                <select [disabled]="disableEventButton()" (change)="getEventOperation()" [(ngModel)]="eventValue" class="form-control" id="sel1" name="sellist1">
+                <select style="width: 300px;" [disabled]="disableEventButton()" (change)="getEventOperation()" [(ngModel)]="eventValue" class="form-control" id="sel1" name="sellist1">
                   <option value=""></option>
                   <option value="1">One Event</option>
                   <option value="2">All Event</option>

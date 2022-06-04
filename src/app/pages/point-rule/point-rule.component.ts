@@ -14,29 +14,6 @@ export class PointRuleComponent implements OnInit {
 
   public pointRules: PointRule[];
   public loader: boolean = true;
-  public fackeList: number[] = [
-    1,
-    1,
-    1,
-    1,
-    1,
-    ,
-    1,
-    1,
-    1,
-    1,
-    1,
-    ,
-    1,
-    1,
-    1,
-    1,
-    ,
-    1,
-    1,
-    1,
-    1,
-  ];
 
   constructor(
     public _pointRuleGateway: PointRuleGateway,
@@ -57,6 +34,7 @@ export class PointRuleComponent implements OnInit {
   }
 
   private async fetchPointRule(filter: any) {
+    this.loader = true;
     return this._pointRuleGateway.getPointRule({});
   }
 

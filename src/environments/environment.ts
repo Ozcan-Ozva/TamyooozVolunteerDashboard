@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  /* production: false,
-  base_url: 'https://giantdeals.ca/vms-back/public/index.php/api/dashboard/', */
   production: false,
-  base_url: 'http://192.168.43.50:8001/api/dashboard/',
+  base_url: 'https://giantdeals.ca/vms-back/public/index.php/api/dashboard/',
+  /* production: false,
+  base_url: 'http://192.168.43.50:8001/api/dashboard/', */
   /* production: false,
   base_url: 'http://localhost:8000/api/dashboard/', */
 };

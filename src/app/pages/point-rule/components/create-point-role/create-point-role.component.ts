@@ -37,7 +37,7 @@ export class CreatePointRoleComponent implements OnInit {
     };
     this.fetchMetrics({})
       .then((data) => {
-        this.metrics = data;
+        this.metrics = data.metrics;
       })
       .catch((error) => {
         if (error instanceof HttpErrorResponse) {

@@ -34,7 +34,7 @@ export class CreateEventComponent implements OnInit {
     this.data.end_date = pipe.transform(this.data.end_date, 'yyyy-MM-dd');
     this.fetchCategory({})
       .then((data) => {
-        this.categories = data;
+        this.categories = data.categories;
       })
       .catch((error) => {
         if (error instanceof HttpErrorResponse) {
@@ -43,7 +43,7 @@ export class CreateEventComponent implements OnInit {
       });
     this.fetchMetric({})
       .then((data) => {
-        this.metrics = data;
+        this.metrics = data.metrics;
       })
       .catch((error) => {
         if (error instanceof HttpErrorResponse) {

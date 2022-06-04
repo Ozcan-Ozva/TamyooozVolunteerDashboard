@@ -13,12 +13,19 @@ const ENDPOINTS = {
 export class RolesGateway {
   constructor(private api: API) {}
 
-  getRoles(filter: any): Promise<Role[]> {
+  getRoles(filter: any): Promise<GetRoleDto> {
     return this.api
       .get<any>(ENDPOINTS.getRoles, {}, null, null, filter)
       .toPromise()
       .then((data) => {
-        return Role.fromDTOArray(data.data);
+        return {
+          roles: Role.fromDTOArray(data.data),
+          current_page: data.current_page,
+          links: data.links,
+          total: data.total,
+          last_page: data.last_page,
+          from: data.from,
+        };
       });
   }
 
@@ -35,7 +42,10 @@ export class RolesGateway {
   }
 
   updateRole(roleId: number, data: RoleDto) {
-    return this.api.put(ENDPOINTS.putRole(roleId), {}, { data });
+    return this.api.put(ENDPOINTS.putRole(roleId), {}, { 
+      name: data.name,
+      permissions: data.permissions
+     });
   }
 
   deleteRole(roleId) {
@@ -47,4 +57,13 @@ export interface RoleDto {
   name: string;
   guardName?: string;
   permissions: number[];
+}
+
+export interface GetRoleDto {
+  roles: Role[];
+  current_page: number;
+  links: any[];
+  total: number;
+  last_page: number;
+  from: number;
 }

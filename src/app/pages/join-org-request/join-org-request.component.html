@@ -1,8 +1,24 @@
+<div *ngIf="loader" class="overlay">
+  <div style="margin-left: 35%;" class="waviy">
+    <span style="--i:1">F</span>
+    <span style="--i:2">E</span>
+    <span style="--i:3">T</span>
+    <span style="--i:4">C</span>
+    <span style="--i:5">H</span>
+    <span style="--i:6">I</span>
+    <span style="--i:7">N</span>
+    <span style="--i:8">G</span>&nbsp;
+    <span style="--i:9">D</span>
+    <span style="--i:10">A</span>
+    <span style="--i:11">T</span>
+    <span style="--i:12">A</span>
+  </div>
+</div>
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
-      <div class="scrolling-wrapper">
+      <!-- <div class="scrolling-wrapper">
         <div class="row">
           <div class="row-card">
             <div *ngFor="let x of fackeList" style="margin-left: 10px;">
@@ -28,22 +44,25 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
 <div class="container-fluid mt--7">
   <div class="row" style="justify-content: center; align-items: center;">
-    <div>
+    <div class="tamyooz-table">
       <div class="card shadow">
-        <div *ngIf="loader" class="loader"></div>
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Join Requests</h3>
+              <div class="row">
+                <h3 class="mb-0">Join Requests</h3>
+                <div style="margin-left: 8px; margin-top: 8px; font-size: 12px;">total: {{total == null ? 0 : total}}
+                </div>
+              </div>
             </div>
             <div class="col text-right">
-              <button (click)="openDialog()" class="btn btn-sm btn-primary">New join request</button>
+              <button (click)="openDialog()" class="btn btn-sm btn-primary">New Join Request</button>
             </div>
           </div>
         </div>
@@ -61,7 +80,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let joinRequest of joinRequests">
-                <th scope="row">
+                <th (click)="updateJoinRequest(joinRequest)" scope="row">
                   {{joinRequest.user.name}}
                 </th>
                 <td>
@@ -71,7 +90,7 @@
                   {{joinRequest.status}}
                 </td>
                 <td>
-                  {{joinRequest.created_at | date:'short'}}
+                  {{joinRequest.created_at}}
                 </td>
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
@@ -79,18 +98,62 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                      <a (click)="updateJoinRequest(joinRequest)" class="dropdown-item">Update join-request</a>
-                      <a (click)="deleteJoinRequest(joinRequest.id)" class="dropdown-item">Delete join-request</a>
-                      <a (click)="acceptJoinRequest(joinRequest.id)" class="dropdown-item">Accept join-request</a>
-                      <a (click)="deleteJoinRequest(joinRequest.id)" class="dropdown-item">Decline join-request</a>
-                      <a (click)="acceptUserJoinRequest(joinRequest.user.id)" class="dropdown-item">Accept user</a>
-                      <a (click)="deleteJoinRequest(joinRequest.id)" class="dropdown-item">Decline user</a>
+                      <a (click)="acceptJoinRequest(joinRequest.id)" class="dropdown-item">Accept join request</a>
+                      <a (click)="acceptUserJoinRequest(joinRequest.id)" class="dropdown-item">Accept Volunteer</a>
+                      <a (click)="deleteJoinRequest(joinRequest.id)" class="dropdown-item">Delete join request</a>
                     </div>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <div class="row">
+              <div style="width: 30%;">
+                <input (keyup)="changePerPage()" [(ngModel)]="per_page" style="text-align: left" type="number"
+                  class="form-control" placeholder="enter per page">
+              </div>
+              <div style="width: 70%;">
+                <ul *ngIf="joinRequests !== []" class="pagination justify-content-end mb-0">
+                  <li (click)="nextPage(false)" class="page-item">
+                    <a [ngClass]="checkPreviousClass()" class="page-link" href="javascript:void(0)" tabindex="-1">
+                      <i class="fas fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <!-- When first item is hidden from the list -->
+                  <li [style.content-visibility]="checkFirstIndex()" class="page-item">
+                    <a (click)="changeTableIndex(1)" class="page-link" href="javascript:void(0)">1<span
+                        class="sr-only">(current)</span></a>
+                  </li>
+                  <li [style.content-visibility]="checkFirstIndex()">
+                    <a href="javascript:void(0)">...<span class="sr-only">(current)</span></a>
+                  </li>
+                  <!-- end here -->
+                  <li [style.content-visibility]="checkHidden(index + 1)" *ngFor="let page of links; let index = index"
+                    [ngClass]="getClassName(index + 1)">
+                    <a (click)="changeTableIndex(index + 1)" class="page-link"
+                      href="javascript:void(0)">{{index + 1}}<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li [style.content-visibility]="checkLastIndex()">
+                    <a href="javascript:void(0)">...<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li [style.content-visibility]="checkLastIndex()" class="page-item">
+                    <a (click)="changeTableIndex(lastPage)" class="page-link" href="javascript:void(0)">{{lastPage}}<span
+                        class="sr-only">(current)</span></a>
+                  </li>
+                  <li (click)="nextPage(true)" class="page-item">
+                    <a [ngClass]="checkNextClass()" class="page-link" href="javascript:void(0)">
+                      <i class="fas fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
       </div>
     </div>
