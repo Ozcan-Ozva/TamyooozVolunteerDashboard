@@ -12,9 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { CreateRoleComponent } from './components/create-role/create-role.component';
 import { RoleAndPermissionComponent } from './role-and-permission.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HasRoleCardComponent } from './components/has-role-card/has-role-card.component';
 
 @NgModule({
-    declarations: [CreateRoleComponent,RoleAndPermissionComponent],
+    declarations: [CreateRoleComponent,RoleAndPermissionComponent, HasRoleCardComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,

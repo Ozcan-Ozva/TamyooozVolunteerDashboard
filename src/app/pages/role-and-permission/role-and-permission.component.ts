@@ -9,6 +9,7 @@ import {
 } from "./components/create-role/create-role.component";
 import { MatDialog } from "@angular/material/dialog";
 import { debounceTime, Subject, Subscription } from "rxjs";
+import { HasRoleCardComponent } from "./components/has-role-card/has-role-card.component";
 
 @Component({
   selector: "app-role-and-permission",
@@ -153,6 +154,16 @@ export class RoleAndPermissionComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  whoHasRole(role: Role): void {
+    const dialogRef = this.dialog.open(HasRoleCardComponent, {
+      data: {roleName: role.name},
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log("this is result");
+      console.log(result);
     });
   }
 
