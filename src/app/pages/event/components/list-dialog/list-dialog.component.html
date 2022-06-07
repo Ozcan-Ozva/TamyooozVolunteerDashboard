@@ -1,0 +1,40 @@
+<div class="card">
+    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">{{data.roleName}}</p>
+  
+    <div style="height: 600px; width: 300px">
+      <div class="leaderboard">
+        <h1>
+          <svg class="ico-cup">
+            <use xlink:href="#cup"></use>
+          </svg>
+          Who Own This Role
+        </h1>
+        <ol>
+          <li>
+            <mark>Metric One</mark>
+            <small>315</small>
+          </li>
+          <li>
+            <mark>Metric Two</mark>
+            <small>315</small>
+          </li>
+          <li>
+            <mark>Metric Three</mark>
+            <small>315</small>
+          </li>
+          <li>
+            <mark>Metric Four</mark>
+            <small>315</small>
+          </li>
+          <li>
+            <mark>Metric Five</mark>
+            <small>315</small>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div style="float: left; position: relative; top: 20px;">
+      <button class="btn btn-primary" [mat-dialog-close]="data">save</button>
+      <button class="btn cancelButton" (click)="onNoClick()">cancel</button>
+    </div>
+  </div>

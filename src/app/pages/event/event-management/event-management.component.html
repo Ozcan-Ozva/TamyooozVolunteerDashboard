@@ -5,7 +5,6 @@
         <div class="event-description">{{event.description}}</div>
       </h1>
       <!-- Card stats -->
-      <div *ngIf="loader" class="loader"></div>
       <div class="row">
         <div class="col-xl-3 col-lg-6">
           <div class="card card-stats mb-4 mb-xl-0">
@@ -85,6 +84,7 @@
         <app-carousel-image [images]="images" [autoSlides]="false" [slidesInterval]="10000"></app-carousel-image>
     </div>
     <div class="col-xl-4">
+      <app-event-state></app-event-state>
       <div class="container">
         <div class="items">
           <div class="items-head">
@@ -121,8 +121,8 @@
             <div class="col">
               <h3 class="mb-0">Volunteers</h3>
             </div>
-            <div class="col text-right">
-              <a href="#!" class="btn btn-sm btn-primary">See all</a>
+            <div (click)="addVolunteer()" class="col text-right">
+              <a class="btn btn-sm btn-primary">Add volunteer</a>
             </div>
           </div>
         </div>
@@ -134,29 +134,31 @@
                 <th scope="col">Name</th>
                 <th scope="col">Goal</th>
                 <th scope="col">Points</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let volunteer of volunteerList">
                 <th scope="row">
-                  Ahmad
+                  {{volunteer.name}}
                 </th>
                 <td>
-                  Master chef
+                  {{volunteer.goal}}
                 </td>
                 <td>
-                  340
+                  {{volunteer.points}}
                 </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Fayz
-                </th>
-                <td>
-                  chef
-                </td>
-                <td>
-                  130
+                <td class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                      <a (click)="convertVolunteerToManager(volunteer)" class="dropdown-item">Move to Manager</a>
+                      <a (click)="showVolunteerMertic()" class="dropdown-item">Show Metric</a>
+                      <a class="dropdown-item">Delete event</a>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -171,8 +173,8 @@
             <div class="col">
               <h3 class="mb-0">Event Managers</h3>
             </div>
-            <div class="col text-right">
-              <a href="#!" class="btn btn-sm btn-primary">See all</a>
+            <div (click)="addManager()" class="col text-right">
+              <a class="btn btn-sm btn-primary">Add Manager</a>
             </div>
           </div>
         </div>
@@ -184,29 +186,30 @@
                 <th scope="col">Name</th>
                 <th scope="col">Goal</th>
                 <th scope="col">Points</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let manager of managerList">
                 <th scope="row">
-                  Yazan
+                  {{manager.name}}
                 </th>
                 <td>
-                  health care
+                  {{manager.goal}}
                 </td>
                 <td>
-                  1,480
+                  {{manager.points}}
                 </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Hamdi
-                </th>
-                <td>
-                  health care
-                </td>
-                <td>
-                  1,440
+                <td class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                      <a (click)="convertManagerToVolunteer(manager)" class="dropdown-item">Move to Volunteer</a>
+                      <a class="dropdown-item">Delete event</a>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>

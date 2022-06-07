@@ -1,0 +1,35 @@
+<div class="card">
+    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">{{data.title}}</p>
+    <div class="card-content">
+      <div class="row">
+        <div class="form-group" style="margin-left: 60px">
+            <label class="labelInput" for="exampleInputEmail1">User name</label>
+            <input type="text" [(ngModel)]="data.name" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Enter">
+          </div>
+          <div class="form-group" style="margin-left: 60px">
+            <!-- <label class="labelInput" for="exampleInputEmail1">Description</label> -->
+            <div class="wrapper">
+                <input type="radio" name="select" id="option-1" value="supervisor" (change)="onItemChange($event.target.value)">
+                <input type="radio" name="select" id="option-2" value="volunteer" (change)="onItemChange($event.target.value)">
+                  <label for="option-1" class="option option-1">
+                    <div class="dot"></div>&nbsp;
+                     <span>Supervisor</span>
+                     </label>
+                  <label for="option-2" class="option option-2">
+                    <div class="dot"></div>&nbsp;
+                     <span>Volunteer</span>
+                  </label>
+            </div>
+          </div>
+        <!-- <div class="column-50">
+        </div>
+        <div class="column-50">
+        </div> -->
+      </div>
+    </div>
+    <div style="float: left; position: relative; top: 20px;">
+      <button class="btn btn-primary" [mat-dialog-close]="data">Save</button>
+      <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
+    </div>
+  </div>

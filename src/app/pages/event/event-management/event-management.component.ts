@@ -3,6 +3,9 @@ import { ActivatedRoute } from "@angular/router";
 import { EventGateway } from "../../../services/gateways/event.service";
 import { Event } from "../../../model/event";
 import { HttpErrorResponse } from "@angular/common/http";
+import { AddVolunteerComponent } from "../components/add-volunteer/add-volunteer.component";
+import { MatDialog } from "@angular/material/dialog";
+import { ListDialogComponent } from "../components/list-dialog/list-dialog.component";
 
 @Component({
   selector: "app-event-management",
@@ -26,6 +29,14 @@ export class EventManagementComponent implements OnInit {
     updated_at: new Date(),
   };
   public loader: boolean = true;
+  public volunteerList = [
+    { name: "Ahmad", goal: "Master chef", points: 30},
+    { name: "Yazan", goal: "chef", points: 50},
+  ];
+  public managerList = [
+    { name: "Hamdi", goal: "Health Care", points: 450},
+    { name: "Fozi", goal: "Health Care", points: 580},
+  ];
 
   images = [
     {
@@ -65,7 +76,7 @@ export class EventManagementComponent implements OnInit {
     },
   ];
 
-  constructor(private route: ActivatedRoute, private _eventGateway: EventGateway) {}
+  constructor(private route: ActivatedRoute, private _eventGateway: EventGateway, public dialog: MatDialog,) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
@@ -89,5 +100,88 @@ export class EventManagementComponent implements OnInit {
 
   private async fetchEvent(id: number) {
     return this._eventGateway.getEvent(id);
+  }
+
+  convertVolunteerToManager(volunteer: any) {
+    let index = this.volunteerList.indexOf(volunteer);
+    this.volunteerList.splice(index,1);
+    this.managerList.push(volunteer);
+  }
+
+  convertManagerToVolunteer(manager: any) {
+    let index = this.managerList.indexOf(manager);
+    this.managerList.splice(index,1);
+    this.volunteerList.push(manager);
+  }
+
+  showVolunteerMertic() {
+    const dialogRef = this.dialog.open(ListDialogComponent, {
+      data: {
+        roleName: "Ahmad",
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result !== undefined) {
+        console.log("this is result");
+        console.log(result);
+      }
+    });
+  }
+
+  addVolunteer(): void {
+    const dialogRef = this.dialog.open(AddVolunteerComponent, {
+      data: {
+        manager: false,
+        volunteer: true,
+        title: "Add Volunteer",
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result !== undefined) {
+        console.log("this is result");
+        console.log(result);
+        if (result.volunteer) {
+          this.volunteerList.push({
+            name: result.name,
+            goal: "None",
+            points: 10
+          })
+        } else if (result.manager) {
+          this.managerList.push({
+            name: result.name,
+            goal: "None",
+            points: 10
+          })
+        }
+      }
+    });
+  }
+
+  addManager(): void {
+    const dialogRef = this.dialog.open(AddVolunteerComponent, {
+      data: {
+        manager: true,
+        volunteer: false,
+        title: "Add Supervisor",
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result !== undefined) {
+        console.log("this is result");
+        if (result.volunteer) {
+          this.volunteerList.push({
+            name: result.name,
+            goal: "None",
+            points: 10
+          })
+        } else if (result.manager) {
+          this.managerList.push({
+            name: result.name,
+            goal: "None",
+            points: 10
+          })
+        }
+      }
+    });
   }
 }

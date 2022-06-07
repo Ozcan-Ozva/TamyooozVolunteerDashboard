@@ -38,11 +38,9 @@ export class CreateBadgeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.data = {
-      name: "",
-      description: "",
-      metric_queries: [],
-    };
+    if (this.data.metric_queries != []) {
+      this.metricQueries = this.data.metric_queries;
+    }
     this.fetchMetrics({})
       .then((data) => {
         this.metrics = data.metrics;

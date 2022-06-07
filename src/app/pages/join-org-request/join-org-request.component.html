@@ -99,7 +99,7 @@
                     </a>
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                       <a (click)="acceptJoinRequest(joinRequest.id)" class="dropdown-item">Accept join request</a>
-                      <a (click)="acceptUserJoinRequest(joinRequest.id)" class="dropdown-item">Accept Volunteer</a>
+                      <a (click)="acceptUserJoinRequest(joinRequest.user.id)" class="dropdown-item">Accept Volunteer</a>
                       <a (click)="deleteJoinRequest(joinRequest.id)" class="dropdown-item">Delete join request</a>
                     </div>
                   </div>

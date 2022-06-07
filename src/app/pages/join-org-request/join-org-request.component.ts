@@ -120,6 +120,8 @@ export class JoinOrgRequestComponent implements OnInit {
           let joinRequest = this.joinRequests.find(
             (jR) => jR.user.id == userId
           );
+          console.log("this is join request");
+          console.log(joinRequest);
           this.joinRequests[this.joinRequests.indexOf(joinRequest)].status =
             this.checkJoinRequestStatus(3);
         }

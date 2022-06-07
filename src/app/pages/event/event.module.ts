@@ -14,9 +14,13 @@ import { CarouselImageComponent } from './components/carousel-image/carousel-ima
 import { EventManagementComponent } from './event-management/event-management.component';
 import { EventComponent } from './events-view/event.component';
 import { EventRouting } from './event.route';
+import { EventStateComponent } from './components/event-state/event-state.component';
+import { AddVolunteerComponent } from './components/add-volunteer/add-volunteer.component';
+import { ListDialogComponent } from './components/list-dialog/list-dialog.component';
+import { EventReportComponent } from './event-report/event-report.component';
 
 @NgModule({
-    declarations: [EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent],
+    declarations: [EventReportComponent, EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent, EventStateComponent, AddVolunteerComponent, ListDialogComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,

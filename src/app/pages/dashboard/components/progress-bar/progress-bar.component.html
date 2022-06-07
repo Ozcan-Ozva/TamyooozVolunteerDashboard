@@ -1,12 +1,21 @@
 <div class="container">
   <div class="progress-container">
     <div class="progress" id="progress"> </div>
-    <div>
+    <div (click)="update(1)">
       <div class="circle">Established</div>
       <div class="progress-date">2020/12/1</div>
     </div>
-    <div class="circle">Recruited</div>
-    <div class="circle">inFlow</div>
-    <div class="circle">Ended</div>
+    <div (click)="update(2)">
+      <div class="circle">Recruited</div>
+      <div class="progress-date">2020/12/1</div>
+    </div>
+    <div (click)="update(3)">
+      <div class="circle">inFlow</div>
+      <div class="progress-date">2020/12/1</div>
+    </div>
+    <div (click)="update(4)">
+      <div class="circle">Ended</div>
+      <div class="progress-date">2020/12/1</div>
+    </div>
   </div>
 </div>
