@@ -3,6 +3,11 @@ import { ActivatedRoute } from "@angular/router";
 import { EventGateway } from "../../../services/gateways/event.service";
 import { Event } from "../../../model/event";
 import { HttpErrorResponse } from "@angular/common/http";
+import {MatDialog} from '@angular/material/dialog';
+import {CreateEventComponent, EventtDialogData} from '../components/create-event/create-event.component';
+import {MetricDialogComponent} from '../components/metric-dialog/metric-dialog.component';
+import {MetricGateway} from '../../../services/gateways/metric.service';
+import {ConfirmationDialogComponent} from '../../../components/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: "app-event-management",
@@ -12,7 +17,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 export class EventManagementComponent implements OnInit {
   private sub: any;
   private id;
-  public event: Event = {
+  public event: any = {
     id: 0,
     name: "",
     categories: [],
@@ -24,7 +29,10 @@ export class EventManagementComponent implements OnInit {
     start_date: new Date(),
     status: null,
     updated_at: new Date(),
+    acceptedUsers : [],
+    supervisors : []
   };
+  public metrics :[];
   public loader: boolean = true;
 
   images = [
@@ -65,7 +73,12 @@ export class EventManagementComponent implements OnInit {
     },
   ];
 
-  constructor(private route: ActivatedRoute, private _eventGateway: EventGateway) {}
+  constructor(
+    private route: ActivatedRoute,
+    private _eventGateway: EventGateway,
+    public metricDialog: MatDialog,
+    public metricGateWay: MetricGateway) {}
+
 
   ngOnInit() {
     this.sub = this.route.params.subscribe((params) => {
@@ -89,5 +102,73 @@ export class EventManagementComponent implements OnInit {
 
   private async fetchEvent(id: number) {
     return this._eventGateway.getEvent(id);
+  }
+
+  public async openMetricsDialog(userId, userName) {
+    const metrics = await this.metricGateWay.getUserEventMetrics(this.event.id, userId);
+    console.log(metrics);
+    const dialogRef = this.metricDialog.open(MetricDialogComponent, {
+      width: '1300px',
+      data: {
+        userName: userName,
+        metrics: metrics
+      },
+    });
+  }
+
+  public removeUserFromEvent(userId, type) {
+    const dialogRef = this.metricDialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        message: 'Are you sure you want to remove this user from event?',
+        confirmationButtonText: 'Confirm'
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((eventResult: any) => {
+      if (eventResult) {
+        this._eventGateway.removeUserFromEvent(userId, this.event.id);
+        if (type === 1) {
+          this.event.supervisors = this.event.supervisors.filter(item => (item.id !== userId));
+        } else if (type === 2) {
+          this.event.acceptedUsers = this.event.acceptedUsers.filter(item => (item.id !== userId));
+        }
+      }
+    });
+  }
+
+  public changeUserRoleStatus(userId, type) {
+    const dialogRef = this.metricDialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        message: 'Are you sure you want to change this volunteer role?',
+        confirmationButtonText: 'Confirm'
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((eventResult: any) => {
+      if (eventResult) {
+        console.log(userId);
+        this._eventGateway.changeUserRoleStatus(userId, this.event.id);
+        if (type === 1) {
+          // Get Removed Item.
+          const user = this.event.supervisors.find(item => item.id === userId);
+
+          // Remove item from supervisor list.
+          this.event.supervisors = this.event.supervisors.filter(item => (item.id !== userId));
+
+          // Append item to Accepted Volunteers list.
+          this.event.acceptedUsers.push(user);
+        } else if (type === 2) {
+          const user = this.event.acceptedUsers.find(item => item.id === userId);
+
+          // Remove item from Accepted users list.
+          this.event.acceptedUsers = this.event.acceptedUsers.filter(item => (item.id !== userId));
+
+          // Append item to Supervisors list.
+          this.event.supervisors.push(user);
+        }
+      }
+    });
   }
 }

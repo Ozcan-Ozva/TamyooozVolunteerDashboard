@@ -10,6 +10,8 @@ import { Event } from "../../../model/event";
 import { Router } from "@angular/router";
 import { debounceTime, Subject, Subscription } from "rxjs";
 
+import {MatTabsModule} from '@angular/material/tabs';
+
 @Component({
   selector: "app-event",
   templateUrl: "./event.component.html",
@@ -247,6 +249,62 @@ export class EventComponent implements OnInit {
     } else {
       return "page-item";
     }
+  }
+
+  getEventStatusText(status) {
+    switch (status) {
+      case 0: {
+        return {
+          text: 'ESTABLISHING',
+          class: 'bg-warning'
+        };
+        break;
+      }
+      case 1: {
+        return {
+          text: 'RECRUITING',
+          class: 'bg-info'
+        };
+        break;
+      }
+      case 2: {
+        return {
+          text: 'IN_PROGRESS',
+          class: 'bg-success'
+        };
+        break;
+      }
+      case 3: {
+        return {
+          text: 'ENDED',
+          class: 'bg-success'
+        };
+        break;
+      }
+      case 4: {
+        return {
+          text: 'ARCHIVED',
+          class: 'bg-danger'
+        };
+        break;
+      }
+      case 5: {
+        return {
+          text: 'PAUSED',
+          class: 'bg-danger'
+        };
+        break;
+      }
+      case 6: {
+        return {
+          text: 'ABORTED',
+          class: 'bg-danger'
+        };
+        break;
+      }
+
+    }
+
   }
   /* End Method */
 }

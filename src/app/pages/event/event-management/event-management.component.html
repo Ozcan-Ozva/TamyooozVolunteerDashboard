@@ -12,8 +12,25 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Volunteers Num</h5>
+                  <h5 class="card-title text-uppercase text-muted mb-0">Required Volunteers Number</h5>
                   <span class="h2 font-weight-bold mb-0">{{event.required_volunteers_number}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Current Volunteers Number</h5>
+                  <span class="h2 font-weight-bold mb-0">13</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -58,161 +75,248 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Location</h5>
-                  <span class="h2 font-weight-bold mb-0">Outdoor</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                    <i class="fas fa-percent"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
 </div>
-<div class="container-fluid mt--7">
+<div class="container-fluid">
+<!--  <div class="row">-->
+<!--    <div class="col-xl-8 mb-5 mb-xl-0">-->
+<!--        <app-carousel-image [images]="images" [autoSlides]="false" [slidesInterval]="10000"></app-carousel-image>-->
+<!--    </div>-->
+<!--    <div class="col-xl-4">-->
+<!--      <div class="container">-->
+<!--        <div class="items">-->
+<!--          <div class="items-head">-->
+<!--            <p>Metrics</p>-->
+<!--            <hr>-->
+<!--          </div>-->
+<!--          <div class="items-body">-->
+<!--            <div class="items-body-content">-->
+<!--              <span>Metric -1</span>-->
+<!--              &lt;!&ndash;<i class="fa fa-angle-right"></i&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="items-body-content">-->
+<!--              <span>Metric -2</span>-->
+<!--              &lt;!&ndash;<i class="fa fa-angle-right"></i&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="items-body-content">-->
+<!--              <span>Metric -3</span>-->
+<!--              &lt;!&ndash; <i class="fa fa-angle-right"></i> &ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="items-body-content">-->
+<!--              <span>Metric -4</span>-->
+<!--              &lt;!&ndash; <i class="fa fa-angle-right"></i> &ndash;&gt;-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="row">
-    <div class="col-xl-8 mb-5 mb-xl-0">
-        <app-carousel-image [images]="images" [autoSlides]="false" [slidesInterval]="10000"></app-carousel-image>
-    </div>
-    <div class="col-xl-4">
-      <div class="container">
-        <div class="items">
-          <div class="items-head">
-            <p>Metrics</p>
-            <hr>
+    <div class="col-12">
+      <mat-tab-group>
+        <mat-tab label="General Settings"> General Settings </mat-tab>
+        <mat-tab label="Volunteers Data">
+          <div class="row mt-5">
+            <div class="col-xl-6" style="margin-bottom: 25px;">
+              <div class="card shadow">
+                <div class="card-header border-0">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h3 class="mb-0">Accepted Volunteers <span class="badge badge-success">({{this.event.acceptedUsers.length}})</span></h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <!-- Projects table -->
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of event.acceptedUsers; let i = index" >
+                      <th scope="row">
+                        {{ i+1 }}
+                      </th>
+                      <td>
+                        {{ user.name }}
+                      </td>
+                      <td>
+                        {{ user.email }}
+                      </td>
+                      <td>
+                        توزيع كرات
+                      </td>
+                      <td class="text-right">
+                        <a (click)="changeUserRoleStatus(user.id, 2)" placement="top" ngbTooltip="Mark as supervisor" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/up.png" width="25px" height="25px">
+                        </a>
+
+                        <a (click)="removeUserFromEvent(user.id, 2)" placement="top" ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/trash-bin.png" width="25px" height="25px">
+                        </a>
+
+                        <a (click)="openMetricsDialog(user.id, user.name)" placement="top" ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/database.png" width="25px" height="25px">
+                        </a>
+
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 mb-5">
+              <div class="card shadow">
+                <div class="card-header border-0">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h3 class="mb-0">Pending Join Requests <span class="badge badge-info">({{this.event.pendingUsers.length}})</span></h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <!-- Projects table -->
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of event.pendingUsers; let i = index" >
+                      <th scope="row">
+                        {{ i+1 }}
+                      </th>
+                      <td>
+                        {{ user.name }}
+                      </td>
+                      <td>
+                        {{ user.email }}
+                      </td>
+                      <td>
+                        <a placement="top" ngbTooltip="Accept Join Request" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/accept.png" width="25px" height="25px">
+                        </a>
+                        <a placement="top" ngbTooltip="Reject Join Request" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/cancel.png" width="25px" height="25px">
+                        </a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6" style="margin-bottom: 25px;">
+              <div class="card shadow">
+                <div class="card-header border-0">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h3 class="mb-0">Supervisors <span class="badge badge-success">({{this.event.supervisors.length}})</span></h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <!-- Projects table -->
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of event.supervisors; let i = index" >
+                      <th scope="row">
+                        {{ i+1 }}
+                      </th>
+                      <td>
+                        {{ user.name }}
+                      </td>
+                      <td>
+                        {{ user.email }}
+                      </td>
+                      <td>
+                        إشراف على توزيع الأطعمة
+                      </td>
+                      <td class="text-right">
+                        <a (click)="changeUserRoleStatus(user.id, 1)" placement="top" ngbTooltip="Mark as Normal Volunteer" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/down.png" width="25px" height="25px">
+                        </a>
+                        <a (click)="removeUserFromEvent(user.id, 1)" placement="top" ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/trash-bin.png" width="25px" height="25px">
+                        </a>
+                        <a (click)="openMetricsDialog(user.id, user.name)" placement="top" ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
+                          <img src="assets/img/icons/common/database.png" width="25px" height="25px">
+                        </a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 mb-5">
+              <div class="card shadow">
+                <div class="card-header border-0">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h3 class="mb-0">Rejected Join Requests <span class="badge badge-danger">({{this.event.rejectedUsers.length}})</span></h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <!-- Projects table -->
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Reason</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of event.rejectedUsers; let i = index" >
+                      <th scope="row">
+                        {{ i+1 }}
+                      </th>
+                      <td>
+                        {{ user.name }}
+                      </td>
+                      <td>
+                        {{ user.email }}
+                      </td>
+                      <td>
+                        لا يوجد سبب حالياً
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="items-body">
-            <div class="items-body-content">
-              <span>Metric -1</span>
-              <!--<i class="fa fa-angle-right"></i-->
-            </div>
-            <div class="items-body-content">
-              <span>Metric -2</span>
-              <!--<i class="fa fa-angle-right"></i-->
-            </div>
-            <div class="items-body-content">
-              <span>Metric -3</span>
-              <!-- <i class="fa fa-angle-right"></i> -->
-            </div>
-            <div class="items-body-content">
-              <span>Metric -4</span>
-              <!-- <i class="fa fa-angle-right"></i> -->
-            </div>
-          </div>
-        </div>
-      </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
-  <div class="row mt-5">
-    <div class="col-xl-8 mb-5 mb-xl-0">
-      <div class="card shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h3 class="mb-0">Volunteers</h3>
-            </div>
-            <div class="col text-right">
-              <a href="#!" class="btn btn-sm btn-primary">See all</a>
-            </div>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <!-- Projects table -->
-          <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Goal</th>
-                <th scope="col">Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">
-                  Ahmad
-                </th>
-                <td>
-                  Master chef
-                </td>
-                <td>
-                  340
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Fayz
-                </th>
-                <td>
-                  chef
-                </td>
-                <td>
-                  130
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4">
-      <div class="card shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h3 class="mb-0">Event Managers</h3>
-            </div>
-            <div class="col text-right">
-              <a href="#!" class="btn btn-sm btn-primary">See all</a>
-            </div>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <!-- Projects table -->
-          <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Goal</th>
-                <th scope="col">Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">
-                  Yazan
-                </th>
-                <td>
-                  health care
-                </td>
-                <td>
-                  1,480
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  Hamdi
-                </th>
-                <td>
-                  health care
-                </td>
-                <td>
-                  1,440
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </div>

@@ -29,7 +29,7 @@ export class Event {
     }
 
     public static fromDTO(dto : any) : Event | null {
-        return dto == null ? null : 
+        return dto == null ? null :
         new Event({
             id: dto.id,
             name : dto.name,

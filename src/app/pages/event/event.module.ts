@@ -15,8 +15,11 @@ import { EventManagementComponent } from './event-management/event-management.co
 import { EventComponent } from './events-view/event.component';
 import { EventRouting } from './event.route';
 
+import {MatTabsModule} from '@angular/material/tabs';
+import { MetricDialogComponent } from './components/metric-dialog/metric-dialog.component';
+
 @NgModule({
-    declarations: [EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent],
+    declarations: [EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent, MetricDialogComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,
@@ -29,6 +32,7 @@ import { EventRouting } from './event.route';
         MatDialogModule,
         NgbModule,
         EventRouting,
+        MatTabsModule
     ],
 })
 export class EventViewModule {}
