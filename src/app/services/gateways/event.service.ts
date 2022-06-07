@@ -8,6 +8,8 @@ const ENDPOINTS = {
   postEvent: "events",
   putRole: (id: number) => `events/${id}`,
   deleteRole: (id: number) => `events/${id}`,
+  removeUserFromEvent: () => `events/remove-user`,
+  changeUserRoleStatus: () => `events/change-user-role`,
 };
 
 @Injectable()
@@ -35,7 +37,7 @@ export class EventGateway {
       .get<any>(ENDPOINTS.getEvent(id), {}, null, null, {})
       .toPromise()
       .then((data) => {
-        return Event.fromDTO(data.data);
+        return data.data;
       });
   }
 
@@ -62,6 +64,24 @@ export class EventGateway {
 
   deleteEvent(eventId) {
     return this.api.delete(ENDPOINTS.deleteRole(eventId), {});
+  }
+
+  removeUserFromEvent(userId, eventId) {
+    return this.api.get(
+      ENDPOINTS.removeUserFromEvent(), {}, {'user_id': userId, 'event_id': eventId}
+      ).toPromise()
+      .then((data: any) => {
+        return data.data;
+      });
+  }
+
+  changeUserRoleStatus(userId, eventId) {
+    return this.api.get(
+      ENDPOINTS.changeUserRoleStatus(), {}, {'user_id': userId, 'event_id': eventId}
+    ).toPromise()
+      .then((data: any) => {
+        return data.data;
+      });
   }
 
 }

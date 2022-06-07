@@ -19,6 +19,9 @@ import { AddVolunteerComponent } from './components/add-volunteer/add-volunteer.
 import { ListDialogComponent } from './components/list-dialog/list-dialog.component';
 import { EventReportComponent } from './event-report/event-report.component';
 
+import {MatTabsModule} from '@angular/material/tabs';
+import { MetricDialogComponent } from './components/metric-dialog/metric-dialog.component';
+
 @NgModule({
     declarations: [EventReportComponent, EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent, EventStateComponent, AddVolunteerComponent, ListDialogComponent],
     imports: [
@@ -33,6 +36,7 @@ import { EventReportComponent } from './event-report/event-report.component';
         MatDialogModule,
         NgbModule,
         EventRouting,
+        MatTabsModule
     ],
 })
 export class EventViewModule {}

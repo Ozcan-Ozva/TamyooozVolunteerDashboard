@@ -74,6 +74,7 @@
                 <th scope="col">Event name</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th scope="col">Status</th>
                 <th scope="col">Created at</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -88,6 +89,12 @@
                 </td>
                 <td>
                   {{event.end_date | date:'short'}}
+                </td>
+                <td>
+                  <span [className]="'badge badge-md text-white mr-4 ' + this.getEventStatusText(event.status).class">
+                    {{this.getEventStatusText(event.status).text}}
+                  </span>
+
                 </td>
                 <td>
                   {{event.created_at | date:'short'}}
