@@ -23,7 +23,7 @@ export class API {
     get<T>(
         url: string,
         variables: Object,
-        filter?: Object,
+        filter?: {},
         where?: Object,
         queryParmas?: Object,
         changeRoute?: boolean
@@ -36,7 +36,8 @@ export class API {
             queryParmas,
             changeRoute
         );
-        return this.http.get<T>(url, {headers: this.headers});
+        console.log(filter);
+        return this.http.get<T>(url, {headers: this.headers, params: filter });
     }
 
     post<T>(

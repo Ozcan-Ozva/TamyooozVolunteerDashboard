@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { API } from "../api.service";
 import { Metric } from "../../model/metric";
 import { MetricOperation } from "../../model/metric-operation";
+import {Event} from '../../model/event';
 
 const ENDPOINTS = {
   getMetric: "metrics",
@@ -9,6 +10,7 @@ const ENDPOINTS = {
   putMetric: (id: number) => `metrics/${id}`,
   deleteMetric: (id: number) => `metrics/${id}`,
   getMetricOperation: "getMetricsOperations",
+  getUserEventMetrics: 'metric/metrics-event-user'
 };
 
 @Injectable()
@@ -21,7 +23,7 @@ export class MetricGateway {
       .toPromise()
       .then((data) => {
         return {
-          metrics: Metric.fromDTOArray(data.data.data), 
+          metrics: Metric.fromDTOArray(data.data.data),
           current_page: data.data.current_page,
           links: data.data.links,
           total: data.data.total,
@@ -62,6 +64,17 @@ export class MetricGateway {
 
   deleteMetric(metricId : number) {
     return this.api.delete(ENDPOINTS.deleteMetric(metricId), {});
+  }
+
+  async getUserEventMetrics(eventId: number, userId: number) {
+    return this.api.get(ENDPOINTS.getUserEventMetrics, {}, {
+      'user_id': userId,
+      'event_id': eventId
+    }).toPromise()
+      .then((data: any) => {
+
+        return data.data;
+      });
   }
 }
 

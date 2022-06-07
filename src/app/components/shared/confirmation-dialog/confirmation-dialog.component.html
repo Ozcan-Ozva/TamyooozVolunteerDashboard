@@ -1,0 +1,14 @@
+<div class="card show">
+  <div class="row text-center align-items-center" style="margin-top: 20px; margin-bottom: 20px">
+    <div class="col-12">
+      <p>{{ this.data.message }}</p>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-danger" (click)="confirm()">{{ this.data.confirmationButtonText}}</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-danger" (click)="onNoClick()">Cancel</button>
+    </div>
+  </div>
+
+</div>
