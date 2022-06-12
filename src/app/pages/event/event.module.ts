@@ -21,9 +21,10 @@ import { EventReportComponent } from './event-report/event-report.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
 import { MetricDialogComponent } from './components/metric-dialog/metric-dialog.component';
+import { MetricConfigurationsComponent } from './components/metric-configurations/metric-configurations.component';
 
 @NgModule({
-    declarations: [EventReportComponent, EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent, EventStateComponent, AddVolunteerComponent, ListDialogComponent],
+    declarations: [EventReportComponent, EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent, EventStateComponent, AddVolunteerComponent, ListDialogComponent, MetricConfigurationsComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,

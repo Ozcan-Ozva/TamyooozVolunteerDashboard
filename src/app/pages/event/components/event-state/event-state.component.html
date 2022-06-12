@@ -24,20 +24,20 @@
       font-weight: bold;
       font-size: 20px;">Event States</h1>
       <hr style="width: 20%; margin: 0px 30px; border: 1px solid #0B5AA2; background-color: #0B5AA2; margin-bottom: 30px; margin-left: 10px;">
-      <label class="control control--radio">Establishing
-        <input type="radio" name="radio" checked="checked"/>
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--radio">Recruiting
-        <input type="radio" name="radio"/>
+      <label class="control control--radio">Recruited
+        <input (change)="onChangeState(0)" type="radio" name="radio" checked="checked"/>
         <div class="control__indicator"></div>
       </label>
       <label class="control control--radio">InFlow
-        <input type="radio" name="radio"/>
+        <input (change)="onChangeState(1)" type="radio" name="radio"/>
         <div class="control__indicator"></div>
       </label>
       <label class="control control--radio">Ended
-        <input type="radio" name="radio"/>
+        <input (change)="onChangeState(2)" type="radio" name="radio"/>
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--radio">Archived
+        <input (change)="onChangeState(3)" type="radio" name="radio"/>
         <div class="control__indicator"></div>
       </label>
       <!-- <label class="control control--radio">Disabled

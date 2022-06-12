@@ -85,6 +85,7 @@ export class BadgetComponent implements OnInit {
   badgeOwners(badge: Badge) {
     const dialogRef = this.dialog.open(BadgeLeaderboardComponent, {
       data: {
+        badgeId: badge.id,
         name: badge.name,
         description: "",
         metric_queries: [],

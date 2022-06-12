@@ -2,34 +2,22 @@
 
 
 .permission-drop-down{
-  @include make-scroll-bar;
-  overflow-y: auto;
-  position: relative;
-  max-height: 200px;
-  margin-bottom: 10px;
-  margin-left: 60px;
-}
-
-
-.role-span {
-  background-color: #5E72E4;
-  color: white;
-  border-radius: 25px;
-  padding: 5px;
-  margin-right: 5px;
-  white-space: nowrap;
-  display: inline-block;
-  margin-top: 10px;
+    @include make-scroll-bar;
+    overflow-y: auto;
+    position: relative;
+    max-height: 200px;
+    margin-bottom: 10px;
 }
 
 .card {
+    padding: 10px;
     max-width: 750px;
     width: 100%;
     @include make-card;
     @include make-scroll-bar;
     overflow-y: auto;
     position: relative;
-    padding: 50px;
+    padding: 50px 30px;
     max-height: 600px;
 
     .saveButton {
@@ -109,8 +97,4 @@
     display: inline-block;
     margin-top: 10px;
     font-size: 12px;
-  }
-
-  .labelInput {
-    float:left; color: rgb(82, 82, 82)
   }

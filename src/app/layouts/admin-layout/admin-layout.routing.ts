@@ -13,6 +13,7 @@ import { MetricComponent } from "../../pages/metric/metric.component";
 import { PointRuleComponent } from "../../pages/point-rule/point-rule.component";
 import { BadgetComponent } from "../../pages/badget/badget.component";
 import { NewsFeedComponent } from "../../pages/news-feed/news-feed.component";
+import { MessagesComponent } from "../../pages/messages/messages.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -20,6 +21,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "point-rule", component: PointRuleComponent },
   { path: "badge", component: BadgetComponent },
   { path: "join-request", component: JoinOrgRequestComponent },
+  { path: "messages", component: MessagesComponent },
   { path: "metric", component: MetricComponent },
   { path: "news-feed", component: NewsFeedComponent },
   {

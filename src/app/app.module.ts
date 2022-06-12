@@ -19,7 +19,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import { ProfileService } from './services/profile.service';
 
 import {MatTabsModule} from '@angular/material/tabs';
 
@@ -38,14 +37,14 @@ import {MatTabsModule} from '@angular/material/tabs';
     RouterModule,
     AppRoutingModule,
     GatewayModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
   ],
-  providers: [AuthService, ProfileService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

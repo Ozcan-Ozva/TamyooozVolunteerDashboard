@@ -2,11 +2,14 @@ import { Injectable } from "@angular/core";
 import { API } from "../api.service";
 import { Badge } from "../../model/badge";
 import { MetricQuery } from "../../model/metric-query";
+import { map, Observable } from "rxjs";
 
 const ENDPOINTS = {
   getBadges: "getAllBadges",
   postBadge: "newBadge",
+  userBadges: "userBadges",
   putJoinRequest: (id: number) => `join-requests/${id}`,
+  badgeUsers: (id: number) => `badgeUsers/${id}`,
   patchJoinRequest: (id: number) => `join-requests/${id}`,
   deleteJoinRequest: (id: number) => `join-requests/${id}`,
 };
@@ -22,6 +25,14 @@ export class BadgeGateway {
       .then((data) => {
         return Badge.fromDTOArray(data);
       });
+  }
+
+  getUserBadges(filter: any) : Observable<Badge[]> {
+    return this.api.get<any>(ENDPOINTS.userBadges, {}, null, null, filter);
+  }
+
+  getBadgeUsers(filter: any, badgeId: number) : Observable<any[]>{
+    return this.api.get<any>(ENDPOINTS.badgeUsers(badgeId), {}, null, null, filter);
   }
 
   postBadge(badge: BadgeDto) {

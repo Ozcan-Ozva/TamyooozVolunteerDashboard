@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { User } from '../../../../model/user';
+import { BadgeGateway } from '../../../../services/gateways/badge.service';
 
 @Component({
   selector: 'app-badge-leaderboard',
@@ -8,12 +10,20 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class BadgeLeaderboardComponent implements OnInit {
 
+  owners: User[];
+
   constructor(
     public dialogRef: MatDialogRef<BadgeLeaderboardComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _badgeService: BadgeGateway,
   ) {}
 
   ngOnInit(): void {
+    this._badgeService.getBadgeUsers({},this.data.badgeId)
+    .subscribe((data) => {
+      console.log("this is data");
+      console.log(User.fromDTOArray(data[0].users));
+    })
   }
 
   onNoClick(): void {

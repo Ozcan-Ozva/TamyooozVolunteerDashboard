@@ -1,0 +1,45 @@
+<div class="card">
+    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Metric Configuration</p>
+  
+    <div>
+      <div *ngIf="data.metricType == 5 || data.metricType == 6" class="form-group" style="margin-left: auto; margin-right: 0px;">
+        <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Max Value</label>
+        <input style="text-align: left" [(ngModel)]="data.maxValue" type="number" class="form-control"
+          id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter max value">
+      </div>
+      <div *ngIf="data.metricType == 5 || data.metricType == 6" class="form-group" style="margin-left: auto; margin-right: 0px;">
+        <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Min Value</label>
+        <input style="text-align: left" [(ngModel)]="data.minValue" type="number" class="form-control"
+          id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter min value">
+      </div>
+      <div *ngIf="(data.metricType % 2 ) == 0 " class="form-group" style="margin-left: auto; margin-right: 0px;">
+        <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Values limit</label>
+        <input style="text-align: left" [(ngModel)]="data.valueLimit" type="number" class="form-control"
+          id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter value limit">
+      </div>
+      <div *ngIf="(data.metricType % 2 ) == 1 " class="form-group" style="margin-left: auto; margin-right: 0px;">
+        <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">At Event End</label>
+        <select [(ngModel)]="data.atEventEnd" class="form-control" id="sel1" name="sellist1">
+            <option value="">ٍSelect Options</option>
+            <option value="1">True</option>
+            <option value="0">False</option>
+          </select>
+      </div>
+      <!-- <div class="form-group" style="margin-left: auto; margin-right: 0px; margin-bottom: 0px;">
+        <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Role's Permissions</label>
+        <input (keyup)="filterPermissions($event)" [(ngModel)]="permissionFilter" style="text-align: left" type="text" class="form-control"
+          id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter permission name">
+      </div>
+      <span (click)="removePermission($event)" class="role-span" *ngFor="let permission of spanPermissions">{{permission}}</span>
+      <div class="permission-drop-down">
+        <ul id="myUL">
+          <li (click)="addPermissions($event)" *ngFor="let permission of liPermissions"><a>{{permission.name}}</a></li>
+        </ul>
+      </div> -->
+    </div>
+    <div style="float: left; position: relative; top: 20px;">
+      <button class="btn btn-primary" [mat-dialog-close]="data">save</button>
+      <button class="btn cancelButton" (click)="onNoClick()">cancel</button>
+    </div>
+  </div>
+  

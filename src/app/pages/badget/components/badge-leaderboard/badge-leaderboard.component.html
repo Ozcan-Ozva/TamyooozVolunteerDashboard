@@ -1,7 +1,8 @@
 <div class="card">
     <div class="row">
         <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">{{data.name}}</p>
-        <app-badge style="margin-top: -100px; left: 50px;"></app-badge>
+        <!-- <app-badge style="margin-top: -100px; left: 50px;"></app-badge> -->
+        <img style="width: 100px; height:100px; margin-top: -40px; margin-left: 30%;" src="https://www.pngmart.com/files/14/Golden-Badge-Transparent-PNG.png" alt="badge">
     </div>
     <div style="height: 600px; width: 300px">
       <div class="leaderboard">
@@ -16,20 +17,8 @@
             <mark>Jerry Wood</mark>
             <small><button class="btn small-btn-remove btn-xs btn-danger">Delete</button></small>
           </li>
-          <li>
-            <mark>Brandon Barnes</mark>
-            <small><button class="btn small-btn-remove btn-xs btn-danger">Delete</button></small>
-          </li>
-          <li>
-            <mark>Raymond Knight</mark>
-            <small><button class="btn small-btn-remove btn-xs btn-danger">Delete</button></small>
-          </li>
-          <li>
-            <mark>Trevor McCormick</mark>
-            <small><button class="btn small-btn-remove btn-xs btn-danger">Delete</button></small>
-          </li>
-          <li>
-            <mark>Andrew Fox</mark>
+          <li *ngFor="let owner of owners">
+            <mark>{{owner.name}}</mark>
             <small><button class="btn small-btn-remove btn-xs btn-danger">Delete</button></small>
           </li>
         </ol>

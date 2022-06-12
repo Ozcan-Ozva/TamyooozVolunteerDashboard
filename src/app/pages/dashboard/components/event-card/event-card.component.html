@@ -8,14 +8,14 @@
     </header>
     
     <main class="leaderboard__profiles">
-      <article class="leaderboard__profile">
+      <article *ngFor="let event of events; let index = index" class="leaderboard__profile">
           <div class="row" style="padding: 10px; justify-content: center;">
-              <div class="event-name">Event Name</div>
-              <div class="event-date">Start in: 2015/1/22</div>
-              <div class="event-date">End in: 2015/6/22</div>
+              <div class="event-name">{{event.name}}</div>
+              <div class="event-date">Start in: {{event.start_date | date: 'dd/MM/yyyy'}}</div>
+              <div class="event-date">End in: {{event.end_date | date: 'dd/MM/yyyy'}}</div>
           </div>
         <div class="row" style="justify-content: center;">
-            <app-progress-bar></app-progress-bar>
+            <app-progress-bar [eventStatus]="event.status"></app-progress-bar>
         </div>
       </article>
       

@@ -57,10 +57,10 @@ export class JoinRequestGateway {
   }
 
   acceptJoinRequest(joinRequestId: number) {
-    return this.api.patch(ENDPOINTS.patchJoinRequest(joinRequestId), {}, {});
+    return this.api.patch(ENDPOINTS.patchJoinRequest(joinRequestId), {}, {}, {});
   }
   acceptUserJoinRequest(userId: number) {
-    return this.api.patch(ENDPOINTS.patchUserJoinRequest(userId), {}, {});
+    return this.api.patch(ENDPOINTS.patchUserJoinRequest(userId), {}, {}, {});
   }
 }
 

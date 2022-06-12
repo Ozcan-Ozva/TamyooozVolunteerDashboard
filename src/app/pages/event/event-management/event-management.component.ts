@@ -1,3 +1,4 @@
+import { Metric } from './../../../model/metric';
 import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { EventGateway } from "../../../services/gateways/event.service";
@@ -10,6 +11,7 @@ import {CreateEventComponent, EventtDialogData} from '../components/create-event
 import {MetricDialogComponent} from '../components/metric-dialog/metric-dialog.component';
 import {MetricGateway} from '../../../services/gateways/metric.service';
 import {ConfirmationDialogComponent} from '../../../components/shared/confirmation-dialog/confirmation-dialog.component';
+import { MetricConfigurationsComponent } from '../components/metric-configurations/metric-configurations.component';
 
 @Component({
   selector: "app-event-management",
@@ -34,7 +36,7 @@ export class EventManagementComponent implements OnInit {
     acceptedUsers : [],
     supervisors : []
   };
-  public metrics :[];
+  public metrics :Metric[] = [];
   public loader: boolean = true;
   public volunteerList = [
     { name: "Ahmad", goal: "Master chef", points: 30},
@@ -88,7 +90,7 @@ export class EventManagementComponent implements OnInit {
     private _eventGateway: EventGateway,
     public metricDialog: MatDialog,
     public dialog: MatDialog,
-    public metricGateWay: MetricGateway) {}
+    public _metricGateWay: MetricGateway) {}
 
 
   ngOnInit() {
@@ -96,6 +98,12 @@ export class EventManagementComponent implements OnInit {
       this.id = +params["id"];
       console.log("this is id");
       console.log(this.id);
+      this.fetchMetrics(this.id)
+      .subscribe((data) => {
+        data.data.forEach(element => {
+          this.metrics.push(Metric.fromDTO(element.metric))
+        });
+      })
       this.fetchEvent(this.id)
       .then((data) => {
         console.log("this is event");
@@ -113,6 +121,9 @@ export class EventManagementComponent implements OnInit {
 
   private async fetchEvent(id: number) {
     return this._eventGateway.getEvent(id);
+  }
+  private fetchMetrics(id: number) {
+    return this._metricGateWay.getEventMetrics(id);
   }
 
   convertVolunteerToManager(volunteer: any) {
@@ -139,6 +150,38 @@ export class EventManagementComponent implements OnInit {
         console.log(result);
       }
     });
+  }
+
+  changeMetricConfiguration(metric: Metric) {
+    const dialogRef = this.dialog.open(MetricConfigurationsComponent, {
+      data: {
+        metricType: metric.type,
+        maxValue: 0,
+        minValue: 0,
+        valueLimit: 0,
+        atEventEnd: null,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result !== undefined) {
+        console.log("this is result");
+        console.log(result);
+        this._metricGateWay
+        .postMetricConfiguration({
+          maxValue: result.maxValue,
+          minValue: result.minValue,
+          valuesLimit: result.valueLimit,
+          atEndValue: result.atEventEnd,
+          metricId: metric.id,
+          eventId: this.id
+        })
+        .subscribe((result: any) => {
+          if (result.status_code === 200) {
+            console.log("Done");
+          }
+        });
+      }
+    })
   }
 
   addVolunteer(): void {
@@ -170,7 +213,7 @@ export class EventManagementComponent implements OnInit {
     })
   }
   public async openMetricsDialog(userId, userName) {
-    const metrics = await this.metricGateWay.getUserEventMetrics(this.event.id, userId);
+    const metrics = await this._metricGateWay.getUserEventMetrics(this.event.id, userId);
     console.log(metrics);
     const dialogRef = this.metricDialog.open(MetricDialogComponent, {
       width: '1300px',

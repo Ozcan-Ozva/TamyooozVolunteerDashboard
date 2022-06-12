@@ -1,3 +1,4 @@
+import { API } from './../../services/api.service';
 import { AuthService } from "./../../services/auth.service";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
@@ -21,10 +22,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._onLogin(this.email, this.password)
       .then((data) => {
         console.log(data);
+        API.token$.next(data.data.admin.access_token);
         setTimeout(() => {
           this.router.navigate([""])
           .then(() => {
-            window.location.reload();
+            //window.location.reload();
           })
         }, 0);
       })

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart, ChartItem} from 'chart.js';
+import { EventGateway } from '../../services/gateways/event.service';
+import { Event } from "../../model/event";
+
 
 // core components
 import {
@@ -21,8 +24,22 @@ export class DashboardComponent implements OnInit {
   public salesChart;
   public clicked: boolean = true;
   public clicked1: boolean = false;
+  public events: Event[] = [];
+
+  constructor(private _eventGateway: EventGateway) {
+
+  }
 
   ngOnInit() {
+
+    this._eventGateway.getEvents({})
+    .then((data) => {
+      console.log("this is data");
+      console.log(data);
+      this.events = data.events;
+      console.log("this is events");
+      console.log(this.events);
+    })
 
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],

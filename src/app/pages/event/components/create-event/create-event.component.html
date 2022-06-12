@@ -1,24 +1,24 @@
 <div class="card">
-    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Create New Event</p>
-    <div class="card-content">
-      <div class="row">
-        <div class="column-50">
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Event name</label>
-            <input type="text" [(ngModel)]="data.name" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp" placeholder="Enter">
-          </div>
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Description</label>
-            <input type="text" [(ngModel)]="data.description" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp" placeholder="Enter">
-          </div>
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Start Date</label>
-            <input type="date" [(ngModel)]="data.start_date" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp" placeholder="Enter">
-          </div>
-          <!--<div class="form-group" style="margin-left: 60px">
+  <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Create New Event</p>
+  <div class="card-content">
+    <div class="row">
+      <div class="column-50">
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Event name</label>
+          <input type="text" [(ngModel)]="data.name" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Description</label>
+          <input type="text" [(ngModel)]="data.description" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Start Date</label>
+          <input type="date" [(ngModel)]="data.start_date" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <!--<div class="form-group" style="margin-left: 60px">
             <mat-form-field appearance="fill">
               <mat-label style="color: black;">Choose a date</mat-label>
               <input type="date" [(ngModel)]="data.date_of_birth" class="form-control" style="color: black;" matInput [matDatepicker]="picker">
@@ -26,47 +26,55 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </div>-->
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">End Date</label>
-            <input type="date" [(ngModel)]="data.end_date" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp" placeholder="Enter">
-          </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">End Date</label>
+          <input type="date" [(ngModel)]="data.end_date" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
         </div>
-        <div class="column-50">
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Metrix</label>
-              <select (change)="onChangeMetric($event)" class="form-control" id="sel1" name="sellist1">
-                <option value=""></option>
-                <option *ngFor="let metric of metrics; let i = index" value={{metric.name}}>{{metric.name}}</option>
-              </select>
-              <span (click)="removeMetric($event)" class="role-span" *ngFor="let span of metricSpan">{{span}}</span>
-          </div>
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Categories</label>
-              <select (change)="onChangeCategory($event)" class="form-control" id="sel1" name="sellist1">
-                <option value=""></option>
-                <option *ngFor="let category of categories" value={{category.name}}>{{category.name}}</option>
-              </select>
-              <span (click)="removeCategory($event)" class="role-span" *ngFor="let span of categorySpan">{{span}}</span>
-          </div>
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Event Manager</label>
-              <select [(ngModel)]="data.users" class="form-control" id="sel1" name="sellist1">
-                <option value="Gender">Gender</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-              </select>
-          </div>
-          <div class="form-group" style="margin-left: 60px">
-            <label class="labelInput" for="exampleInputEmail1">Number of required volunteers</label>
-            <input type="number" [(ngModel)]="data.required_volunteers_number" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp" placeholder="Enter">
-          </div>
+      </div>
+      <div class="column-50">
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Metrix</label>
+          <select (change)="onChangeMetric($event)" class="form-control" id="sel1" name="sellist1">
+            <option value=""></option>
+            <option *ngFor="let metric of metrics; let i = index" value={{metric.name}}>{{metric.name}}</option>
+          </select>
+          <span (click)="removeMetric($event)" class="role-span" *ngFor="let span of metricSpan">{{span}}</span>
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Categories</label>
+          <select (change)="onChangeCategory($event)" class="form-control" id="sel1" name="sellist1">
+            <option value=""></option>
+            <option *ngFor="let category of categories" value={{category.name}}>{{category.name}}</option>
+          </select>
+          <span (click)="removeCategory($event)" class="role-span" *ngFor="let span of categorySpan">{{span}}</span>
+        </div>
+        <div class="form-group" style="margin-left: 60px;">
+          <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Role's Permissions</label>
+          <input (keyup)="filterPermissions($event)" [(ngModel)]="permissionFilter" style="text-align: left" type="text"
+            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="enter permission name">
+        </div>
+        <div style="margin-left: 60px;">
+          <span (click)="removePermission($event)" class="role-span"
+          *ngFor="let permission of spanPermissions">{{permission}}</span>
+        </div>
+        <div class="permission-drop-down">
+          <ul id="myUL">
+            <li (click)="addPermissions($event)" *ngFor="let permission of liPermissions"><a>{{permission.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Number of required volunteers</label>
+          <input type="number" [(ngModel)]="data.required_volunteers_number" class="form-control"
+            id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter">
         </div>
       </div>
     </div>
-    <div style="float: left; position: relative; top: 20px;">
-      <button class="btn btn-primary" [mat-dialog-close]="data">Save</button>
-      <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
-    </div>
   </div>
+  <div style="float: left; position: relative; top: 20px;">
+    <button class="btn btn-primary" [mat-dialog-close]="data">Save</button>
+    <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
+  </div>
+</div>

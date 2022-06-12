@@ -6,6 +6,8 @@ const ENDPOINTS = {
   getEvents: "events",
   getEvent: (id: number) => `events/${id}`,
   postEvent: "events",
+  changeState:(id: number) => `event/changeStatus/${id}`,
+  /* {status: 1} */
   putRole: (id: number) => `events/${id}`,
   deleteRole: (id: number) => `events/${id}`,
   removeUserFromEvent: () => `events/remove-user`,
@@ -60,6 +62,12 @@ export class EventGateway {
 
   updateEvent(eventId: number, data: EventDto) {
     return this.api.put(ENDPOINTS.putRole(eventId), {}, { data });
+  }
+
+  updateEventState(eventId: number, data: any) {
+    console.log("this is data");
+    console.log(data);
+    return this.api.patch(ENDPOINTS.changeState(eventId), {}, {} , data);
   }
 
   deleteEvent(eventId) {

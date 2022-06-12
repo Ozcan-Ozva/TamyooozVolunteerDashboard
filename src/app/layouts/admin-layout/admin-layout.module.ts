@@ -25,6 +25,7 @@ import { BadgeViewModule } from '../../pages/badget/badget.module';
 import { NewsFeedViewModule } from '../../pages/news-feed/news-feed.module';
 import { ProfileService } from '../../services/profile.service';
 import { UserProfileViewModule } from '../../pages/user-profile/user-profile.module';
+import { MessageViewModule } from '../../pages/messages/messages.module';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -47,6 +48,7 @@ import { UserProfileViewModule } from '../../pages/user-profile/user-profile.mod
     BadgeViewModule,
     NewsFeedViewModule,
     UserProfileViewModule,
+    MessageViewModule,
   ],
   declarations: [
     DashboardComponent,
@@ -56,6 +58,7 @@ import { UserProfileViewModule } from '../../pages/user-profile/user-profile.mod
     EventCardComponent,
     MapsComponent
   ],
+  providers: []
 })
 
 export class AdminLayoutModule {}

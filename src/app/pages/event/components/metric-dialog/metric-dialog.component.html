@@ -6,7 +6,7 @@
           <div class="card-header border-0">
             <div class="row align-items-center">
               <div class="col">
-                <h3 class="mb-0 dialog-header">{{this.data.userName}}'s Metrics</h3>
+                <h3 *ngFor="let x of oneValue" class="mb-0 dialog-header">{{data.userName}}'s Metrics</h3>
               </div>
             </div>
           </div>
@@ -22,16 +22,16 @@
               </tr>
               </thead>
               <tbody>
-
-              <tr *ngFor="let metric of this.data.metrics.oneValue; let i = index" >
-                  <th scope="row" >
-                    {{ i+1 }}
+              <tr *ngFor="let metric of oneValue">
+                  <th scope="row">
+                    {{data.metrics.oneValue[0].name}}
                   </th>
                   <td>
                     {{ metric.name }}
                   </td>
                   <td>
-                    <div *ngIf="metric.type == 1">
+                    sadsad
+                    <!-- <div *ngIf="metric.type == 1">
                       <div *ngIf="metric.values[0].value == 1">
                         <div class="custom-control custom-checkbox mb-3">
                           <input class="custom-control-input" id="customCheck4" type="checkbox" checked="checked" disabled="">
@@ -47,7 +47,7 @@
                     </div>
                     <div *ngIf="metric.type != 1">
                       {{ metric.values[0].value }}
-                    </div>
+                    </div> -->
                   </td>
               </tr>
               </tbody>
@@ -56,7 +56,7 @@
           <hr>
           <p class="font-weight-bold">Event List Metrics</p>
 
-          <div class="card shadow"  *ngFor="let metric of this.data.metrics.listValue; let i = index">
+          <div class="card shadow"  *ngFor="let metric of data.metrics.listValue; let i = index">
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">

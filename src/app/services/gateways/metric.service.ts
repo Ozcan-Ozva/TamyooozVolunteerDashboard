@@ -7,6 +7,8 @@ import {Event} from '../../model/event';
 const ENDPOINTS = {
   getMetric: "metrics",
   postMetric: "metrics",
+  metricConfiguration: "metricConfiguration",
+  eventMetrics: (id: number) => `metric/get-event-metrics/${id}`,
   putMetric: (id: number) => `metrics/${id}`,
   deleteMetric: (id: number) => `metrics/${id}`,
   getMetricOperation: "getMetricsOperations",
@@ -33,6 +35,16 @@ export class MetricGateway {
       });
   }
 
+  getEventMetrics(eventId: number) {
+    return this.api.get<any>(
+      ENDPOINTS.eventMetrics(eventId),
+      {},
+      null,
+      null,
+      {}
+    );
+  }
+
   getMetricsOperation(filter: any): Promise<MetricOperation[]> {
     return this.api
       .get<any>(ENDPOINTS.getMetricOperation, {}, null, null, filter)
@@ -54,25 +66,49 @@ export class MetricGateway {
     );
   }
 
-  updateMetric(metricId: number, data: MetricDto) {
-    return this.api.put(ENDPOINTS.putMetric(metricId), {}, {
-      name: data.name,
-      type: data.type,
-      description: data.description
-    });
+  postMetricConfiguration(metricConfiguration: metricConfiguration) {
+    return this.api.post(
+      ENDPOINTS.metricConfiguration,
+      {},
+      {
+        max_value: metricConfiguration.maxValue,
+        min_value: metricConfiguration.minValue,
+        values_limit: metricConfiguration.valuesLimit,
+        at_event_end: metricConfiguration.atEndValue,
+        metric_id: metricConfiguration.metricId,
+        event_id: metricConfiguration.eventId,
+      }
+    );
   }
 
-  deleteMetric(metricId : number) {
+  updateMetric(metricId: number, data: MetricDto) {
+    return this.api.put(
+      ENDPOINTS.putMetric(metricId),
+      {},
+      {
+        name: data.name,
+        type: data.type,
+        description: data.description,
+      }
+    );
+  }
+
+  deleteMetric(metricId: number) {
     return this.api.delete(ENDPOINTS.deleteMetric(metricId), {});
   }
 
   async getUserEventMetrics(eventId: number, userId: number) {
-    return this.api.get(ENDPOINTS.getUserEventMetrics, {}, {
-      'user_id': userId,
-      'event_id': eventId
-    }).toPromise()
+    return this.api
+      .get(
+        ENDPOINTS.getUserEventMetrics,
+        {},
+        {
+          user_id: userId,
+          event_id: eventId,
+        }
+      )
+      .toPromise()
       .then((data: any) => {
-
         return data.data;
       });
   }
@@ -91,4 +127,13 @@ export interface GetMetricstDto {
   total: number;
   last_page: number;
   from: number;
+}
+
+export interface metricConfiguration {
+  maxValue?: number;
+  minValue?: number;
+  valuesLimit?: number;
+  atEndValue?: number;
+  metricId: number;
+  eventId: number
 }
