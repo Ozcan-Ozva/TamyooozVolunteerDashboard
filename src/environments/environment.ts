@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://157.175.98.98:8000/api/dashboard/',
+  base_url: 'https://157.175.98.98:8000/api/dashboard/',
   /* production: false,
   base_url: 'http://192.168.43.50:8001/api/dashboard/', */
   /* production: false, */
