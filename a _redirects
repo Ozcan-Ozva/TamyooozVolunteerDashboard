@@ -1,0 +1,1 @@
+/api/* http://157.175.98.98:80/vms-back-develop/public/index.php/api/dashboard/:splat 200
