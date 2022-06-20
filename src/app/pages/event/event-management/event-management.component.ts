@@ -12,6 +12,7 @@ import {MetricDialogComponent} from '../components/metric-dialog/metric-dialog.c
 import {MetricGateway} from '../../../services/gateways/metric.service';
 import {ConfirmationDialogComponent} from '../../../components/shared/confirmation-dialog/confirmation-dialog.component';
 import { MetricConfigurationsComponent } from '../components/metric-configurations/metric-configurations.component';
+import { AdminLayoutComponent } from '../../../layouts/admin-layout/admin-layout.component';
 
 @Component({
   selector: "app-event-management",
@@ -21,22 +22,7 @@ import { MetricConfigurationsComponent } from '../components/metric-configuratio
 export class EventManagementComponent implements OnInit {
   private sub: any;
   private id;
-  public event: any = {
-    id: 0,
-    name: "",
-    categories: [],
-    created_at: new Date(),
-    description: "",
-    end_date: new Date(),
-    media: null,
-    required_volunteers_number: 0,
-    start_date: new Date(),
-    status: null,
-    updated_at: new Date(),
-    acceptedUsers : [],
-    supervisors : []
-  };
-  public metrics :Metric[] = [];
+  public event: Event;
   public loader: boolean = true;
   public volunteerList = [
     { name: "Ahmad", goal: "Master chef", points: 30},
@@ -94,22 +80,24 @@ export class EventManagementComponent implements OnInit {
 
 
   ngOnInit() {
+    AdminLayoutComponent.loader$.next(true);
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params["id"];
       console.log("this is id");
       console.log(this.id);
-      this.fetchMetrics(this.id)
+      /* this.fetchMetrics(this.id)
       .subscribe((data) => {
         data.data.forEach(element => {
           this.metrics.push(Metric.fromDTO(element.metric))
         });
-      })
+      }) */
       this.fetchEvent(this.id)
       .then((data) => {
         console.log("this is event");
         console.log(data);
         this.event = data;
         this.loader = false;
+        AdminLayoutComponent.loader$.next(false);
       })
       .catch((error) => {
         if (error instanceof HttpErrorResponse) {
@@ -122,9 +110,9 @@ export class EventManagementComponent implements OnInit {
   private async fetchEvent(id: number) {
     return this._eventGateway.getEvent(id);
   }
-  private fetchMetrics(id: number) {
+  /* private fetchMetrics(id: number) {
     return this._metricGateWay.getEventMetrics(id);
-  }
+  } */
 
   convertVolunteerToManager(volunteer: any) {
     let index = this.volunteerList.indexOf(volunteer);
@@ -212,27 +200,23 @@ export class EventManagementComponent implements OnInit {
       }
     })
   }
-  public async openMetricsDialog(userId, userName) {
-    const metrics = await this._metricGateWay.getUserEventMetrics(this.event.id, userId);
-    console.log(metrics);
-    const dialogRef = this.metricDialog.open(MetricDialogComponent, {
-      width: '1300px',
-      data: {
-        userName: userName,
-        metrics: metrics
-      },
-    });
+  public openMetricsDialog(userId, userName) {
+      const dialogRef = this.metricDialog.open(MetricDialogComponent, {
+        data: {
+          userName: userName,
+          eventId: this.event.id,
+          userId: userId,
+        },
+      });
   }
 
   public removeUserFromEvent(userId, type) {
     const dialogRef = this.metricDialog.open(ConfirmationDialogComponent, {
-      width: '500px',
       data: {
         message: 'Are you sure you want to remove this user from event?',
         confirmationButtonText: 'Confirm'
       },
     });
-
     dialogRef.afterClosed().subscribe((eventResult: any) => {
       if (eventResult) {
         this._eventGateway.removeUserFromEvent(userId, this.event.id);
@@ -280,7 +264,6 @@ export class EventManagementComponent implements OnInit {
         confirmationButtonText: 'Confirm'
       },
     });
-
     dialogRef.afterClosed().subscribe((eventResult: any) => {
       if (eventResult) {
         console.log(userId);

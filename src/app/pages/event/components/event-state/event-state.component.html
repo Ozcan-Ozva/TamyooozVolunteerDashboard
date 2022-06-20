@@ -24,20 +24,20 @@
       font-weight: bold;
       font-size: 20px;">Event States</h1>
       <hr style="width: 20%; margin: 0px 30px; border: 1px solid #0B5AA2; background-color: #0B5AA2; margin-bottom: 30px; margin-left: 10px;">
-      <label class="control control--radio">Recruited
-        <input (change)="onChangeState(0)" type="radio" name="radio" checked="checked"/>
+      <label class="control control--radio">Recruiting
+        <input [disabled]="checkDisable(0)" (change)="changeUserRoleStatus(0)" type="radio" name="radio"/>
         <div class="control__indicator"></div>
       </label>
       <label class="control control--radio">InFlow
-        <input (change)="onChangeState(1)" type="radio" name="radio"/>
+        <input [disabled]="checkDisable(1)" (change)="changeUserRoleStatus(1)" type="radio" name="radio"/>
         <div class="control__indicator"></div>
       </label>
       <label class="control control--radio">Ended
-        <input (change)="onChangeState(2)" type="radio" name="radio"/>
+        <input [disabled]="checkDisable(2)" (change)="changeUserRoleStatus(2)" type="radio" name="radio"/>
         <div class="control__indicator"></div>
       </label>
       <label class="control control--radio">Archived
-        <input (change)="onChangeState(3)" type="radio" name="radio"/>
+        <input [disabled]="checkDisable(3)" (change)="changeUserRoleStatus(3)" type="radio" name="radio"/>
         <div class="control__indicator"></div>
       </label>
       <!-- <label class="control control--radio">Disabled
@@ -48,6 +48,12 @@
         <input type="radio" name="radio2" disabled="disabled" checked="checked"/>
         <div class="control__indicator"></div>
       </label> -->
+      <div style="margin-top: 40px;" class="two-button">
+        <p style="color: black; font-size: 14px; font-weight: 800; font-family: monospace;">If this event is wating something click on Pending button</p>
+        <button style="background-color: orange; border-color: #d78b00;" class="btn btn-primary">Pending</button>
+        <p style="color: black; font-size: 14px; font-weight: 800; font-family: monospace; margin-top: 20px;">If this event is canceled click on Aborted button</p>
+        <button style="background-color: red; border-color: #c53434;" class="btn btn-primary">Aborted</button>
+      </div>
     </div>
     <!-- <div class="control-group">
       <h1>Select boxes</h1>

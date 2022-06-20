@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { API } from "../api.service";
 import { Metric } from "../../model/metric";
 import { MetricOperation } from "../../model/metric-operation";
-import {Event} from '../../model/event';
+import { Event } from "../../model/event";
 
 const ENDPOINTS = {
   getMetric: "metrics",
@@ -12,7 +12,7 @@ const ENDPOINTS = {
   putMetric: (id: number) => `metrics/${id}`,
   deleteMetric: (id: number) => `metrics/${id}`,
   getMetricOperation: "getMetricsOperations",
-  getUserEventMetrics: 'metric/metrics-event-user'
+  getUserEventMetrics: "metric/metrics-event-user",
 };
 
 @Injectable()
@@ -33,6 +33,20 @@ export class MetricGateway {
           from: data.data.from,
         };
       });
+  }
+
+  getUserEventMetrics(eventId: number, userId: number) {
+    return this.api.get<any>(
+      ENDPOINTS.getUserEventMetrics,
+      {},
+      {
+        user_id: userId,
+        event_id: eventId,
+      },
+      null,
+      null,
+      null
+    );
   }
 
   getEventMetrics(eventId: number) {
@@ -62,6 +76,7 @@ export class MetricGateway {
         name: metric.name,
         description: metric.description,
         type: metric.type,
+        enums: metric.enums,
       }
     );
   }
@@ -96,28 +111,13 @@ export class MetricGateway {
   deleteMetric(metricId: number) {
     return this.api.delete(ENDPOINTS.deleteMetric(metricId), {});
   }
-
-  async getUserEventMetrics(eventId: number, userId: number) {
-    return this.api
-      .get(
-        ENDPOINTS.getUserEventMetrics,
-        {},
-        {
-          user_id: userId,
-          event_id: eventId,
-        }
-      )
-      .toPromise()
-      .then((data: any) => {
-        return data.data;
-      });
-  }
 }
 
 export interface MetricDto {
   name: string;
   description?: string;
   type: number;
+  enums?: string[];
 }
 
 export interface GetMetricstDto {
@@ -135,5 +135,5 @@ export interface metricConfiguration {
   valuesLimit?: number;
   atEndValue?: number;
   metricId: number;
-  eventId: number
+  eventId: number;
 }

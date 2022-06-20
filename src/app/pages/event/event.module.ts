@@ -24,7 +24,7 @@ import { MetricDialogComponent } from './components/metric-dialog/metric-dialog.
 import { MetricConfigurationsComponent } from './components/metric-configurations/metric-configurations.component';
 
 @NgModule({
-    declarations: [EventReportComponent, EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent, EventStateComponent, AddVolunteerComponent, ListDialogComponent, MetricConfigurationsComponent],
+    declarations: [EventReportComponent, EventComponent, CreateEventComponent, EventManagementComponent, CarouselImageComponent, EventStateComponent, AddVolunteerComponent, ListDialogComponent, MetricConfigurationsComponent, MetricDialogComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,

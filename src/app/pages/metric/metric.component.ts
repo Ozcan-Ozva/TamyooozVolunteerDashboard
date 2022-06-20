@@ -89,11 +89,17 @@ export class MetricComponent implements OnInit {
   }
 
   updateMetric(editMetric: Metric) {
+    let enums : string[] = [];
+    editMetric.metric_enum.forEach(element => {
+      console.log("this is element");
+      enums.push(element.enum_value);
+    });
     const dialogRef = this.dialog.open(CreateMetricComponent, {
       data: { 
         name: editMetric.name,
         description: editMetric.description,
-        type: editMetric.type
+        type: editMetric.type,
+        enums: enums,
       },
     });
     dialogRef.afterClosed().subscribe((metricResult: MetricDialogData) => {
@@ -122,7 +128,8 @@ export class MetricComponent implements OnInit {
         .postMetric({
           name: metricResult.name,
           description: metricResult.description,
-          type: metricResult.type
+          type: metricResult.type,
+          enums: metricResult.enums,
         })
         .subscribe((result: any) => {
           if (result.status_code === 200) {
@@ -140,6 +147,8 @@ export class MetricComponent implements OnInit {
     else if(type == 4) return "List of String";
     else if(type == 5) return "Number";
     else if(type == 6) return "List of Number";
+    else if(type == 7) return "Enum";
+    else if(type == 8) return "List of Enum";
   }
 
   /* Those method is for pagination */

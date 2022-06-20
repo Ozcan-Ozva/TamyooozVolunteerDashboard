@@ -1,7 +1,7 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <h1 class="event-name-header"> {{event.name}}
+      <h1 class="event-name-header"> {{event.name == null ? "Wait a second please" : event.name}}
         <div class="event-description">{{event.description}}</div>
       </h1>
       <!-- Card stats -->
@@ -29,7 +29,8 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Category</h5>
-                  <span style="font-size: 15px" *ngFor="let category of event.categories "class="h2 font-weight-bold mb-0">{{category.name}},</span>
+                  <span style="font-size: 15px" *ngFor="let category of event.categories "
+                    class="h2 font-weight-bold mb-0">{{category.name}},</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -81,147 +82,25 @@
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col-xl-8 mb-5 mb-xl-0">
-        <app-carousel-image [images]="images" [autoSlides]="false" [slidesInterval]="10000"></app-carousel-image>
-    </div>
-    <div class="col-xl-4">
-      <app-event-state [eventId]="event.id"></app-event-state>
-      <div class="container">
-        <div class="items">
-          <div class="items-head">
-            <p>Metrics</p>
-            <hr>
-          </div>
-          <div class="items-body">
-            <div *ngFor="let metric of metrics" class="items-body-content">
-              <span (click)="changeMetricConfiguration(metric)">{{metric.name}}</span>
-              <!--<i class="fa fa-angle-right"></i-->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-5">
-    <div class="col-xl-8 mb-5 mb-xl-0">
-      <div class="card shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h3 class="mb-0">Volunteers</h3>
-            </div>
-            <div (click)="addVolunteer()" class="col text-right">
-              <a class="btn btn-sm btn-primary">Add volunteer</a>
-            </div>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <!-- Projects table -->
-          <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Goal</th>
-                <th scope="col">Points</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let volunteer of volunteerList">
-                <th scope="row">
-                  {{volunteer.name}}
-                </th>
-                <td>
-                  {{volunteer.goal}}
-                </td>
-                <td>
-                  {{volunteer.points}}
-                </td>
-                <td class="text-right">
-                  <div ngbDropdown placement="bottom-right">
-                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                      <a (click)="convertVolunteerToManager(volunteer)" class="dropdown-item">Move to Manager</a>
-                      <a (click)="showVolunteerMertic()" class="dropdown-item">Show Metric</a>
-                      <a class="dropdown-item">Delete event</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4">
-      <div class="card shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h3 class="mb-0">Event Managers</h3>
-            </div>
-            <div (click)="addManager()" class="col text-right">
-              <a class="btn btn-sm btn-primary">Add Manager</a>
-            </div>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <!-- Projects table -->
-          <table class="table align-items-center table-flush">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Goal</th>
-                <th scope="col">Points</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let manager of managerList">
-                <th scope="row">
-                  {{manager.name}}
-                </th>
-                <td>
-                  {{manager.goal}}
-                </td>
-                <td>
-                  {{manager.points}}
-                </td>
-                <td class="text-right">
-                  <div ngbDropdown placement="bottom-right">
-                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                      <a (click)="convertManagerToVolunteer(manager)" class="dropdown-item">Move to Volunteer</a>
-                      <a class="dropdown-item">Delete event</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="this.event.acceptedUsers" class="row">
-    <div class="col-12">
-      <div class="row mt-5">
-        <div class="col-xl-6" style="margin-bottom: 25px;">
-          <div class="card shadow">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Accepted Volunteers <span class="badge badge-success">({{this.event.acceptedUsers.length}})</span></h3>
-                </div>
+      <app-carousel-image [images]="images" [autoSlides]="false" [slidesInterval]="10000"></app-carousel-image>
+      <!-- Accepted Volunteers -->
+      <div style="margin-top: 30px;">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">Accepted Volunteers <span
+                    class="badge badge-success">({{this.event.acceptedUsers.length}})</span></h3>
+              </div>
+              <div (click)="addVolunteer()" class="col text-right">
+                <a class="btn btn-sm btn-primary">Add volunteer</a>
               </div>
             </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
@@ -229,9 +108,9 @@
                   <th scope="col">Role</th>
                   <th scope="col">Actions</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let user of event.acceptedUsers; let i = index" >
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of event.acceptedUsers; let i = index">
                   <th scope="row">
                     {{ i+1 }}
                   </th>
@@ -245,47 +124,52 @@
                     توزيع كرات
                   </td>
                   <td class="text-right">
-                    <a (click)="changeUserRoleStatus(user.id, 2)" placement="top" ngbTooltip="Mark as supervisor" style="margin-right: 10px; cursor: pointer">
+                    <a (click)="changeUserRoleStatus(user.id, 2)" placement="top" ngbTooltip="Mark as supervisor"
+                      style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/up.png" width="25px" height="25px">
                     </a>
 
-                    <a (click)="removeUserFromEvent(user.id, 2)" placement="top" ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
+                    <a (click)="removeUserFromEvent(user.id, 2)" placement="top"
+                      ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/trash-bin.png" width="25px" height="25px">
                     </a>
 
-                    <a (click)="openMetricsDialog(user.id, user.name)" placement="top" ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
+                    <a (click)="openMetricsDialog(user.id, user.name)" placement="top"
+                      ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/database.png" width="25px" height="25px">
                     </a>
 
                   </td>
                 </tr>
-                </tbody>
-              </table>
-            </div>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="col-xl-6 mb-5">
-          <div class="card shadow">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Pending Join Requests <span class="badge badge-info">({{this.event.pendingUsers.length}})</span></h3>
-                </div>
+      </div>
+      <!-- Pending Volunteers -->
+      <div style="margin-top: 30px;">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">Pending Join Requests <span
+                    class="badge badge-info">({{this.event.pendingUsers.length}})</span></h3>
               </div>
             </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Actions</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let user of event.pendingUsers; let i = index" >
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of event.pendingUsers; let i = index">
                   <th scope="row">
                     {{ i+1 }}
                   </th>
@@ -304,24 +188,29 @@
                     </a>
                   </td>
                 </tr>
-                </tbody>
-              </table>
-            </div>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="col-xl-6" style="margin-bottom: 25px;">
-          <div class="card shadow">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Supervisors <span class="badge badge-success">({{this.event.supervisors.length}})</span></h3>
-                </div>
+      </div>
+      <!-- Supervisors -->
+      <div style="margin-top: 30px;">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">Supervisors <span
+                    class="badge badge-success">({{this.event.supervisors.length}})</span></h3>
+              </div>
+              <div (click)="addManager()" class="col text-right">
+                <a class="btn btn-sm btn-primary">Add Manager</a>
               </div>
             </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
@@ -329,9 +218,9 @@
                   <th scope="col">Role</th>
                   <th scope="col">Actions</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let user of event.supervisors; let i = index" >
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of event.supervisors; let i = index">
                   <th scope="row">
                     {{ i+1 }}
                   </th>
@@ -345,45 +234,49 @@
                     إشراف على توزيع الأطعمة
                   </td>
                   <td class="text-right">
-                    <a (click)="changeUserRoleStatus(user.id, 1)" placement="top" ngbTooltip="Mark as Normal Volunteer" style="margin-right: 10px; cursor: pointer">
+                    <a (click)="changeUserRoleStatus(user.id, 1)" placement="top" ngbTooltip="Mark as Normal Volunteer"
+                      style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/down.png" width="25px" height="25px">
                     </a>
-                    <a (click)="removeUserFromEvent(user.id, 1)" placement="top" ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
+                    <a (click)="removeUserFromEvent(user.id, 1)" placement="top"
+                      ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/trash-bin.png" width="25px" height="25px">
                     </a>
-                    <a (click)="openMetricsDialog(user.id, user.name)" placement="top" ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
+                    <a (click)="openMetricsDialog(user.id, user.name)" placement="top"
+                      ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/database.png" width="25px" height="25px">
                     </a>
                   </td>
                 </tr>
-                </tbody>
-              </table>
-            </div>
+              </tbody>
+            </table>
           </div>
         </div>
-
-        <div class="col-xl-6 mb-5">
-          <div class="card shadow">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">Rejected Join Requests <span class="badge badge-danger">({{this.event.rejectedUsers.length}})</span></h3>
-                </div>
+      </div>
+      <!-- Rejected Volunteer -->
+      <div style="margin-top: 30px;">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">Rejected Join Requests <span
+                    class="badge badge-danger">({{this.event.rejectedUsers.length}})</span></h3>
               </div>
             </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Reason</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let user of event.rejectedUsers; let i = index" >
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of event.rejectedUsers; let i = index">
                   <th scope="row">
                     {{ i+1 }}
                   </th>
@@ -397,18 +290,36 @@
                     لا يوجد سبب حالياً
                   </td>
                 </tr>
-                </tbody>
-              </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <app-event-state [eventId]="event.id" [eventState]="event.status"></app-event-state>
+      <div class="container">
+        <div class="items">
+          <div class="items-head">
+            <p>Metrics</p>
+            <hr>
+          </div>
+          <div class="items-body">
+            <div *ngFor="let metric of event.metrics" class="items-body-content">
+              <span (click)="changeMetricConfiguration(metric)">{{metric.name}}</span>
+              <!--<i class="fa fa-angle-right"></i-->
             </div>
           </div>
         </div>
       </div>
-      <!-- <mat-tab-group>
-        <mat-tab label="General Settings"> General Settings </mat-tab>
-        <mat-tab label="Volunteers Data">
-          
-        </mat-tab>
-      </mat-tab-group> -->
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-xl-8 mb-5 mb-xl-0">
+      
+    </div>
+    <div class="col-xl-4">
+      
     </div>
   </div>
 </div>

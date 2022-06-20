@@ -1,17 +1,25 @@
+import { User } from './user';
 import { Category } from './category';
+import { Metric } from './metric';
 
 export class Event {
     id:                         number;
-    name:                       string;
-    description:                string;
-    start_date:                 Date;
-    end_date:                   Date;
-    required_volunteers_number: number;
-    status:                     number;
-    created_at:                 Date;
-    updated_at:                 Date;
-    media:                      any[];
-    categories:                 Category[];
+    name?:                       string;
+    description?:                string;
+    start_date?:                 Date;
+    end_date?:                   Date;
+    required_volunteers_number?: number;
+    status?:                     number;
+    created_at?:                 Date;
+    updated_at?:                 Date;
+    media?:                      any[];
+    categories?:                 Category[];
+    metrics?:                    Metric[];
+    acceptedUsers?:              User[];
+    pendingUsers?:              User[];
+    rejectedUsers?:              User[];
+    supervisors?:              User[];
+    
 
     constructor(event: Partial<Event>) {
         if (!event) event = {};
@@ -26,6 +34,11 @@ export class Event {
         this.updated_at = event.updated_at;
         this.media = event.media;
         this.categories = Category.fromArray(event.categories);
+        this.metrics = Metric.fromArray(event.metrics);
+        this.acceptedUsers = User.fromArray(event.acceptedUsers);
+        this.rejectedUsers = User.fromArray(event.rejectedUsers);
+        this.pendingUsers = User.fromArray(event.pendingUsers);
+        this.supervisors = User.fromArray(event.supervisors);
     }
 
     public static fromDTO(dto : any) : Event | null {
@@ -42,6 +55,11 @@ export class Event {
             updated_at: new Date(dto.updated_at),
             media: dto.media,
             categories: Category.fromDTOArray(dto.categories),
+            metrics: dto.metrics == null ? [] : Metric.fromDTOArray(dto.metrics),
+            acceptedUsers: dto.acceptedUsers == null ? [] : User.fromDTOArray(dto.acceptedUsers),
+            rejectedUsers: dto.rejectedUsers == null ? [] : User.fromDTOArray(dto.rejectedUsers),
+            pendingUsers: dto.pendingUsers == null ? [] : User.fromDTOArray(dto.pendingUsers),
+            supervisors: dto.supervisors == null ? [] : User.fromDTOArray(dto.supervisors),
         });
     }
 

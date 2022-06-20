@@ -13,14 +13,22 @@
             <option value="6">number(L)</option>
             <option value="4">string(L)</option>
             <option value="2">boolean(L)</option>
+            <option value="8">enum(L)</option>
           </optgroup>
           <optgroup label="Variable">
             <option value="5">number(V)</option>
             <option value="3">string(V)</option>
             <option value="1">boolean(V)</option>
+            <option value="7">enum(V)</option>
           </optgroup>
         </select>
       </div>
+      <div *ngIf="data.type == 7 || data.type == 8" class="form-group" style="margin-left: auto; margin-right: 0px;">
+        <label style="float:left; color: rgb(82, 82, 82)" for="exampleInputEmail1">Metric Name</label>
+        <input (keyup)="AddEnumValue($event)" style="text-align: left" [(ngModel)]="enumValue" type="email" class="form-control"
+          id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter role name">
+      </div>
+      <span style="margin-bottom: 20px;" (click)="removeEnum($event)" class="role-span" *ngFor="let span of enumListValue">{{span}}</span>
       <div class="form-group">
         <label style="float:left; color: rgb(82, 82, 82);" for="inputGroupSelect01">Discription</label>
         <br>

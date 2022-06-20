@@ -1,4 +1,4 @@
-<div class="card show">
+<!-- <div class="card show">
   <div class="row text-center align-items-center" style="margin-top: 20px; margin-bottom: 20px">
     <div class="col-12">
       <p>{{ this.data.message }}</p>
@@ -11,4 +11,18 @@
     </div>
   </div>
 
+</div> -->
+
+
+<div style="width: 600px" class="card">
+  <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Confirm Message</p>
+  <div class="card-content">
+    <div class="row">
+      <p style="margin-left: 30px; font-weight: 400;">{{ this.data.message }}</p>
+    </div>
+  </div>
+  <div style="float: left; position: relative; top: 20px;">
+    <button style="background-color: #00dc00; border-color: transparent;" class="btn btn-danger" (click)="confirm()">{{ this.data.confirmationButtonText}}</button>
+    <button class="btn btn-danger" (click)="onNoClick()">Cancel</button>
+  </div>
 </div>

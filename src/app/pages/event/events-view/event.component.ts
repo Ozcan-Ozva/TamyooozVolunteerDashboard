@@ -71,8 +71,6 @@ export class EventComponent implements OnInit {
   private getEvents(filter : EventFilter) {
     this.fetchEvent(filter)
       .then((data) => {
-        console.log("this is data");
-        console.log(data);
         this.loader = false;
         this.events = data.events;
         this.current_page = data.current_page;

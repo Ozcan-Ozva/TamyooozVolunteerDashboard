@@ -23,6 +23,10 @@ export class EventGateway {
       .get<any>(ENDPOINTS.getEvents, {}, null, null, filter)
       .toPromise()
       .then((data) => {
+        console.log("this I am here is data");
+        console.log(data);
+        console.log("this is events");
+        console.log(Event.fromDTOArray(data.data.data));
         return {
           events: Event.fromDTOArray(data.data.data),
           current_page: data.data.current_page,

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Metric } from '../../../../model/metric';
+import { Metric, MetricEnum } from '../../../../model/metric';
 import { MetricQuery } from '../../../../model/metric-query';
 import { CompareOperation, MetricOperation, Operation } from '../../../../model/metric-operation';
 import { MetricGateway } from '../../../../services/gateways/metric.service';
@@ -30,6 +30,9 @@ export class CreateBadgeComponent implements OnInit {
   selectedOperationOfEvent: Operation;
   compareValue: number = 0;
   metricQueries: MetricQuery[] = [];
+  /// enums
+  metricEnumId : number = 0;
+  metricEnums : MetricEnum[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CreateBadgeComponent>,
@@ -97,6 +100,9 @@ export class CreateBadgeComponent implements OnInit {
     this.selectedMetricOperation = this.metricsOperations.find(
       (metricOperation) => metricOperation.type == this.selectedMetric.type
     );
+    if (this.selectedMetric.type == 7 || this.selectedMetric.type == 8) {
+      this.metricEnums = this.selectedMetric.metric_enum;
+    }
   }
 
   onChangeOperation() {

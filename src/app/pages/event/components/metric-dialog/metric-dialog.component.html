@@ -1,116 +1,33 @@
-<div class="card" style="height: 800px">
+<div class="card" style="width: 1300px">
   <div class="card-content">
     <div class="row">
-      <div class="col-xl-12" style="margin-bottom: 25px;">
-        <div class="card shadow">
-          <div class="card-header border-0">
-            <div class="row align-items-center">
-              <div class="col">
-                <h3 *ngFor="let x of oneValue" class="mb-0 dialog-header">{{data.userName}}'s Metrics</h3>
-              </div>
+      <div>
+        <div class="HeaderOfMetric">Variable Metrics</div>
+        <div class="row">
+          <div *ngFor="let metric of variableMetrics">
+            <div class="variableMetric row">
+              <div style="text-align: center;" class="column-90">{{metric.name}}</div>
+              <div style="text-align: center;" class="column-10">51</div>
             </div>
           </div>
-          <p class="font-weight-bold">Event One Time Metrics</p>
-          <div class="table-responsive">
-            <!-- One Time Metrics table -->
-            <table class="table align-items-center table-flush">
-              <thead class="thead-light">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Value</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let metric of oneValue">
-                  <th scope="row">
-                    {{data.metrics.oneValue[0].name}}
-                  </th>
-                  <td>
-                    {{ metric.name }}
-                  </td>
-                  <td>
-                    sadsad
-                    <!-- <div *ngIf="metric.type == 1">
-                      <div *ngIf="metric.values[0].value == 1">
-                        <div class="custom-control custom-checkbox mb-3">
-                          <input class="custom-control-input" id="customCheck4" type="checkbox" checked="checked" disabled="">
-                          <label class="custom-control-label" for="customCheck4"></label>
-                        </div>
-                      </div>
-                      <div *ngIf="metric.values[0].value == 0">
-                        <div class="custom-control custom-checkbox mb-3">
-                          <input class="custom-control-input" id="customCheck3" type="checkbox" disabled="">
-                          <label class="custom-control-label" for="customCheck3"></label>
-                        </div>
-                      </div>
-                    </div>
-                    <div *ngIf="metric.type != 1">
-                      {{ metric.values[0].value }}
-                    </div> -->
-                  </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <hr>
-          <p class="font-weight-bold">Event List Metrics</p>
-
-          <div class="card shadow"  *ngFor="let metric of data.metrics.listValue; let i = index">
-            <div class="card-header border-0">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0">{{ metric.name}} <span class="badge badge-info">({{metric.values.length}})</span></h3>
-                </div>
-              </div>
+        </div>
+      </div>
+      <div style="margin-top: 30px; margin-bottom: 30px" class="divider"></div>
+      <div>
+        <div class="HeaderOfMetric">List Metrics</div>
+        <div class="row">
+          <div *ngFor="let metric of listMetrics">
+            <div style="margin-left: 20px;" class="pricing-box text-center">
+              <h5 style="padding-top: 10px;font-size: 18px;font-weight: bolder;">{{metric.name}}</h5>
+              <p class="price">23<sub>/point</sub></p>
+              <ul class="features-list">
+                <li><strong>4</strong> First Day</li>
+                <li><strong>8</strong> Second Day</li>
+                <li><strong>6</strong> Third Day</li>
+                <li><strong>5</strong> Forth Day</li>
+              </ul>
+              <!-- <button class="btn-primary">Get Started</button> -->
             </div>
-
-          <div class="table-responsive">
-            <!-- One Time Metrics table -->
-            <table class="table align-items-center table-flush">
-              <thead class="thead-light">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Value</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Creation Date</th>
-              </tr>
-              </thead>
-              <tbody>
-
-              <tr *ngFor="let value of metric.values; let i = index" >
-                <th scope="row">
-                  {{ i+1 }}
-                </th>
-                <td>
-                  <div *ngIf="metric.type == 2">
-                    <div *ngIf="value.value == 1">
-                      <div class="custom-control custom-checkbox mb-3">
-                        <input class="custom-control-input" id="customCheck4" type="checkbox" checked="checked" disabled="">
-                        <label class="custom-control-label" for="customCheck4"></label>
-                      </div>
-                    </div>
-                    <div *ngIf="value.value == 0">
-                      <div class="custom-control custom-checkbox mb-3">
-                        <input class="custom-control-input" id="customCheck3" type="checkbox" disabled="">
-                        <label class="custom-control-label" for="customCheck3"></label>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="metric.type != 2">
-                    {{ value.value }}
-                  </div>
-                </td>
-                <td></td>
-                <td></td>
-                <td>
-                  {{value.created_at | date:'short'}}
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
           </div>
         </div>
       </div>
