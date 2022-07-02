@@ -5,10 +5,10 @@
 export const environment = {
   /* production: false,
   base_url: 'http://157.175.98.98:8000/api/dashboard/', */
-  production: false,
-  base_url: '/api/',
   /* production: false,
-  base_url: 'http://157.175.98.98:80/vms-back-develop/public/index.php/api/dashboard/', */
+  base_url: '/api/', */
+  production: false,
+  base_url: 'http://157.175.98.98:80/vms-back-develop/public/index.php/api/dashboard/',
   /* production: false,
   base_url: 'http://192.168.43.50:8001/api/dashboard/', */
   /* production: false, */
