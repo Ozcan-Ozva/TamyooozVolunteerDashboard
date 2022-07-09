@@ -1,10 +1,8 @@
 import { UserGateway } from './../services/gateways/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, map, take } from 'rxjs/operators';
-import { ProfileService } from '../services/profile.service';
 
 @Injectable()
 export class ProfileResolver implements Resolve<any> {
