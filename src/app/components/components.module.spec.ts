@@ -6,8 +6,4 @@ describe('ComponentsModule', () => {
   beforeEach(() => {
     componentsModule = new ComponentsModule();
   });
-
-  it('should create an instance', () => {
-    expect(componentsModule).toBeTruthy();
-  });
 });

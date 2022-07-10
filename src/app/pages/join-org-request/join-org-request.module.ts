@@ -13,6 +13,7 @@ import { JoinOrgRequestComponent } from './join-org-request.component';
 import { CreateJoinRequestComponent } from './components/create-join-request/create-join-request.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { JoinRequestGateway } from '../../services/gateways/join-request.service';
 
 @NgModule({
     declarations: [JoinOrgRequestComponent, CreateJoinRequestComponent],

@@ -124,18 +124,18 @@
                     توزيع كرات
                   </td>
                   <td class="text-right">
-                    <a (click)="changeUserRoleStatus(user.id, 2)" placement="top" ngbTooltip="Mark as supervisor"
+                    <a (click)="changeUserRoleStatus(user.id, 2)" placement="top" [ngbTooltip]="'Mark as supervisor'"
                       style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/up.png" width="25px" height="25px">
                     </a>
 
                     <a (click)="removeUserFromEvent(user.id, 2)" placement="top"
-                      ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
+                      [ngbTooltip]="'Remove Volunteer from Event'" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/trash-bin.png" width="25px" height="25px">
                     </a>
 
                     <a (click)="openMetricsDialog(user.id, user.name)" placement="top"
-                      ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
+                      [ngbTooltip]="'Show Volunteer Metrics'" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/database.png" width="25px" height="25px">
                     </a>
 
@@ -234,16 +234,16 @@
                     إشراف على توزيع الأطعمة
                   </td>
                   <td class="text-right">
-                    <a (click)="changeUserRoleStatus(user.id, 1)" placement="top" ngbTooltip="Mark as Normal Volunteer"
+                    <a (click)="changeUserRoleStatus(user.id, 1)" placement="top" [ngbTooltip]="'Mark as Normal Volunteer'"
                       style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/down.png" width="25px" height="25px">
                     </a>
                     <a (click)="removeUserFromEvent(user.id, 1)" placement="top"
-                      ngbTooltip="Remove Volunteer from Event" style="margin-right: 10px; cursor: pointer">
+                      [ngbTooltip]="'Remove Volunteer from Event'" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/trash-bin.png" width="25px" height="25px">
                     </a>
                     <a (click)="openMetricsDialog(user.id, user.name)" placement="top"
-                      ngbTooltip="Show Volunteer Metrics" style="margin-right: 10px; cursor: pointer">
+                      [ngbTooltip]="'Show Volunteer Metrics'" style="margin-right: 10px; cursor: pointer">
                       <img src="assets/img/icons/common/database.png" width="25px" height="25px">
                     </a>
                   </td>
