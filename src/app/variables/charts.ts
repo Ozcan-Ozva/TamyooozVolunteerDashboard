@@ -248,7 +248,7 @@ export function chartOptions() {
       beginAtZero: true,
       padding: 10,
       callback: function(value) {
-        if (!(value % 10)) {
+        if (!(value % 5)) { // edit this here
           return value
         }
       }

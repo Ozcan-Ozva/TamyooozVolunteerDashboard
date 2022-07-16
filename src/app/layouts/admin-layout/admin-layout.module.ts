@@ -26,6 +26,7 @@ import { NewsFeedViewModule } from '../../pages/news-feed/news-feed.module';
 import { ProfileService } from '../../services/profile.service';
 import { UserProfileViewModule } from '../../pages/user-profile/user-profile.module';
 import { MessageViewModule } from '../../pages/messages/messages.module';
+import { LevelViewModule } from '../../pages/level/level.module';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -49,6 +50,7 @@ import { MessageViewModule } from '../../pages/messages/messages.module';
     NewsFeedViewModule,
     UserProfileViewModule,
     MessageViewModule,
+    LevelViewModule,
   ],
   declarations: [
     DashboardComponent,

@@ -1,8 +1,38 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <!-- Card stats -->
-      <!-- <div class="scrolling-wrapper">
+      <div style="width: 40%;" class="card bg-gradient-default shadow">
+        <div class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+              <h2 class="text-white mb-0">Age Distribution</h2>
+            </div>
+            <div class="col">
+              <div class="first-one">
+                <div class="row">
+                  <div style="background-color: #36A2EB;" class="color-of"></div>
+                  <div style="color: white">Boy: 50</div>
+                </div>
+              </div>
+              <div class="first-one">
+                <div class="row">
+                  <div style="background-color: #FF6384;" class="color-of"></div>
+                  <div style="color: white">Girl: 300</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Chart -->
+            <div class="chart">
+              <!-- Chart wrapper -->
+              <canvas id="chart-sales" class="chart-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Card stats -->
+        <!-- <div class="scrolling-wrapper">
         <div class="row">
           <div class="row-card">
             <div *ngFor="let x of fackeList" style="margin-left: 10px;">
@@ -29,18 +59,21 @@
           </div>
         </div>
       </div> -->
+      </div>
     </div>
   </div>
 </div>
-<div class="tab">
-  <button id="defaultOpen" class="tablinks" (click)="openCity($event, 'Users')">Users</button>
-  <button class="tablinks" (click)="openCity($event, 'Admins')">Admins</button>
-</div>
+<div class="table-of-data">
+  <div class="tab">
+    <button id="defaultOpen" class="tablinks" (click)="openCity($event, 'Users')">Users</button>
+    <button class="tablinks" (click)="openCity($event, 'Admins')">Admins</button>
+  </div>
 
-<div id="Users" class="tabcontent">
+  <div id="Users" class="tabcontent">
     <app-user-volunteers></app-user-volunteers>
-</div>
+  </div>
 
-<div id="Admins" class="tabcontent">
+  <div id="Admins" class="tabcontent">
     <app-admin-volunteers></app-admin-volunteers>
+  </div>
 </div>

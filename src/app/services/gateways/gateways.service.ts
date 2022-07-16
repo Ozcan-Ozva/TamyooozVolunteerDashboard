@@ -19,5 +19,6 @@ export class GatewayService {
         public admin: AdminGateway,
         public User: UserGateway,
         public category: CategoryGateway,
+        public level : EventGateway,
     ) {}
 }

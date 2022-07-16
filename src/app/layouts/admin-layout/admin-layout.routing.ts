@@ -14,6 +14,7 @@ import { PointRuleComponent } from "../../pages/point-rule/point-rule.component"
 import { BadgetComponent } from "../../pages/badget/badget.component";
 import { NewsFeedComponent } from "../../pages/news-feed/news-feed.component";
 import { MessagesComponent } from "../../pages/messages/messages.component";
+import { LevelComponent } from "../../pages/level/level.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -24,6 +25,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: "messages", component: MessagesComponent },
   { path: "metric", component: MetricComponent },
   { path: "news-feed", component: NewsFeedComponent },
+  { path: "levels", component: LevelComponent },
   {
     path: "event",
     loadChildren: () =>

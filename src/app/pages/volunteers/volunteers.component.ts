@@ -5,7 +5,21 @@ import { MatDialog } from "@angular/material/dialog";
 import { UserGateway } from "../../services/gateways/user.service";
 import { AdminGateway } from "../../services/gateways/admin.service";
 import { Admin } from "../../model/admin";
-import { debounceTime, delay, of, Subject, Subscription, switchMap } from "rxjs";
+import {
+  debounceTime,
+  delay,
+  of,
+  Subject,
+  Subscription,
+  switchMap,
+} from "rxjs";
+import {
+  chartExample1,
+  chartExample2,
+  chartOptions,
+  parseOptions,
+} from "../../variables/charts";
+import { Chart, ChartItem } from "chart.js";
 
 @Component({
   selector: "app-volunteers",
@@ -24,29 +38,11 @@ export class VolunteersComponent implements OnInit {
   public links: any[] = [];
   public total: number = 0;
   public loader: boolean = true;
-  public fackeList: number[] = [
-    1,
-    1,
-    1,
-    1,
-    1,
-    ,
-    1,
-    1,
-    1,
-    1,
-    1,
-    ,
-    1,
-    1,
-    1,
-    1,
-    ,
-    1,
-    1,
-    1,
-    1,
-  ];
+  public datasets: any;
+  public data: any;
+  public salesChart;
+  public clicked: boolean = true;
+  public clicked1: boolean = false;
 
   constructor(
     public _userGateway: UserGateway,
@@ -56,6 +52,36 @@ export class VolunteersComponent implements OnInit {
 
   ngOnInit() {
     document.getElementById("defaultOpen").click();
+
+    this.datasets = [[0, 20, 10, 30, 15, 40, 20, 60, 60]];
+    this.data = this.datasets[0];
+
+    parseOptions(Chart, chartOptions());
+
+    var chartSales = document.getElementById("chart-sales") as ChartItem;
+
+    this.salesChart = new Chart(chartSales, {
+      type: "doughnut",
+      data: {
+        labels: ["Girl", "Boy"],
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [300, 50],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      },
+    });
+  }
+
+  public updateOptions() {
+    this.salesChart.data.datasets[0].data = this.data;
+    this.salesChart.update();
   }
 
   /* ngAfterViewInit() {
@@ -75,7 +101,7 @@ export class VolunteersComponent implements OnInit {
         }
       });
   } */
-/* 
+  /* 
   ngOnDestroy() {
     this.inputSub.unsubscribe();
   } */
@@ -120,7 +146,7 @@ export class VolunteersComponent implements OnInit {
         }
       });
   } */
-/* 
+  /* 
   checkActiveUserStatus($event) {
     console.log($event.target.checked);
     this.getUsers({
