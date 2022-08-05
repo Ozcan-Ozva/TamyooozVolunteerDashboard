@@ -21,6 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import { QuestionnaireComponent } from './pages/questionnaire/questionnaire.component';
 
 @NgModule({
   imports: [

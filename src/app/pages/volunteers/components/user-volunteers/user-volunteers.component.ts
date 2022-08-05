@@ -2,6 +2,7 @@ import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { debounceTime, Subject, Subscription } from 'rxjs';
 import { User } from '../../../../model/user';
 import { UserGateway } from '../../../../services/gateways/user.service';
@@ -28,7 +29,7 @@ export class UserVolunteersComponent implements OnInit {
   /* End sharable attributes */
 
 
-  constructor(public _userGateway: UserGateway, public dialog: MatDialog) {}
+  constructor(public _userGateway: UserGateway, public dialog: MatDialog, public router : Router) {}
 
   ngOnInit() {
     this.getUsers({
@@ -61,6 +62,17 @@ export class UserVolunteersComponent implements OnInit {
   private async fetchUsers(filter: VolunteerFilter) {
     this.loader = true;
     return this._userGateway.getUsers(filter);
+  }
+
+  volunteerProfilePage(id: number) {
+    console.log("this is id");
+    console.log(id);
+    let volunteerData = {
+      id: id,
+      type : 'User'
+    }
+    /* this.router.navigate(['/user-profile', volunteerData]); */
+    this.router.navigateByUrl('/user-profile', { state: volunteerData });
   }
 
   private getUsers(filter: VolunteerFilter) {

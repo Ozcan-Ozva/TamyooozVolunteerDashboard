@@ -1,0 +1,96 @@
+<div class="card">
+    <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Create New Leaderboard</p>
+    <div class="card-content">
+      <div class="row">
+        <div class="row">
+          <div class="column">
+            <div class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Leaderboard Name</label>
+              <input type="text" [(ngModel)]="data.name" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter">
+            </div>
+          </div>
+          <div class="column">
+            <div class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Description</label>
+              <input type="email" [(ngModel)]="data.description" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter">
+            </div>
+            <div class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Table Size</label>
+              <input type="email" [(ngModel)]="data.table_size" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <app-metric-query-card (deleteMetricQuery)="onDeleteMetricQuery($event)" [metricQueries]="metricQueries"></app-metric-query-card>
+        </div>
+        <!-- Multi Metric -->
+        <div class="divider"></div>
+        <div class="row">
+          <p style="text-align:left; font-size: 24px; font-weight:bold; color:black; margin-left: 34px;">Create Metric Query</p>
+        </div>
+        <br>
+        <div *ngIf="metrics && metrics.length > 0" class="row">
+          <div class="column">
+            <div class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">ُEvents</label>
+                <select style="width: 300px;" [disabled]="disableEventButton()" (change)="getEventOperation()" [(ngModel)]="eventValue" class="form-control" id="sel1" name="sellist1">
+                  <option></option>
+                  <option value="2">All Event</option>
+                </select>
+            </div>
+            <div *ngIf="eventValue == 2" class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Event Operations</label>
+                <select (change)="onChangeSelectEventOperation()" [(ngModel)]="selectedEventOperationId" class="form-control" id="sel1" name="sellist1">
+                  <option value=""></option>
+                  <option *ngFor="let operation of selectedEventOperation.operations" value={{operation.id}}>{{operation.label}}</option>
+                </select>
+            </div>
+            <button style="margin-left: 20px; background-color: coral; border-color: aliceblue;" (click)="addMetricQuery()" class="btn btn-primary">Add</button>
+          </div>
+          <div class="column">
+            <div class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Metric</label>
+                <select (change)="onChangeGetMetric()" [(ngModel)]="selectedMetricType" class="form-control" id="sel1" name="sellist1">
+                  <option value=""></option>
+                  <option *ngFor="let metric of metrics" value={{metric.id}}>{{metric.name}}</option>
+                </select>
+            </div>
+            <div *ngIf="selectedMetricOperation && selectedMetricOperation.operations.length > 0 " class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Metric Operations</label>
+                <select (change)="onChangeOperation()" [(ngModel)]="selectedOperationId" class="form-control" id="sel1" name="sellist1">
+                  <option value=""></option>
+                  <option *ngFor="let operation of selectedMetricOperation.operations" value={{operation.id}}>{{operation.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="selectedMetricOperationCopmare && selectedMetricOperationCopmare.length > 0 " class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Compare To</label>
+                <select (change)="onChangeCompareTo()" [(ngModel)]="selectedCompareOfId" class="form-control" id="sel1" name="sellist1">
+                  <option value=""></option>
+                  <option *ngFor="let compareOf of selectedMetricOperationCopmare" value={{compareOf.id}}>{{compareOf.label}}</option>
+                </select>
+            </div>
+            <!-- <div *ngIf="selectedCompareTo && selectedCompareTo.hasValue" class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Compare Value</label>
+              <input type="number" [(ngModel)]="compareValue" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter">
+            </div> -->
+            <div *ngIf="metricEnums.length > 0" class="form-group" style="margin-left: 60px">
+              <label class="labelInput" for="exampleInputEmail1">Compare Metric</label>
+                <select style="width: 300px;" [(ngModel)]="metricEnumId" class="form-control" id="sel1" name="sellist1">
+                  <option value=""></option>
+                  <option *ngFor="let enum of metricEnums" value={{enum.id}}>{{enum.enum_value}}</option>
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+      </div>
+    </div>
+    <div style="float: left; position: relative; top: 20px;">
+      <button (click)="onSave()" class="btn btn-primary" [mat-dialog-close]="data">Save</button>
+      <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
+    </div>
+  </div>

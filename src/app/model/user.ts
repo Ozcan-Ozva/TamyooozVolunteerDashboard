@@ -1,3 +1,8 @@
+import { Level } from "./level";
+import { Personality } from "./personality";
+import { Role } from "./role";
+import { TraitsValues } from "./traitsValues";
+
 export class User {
     id: number;
     name: string;
@@ -8,9 +13,14 @@ export class User {
     gender?: number;
     location?: string;
     job?: string;
+    roles? : Role[];
     volunteering_history?: string;
     is_active?: boolean;
     created_at?: Date;
+    level? : Level;
+    personality?: Personality[];
+    total_points? : number;
+    traits_values?: TraitsValues[];
 
     constructor(user: Partial<User>) {
         if (!user) user = {};
@@ -23,9 +33,14 @@ export class User {
         this.gender = user.gender;
         this.location = user.location;
         this.job = user.job;
+        this.roles = Role.fromArray(user.roles);
         this.volunteering_history = user.volunteering_history;
         this.is_active = user.is_active;
         this.created_at = new Date(user.created_at);
+        this.level = new Level(user.level);
+        this.personality = Personality.fromArray(user.personality);
+        this.total_points = user.total_points;
+        this.traits_values = TraitsValues.fromArray(user.traits_values);
     }
 
     public static fromDTO(dto : any) : User | null {
@@ -40,9 +55,14 @@ export class User {
             gender : dto.gender,
             location : dto.location,
             job : dto.job,
+            roles : Role.fromDTOArray(dto.roles),
             volunteering_history : dto.volunteering_history,
             is_active : dto.is_active == 0 ? false : true,
             created_at : dto.created_at,
+            level : Level.fromDTO(dto.level),
+            personality : Personality.fromDTOArray(dto.personality),
+            total_points : dto.total_points,
+            traits_values : TraitsValues.fromDTOArray(dto.traits_values),
         });
     }
     public static fromDTOArray(dtoArray : any) : User[] {

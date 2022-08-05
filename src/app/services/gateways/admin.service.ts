@@ -19,6 +19,8 @@ export class AdminGateway {
       .get<any>(ENDPOINTS.getAdmins, {}, null, null, filter)
       .toPromise()
       .then((data) => {
+        console.log("this is data");
+        console.log(data);
         return {
             admins: Admin.fromDTOArray(data.data.data),
             current_page: data.data.current_page,

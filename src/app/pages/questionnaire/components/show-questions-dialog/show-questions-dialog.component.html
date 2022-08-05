@@ -1,0 +1,18 @@
+<div class="card">
+  <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Questions</p>
+  <div class="card-content">
+    <div class="row">
+      <div style="width: 100%;" class="column-50">
+        <div *ngFor="let question of data.questions; let index = index" class="form-group">
+          <label class="labelInput" for="exampleInputEmail1">Question.{{index+1}}</label>
+          <input disabled type="email" [(ngModel)]="question.title" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="float: left; position: relative; top: 20px;">
+    <button class="btn btn-primary" [mat-dialog-close]="data">Save</button>
+    <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
+  </div>
+</div>

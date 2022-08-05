@@ -1,0 +1,112 @@
+<div *ngIf="loader" class="overlay">
+  <div style="margin-left: 35%;" class="waviy">
+    <span style="--i:1">F</span>
+    <span style="--i:2">E</span>
+    <span style="--i:3">T</span>
+    <span style="--i:4">C</span>
+    <span style="--i:5">H</span>
+    <span style="--i:6">I</span>
+    <span style="--i:7">N</span>
+    <span style="--i:8">G</span>&nbsp;
+    <span style="--i:9">D</span>
+    <span style="--i:10">A</span>
+    <span style="--i:11">T</span>
+    <span style="--i:12">A</span>
+  </div>
+</div>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <!-- <div class="scrolling-wrapper">
+            <div class="row">
+              <div class="row-card">
+                <div *ngFor="let x of fackeList" style="margin-left: 10px;">
+                  <div class="card card-stats mb-4 mb-xl-0" style="margin-left: 10px;">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
+                          <span class="h2 font-weight-bold mb-0">350,897</span>
+                        </div>
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i class="fas fa-chart-bar"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="mt-3 mb-0 text-muted text-sm">
+                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                        <span class="text-nowrap">Since last month</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row" style="justify-content: center; align-items: center;">
+    <div class="tamyooz-table">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Questionnaire</h3>
+            </div>
+            <div class="col text-right">
+              <button class="btn btn-sm btn-primary">New Questionnaire</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Questionnaire name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Answers Limit</th>
+                <th scope="col">Question Count</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let questionnaire of questionnaires">
+                <th (click)="updateJoinRequest(badge)" scope="row">
+                  {{questionnaire.title}}
+                </th>
+                <td>
+                  {{questionnaire.description}}
+                </td>
+                <td>
+                  {{questionnaire.answersLimit}}
+                </td>
+                <td>
+                  {{questionnaire.questions.length}}
+                </td>
+                <td class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                      <a (click)="openDialog(questionnaire)" class="dropdown-item">Show Questions</a>
+                      <a (click)="showUsers(questionnaire.id ,0)" class="dropdown-item">Who Answer this Questions</a>
+                      <a (click)="showUsers(questionnaire.id, 1)" class="dropdown-item">Who Dosen't Answer this Questions</a>
+                      <a (click)="sendQuestionnaire(questionnaire.id)" class="dropdown-item">Send Questionnaire</a>
+                      <a class="dropdown-item">Delete Questionnaire</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

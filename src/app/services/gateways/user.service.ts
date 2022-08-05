@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 const ENDPOINTS = {
   getUsers: "users",
+  getUser: (id: number) => `users/${id}`,
   getMe: "me",
   postRole: "roles",
   putRole: (id: number) => `roles/${id}`,
@@ -28,6 +29,15 @@ export class UserGateway {
           last_page: data.data.last_page,
           from: data.data.from,
         };
+      });
+  }
+
+  getUser(userId: number): Promise<User> {
+    return this.api
+      .get<any>(ENDPOINTS.getUser(userId), {}, null, null, {})
+      .toPromise()
+      .then((data) => {
+        return User.fromDTO(data.data)
       });
   }
 

@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="row">
+        <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">{{data.name}}</p>
+        <!-- <app-badge style="margin-top: -100px; left: 50px;"></app-badge> -->
+        <img style="width: 100px; height:100px; margin-top: -40px; margin-left: 30%;" src="https://www.pngmart.com/files/14/Golden-Badge-Transparent-PNG.png" alt="badge">
+    </div>
+    <div style="height: 600px; width: 300px">
+      <div class="leaderboard">
+        <h1>
+          <svg class="ico-cup">
+            <use xlink:href="#cup"></use>
+          </svg>
+          Who Own This Badge
+        </h1>
+        <ol>
+          <li>
+            <mark>Jerry Wood</mark>
+            <small><button class="btn small-btn-remove btn-xs btn-danger">Delete</button></small>
+          </li>
+          <li *ngFor="let user of data.users">
+            <mark>{{user.user.name}}</mark>
+            <small><button class="btn small-btn-remove btn-xs btn-danger">Delete</button></small>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div style="float: left; position: relative; top: 20px;">
+      <button class="btn btn-primary" [mat-dialog-close]="data">save</button>
+      <button class="btn cancelButton" (click)="onNoClick()">cancel</button>
+    </div>
+  </div>

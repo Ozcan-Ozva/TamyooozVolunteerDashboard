@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Level } from '../../../../model/level';
 
 @Component({
   selector: 'app-level-progress',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./level-progress.component.scss']
 })
 export class LevelProgressComponent implements OnInit {
+
+  @Input() level : Level;
 
   constructor() { }
 

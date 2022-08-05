@@ -7,6 +7,9 @@ import { EventGateway } from './event.service';
 import { AdminGateway } from './admin.service';
 import { UserGateway } from './user.service';
 import { CategoryGateway } from './category.service';
+import { LeaderboardGateway } from './leaderboard.service';
+import { InventoriesGateway } from './inventories.service';
+import { QuestionnaireGateway } from './questionnaire.serivce';
 
 @Injectable()
 export class GatewayService {
@@ -20,5 +23,8 @@ export class GatewayService {
         public User: UserGateway,
         public category: CategoryGateway,
         public level : EventGateway,
+        public leaderboard: LeaderboardGateway,
+        public inventories : InventoriesGateway,
+        public questionnaire : QuestionnaireGateway,
     ) {}
 }

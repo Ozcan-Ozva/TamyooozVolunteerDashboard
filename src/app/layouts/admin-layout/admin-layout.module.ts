@@ -27,6 +27,9 @@ import { ProfileService } from '../../services/profile.service';
 import { UserProfileViewModule } from '../../pages/user-profile/user-profile.module';
 import { MessageViewModule } from '../../pages/messages/messages.module';
 import { LevelViewModule } from '../../pages/level/level.module';
+import { LeaderBoardViewModule } from '../../pages/leaderboard/leaderboard.module';
+import { InventoriesViewModule } from '../../pages/inventories/inventories.module';
+import { QyestionnaireViewModule } from '../../pages/questionnaire/questionnaire.module';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -51,6 +54,9 @@ import { LevelViewModule } from '../../pages/level/level.module';
     UserProfileViewModule,
     MessageViewModule,
     LevelViewModule,
+    LeaderBoardViewModule,
+    InventoriesViewModule,
+    QyestionnaireViewModule
   ],
   declarations: [
     DashboardComponent,

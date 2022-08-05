@@ -19,6 +19,10 @@ import { BadgeComponent } from './components/badge/badge.component';
 
 @NgModule({
     declarations: [BadgetComponent, CreateBadgeComponent, MetricQueryCardComponent, BadgeLeaderboardComponent, BadgeComponent],
+    exports: [
+        MetricQueryCardComponent,
+        BadgeLeaderboardComponent
+    ],
     imports: [
         ReactiveFormsModule,
         CommonModule,

@@ -50,7 +50,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let user of users">
-                <th scope="row">
+                <th (click)="volunteerProfilePage(user.id)" scope="row">
                   {{user.name}}
                 </th>
                 <td>

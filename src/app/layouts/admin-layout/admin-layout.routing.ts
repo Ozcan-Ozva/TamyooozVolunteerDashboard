@@ -15,6 +15,9 @@ import { BadgetComponent } from "../../pages/badget/badget.component";
 import { NewsFeedComponent } from "../../pages/news-feed/news-feed.component";
 import { MessagesComponent } from "../../pages/messages/messages.component";
 import { LevelComponent } from "../../pages/level/level.component";
+import { LeaderboardComponent } from "../../pages/leaderboard/leaderboard.component";
+import { InventoriesComponent } from "../../pages/inventories/inventories.component";
+import { QuestionnaireComponent } from "../../pages/questionnaire/questionnaire.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "dashboard", component: DashboardComponent },
@@ -26,6 +29,8 @@ export const AdminLayoutRoutes: Routes = [
   { path: "metric", component: MetricComponent },
   { path: "news-feed", component: NewsFeedComponent },
   { path: "levels", component: LevelComponent },
+  { path: "leaderboards", component: LeaderboardComponent },
+  { path: "inventories", component: InventoriesComponent },
   {
     path: "event",
     loadChildren: () =>
@@ -35,8 +40,9 @@ export const AdminLayoutRoutes: Routes = [
   },
   { path: "category", component: CategoryComponent },
   { path: "volunteers", component: VolunteersComponent },
-  { path: "user-profile/:id", component: UserProfileComponent },
+  { path: "user-profile", component: UserProfileComponent },
   { path: "tables", component: TablesComponent },
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapsComponent },
+  { path: "questionnaire", component: QuestionnaireComponent },
 ];

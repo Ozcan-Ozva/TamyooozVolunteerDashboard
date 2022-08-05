@@ -111,10 +111,10 @@ export class VolunteersComponent implements OnInit {
     return this._userGateway.getUsers(filter);
   } */
 
-  private async fetchAdmins(filter: any) {
+  /* private async fetchAdmins(filter: any) {
     this.loader = true;
     return this._adminGateway.getAdmins(filter);
-  }
+  } */
 
   /* private getUsers(filter: VolunteerFilter) {
     this.fetchUsers(filter)
@@ -212,103 +212,6 @@ export class VolunteersComponent implements OnInit {
       return "page-item";
     }
   }
-
-  /* deleteJoinRequest(joinRequestId: number) {
-    this._joinRequestGateway
-      .deleteJoinRequest(joinRequestId)
-      .subscribe((result: any) => {
-        if (result.status_code === 200) {
-          let deletedJoinRequest = this.joinRequests.find(
-            (joinRequest) => joinRequest.id == joinRequestId
-          );
-          this.joinRequests.splice(
-            this.joinRequests.indexOf(deletedJoinRequest),
-            1
-          );
-        }
-      });
-  } */
-
-  /* updateJoinRequest(editJoinRequest: JoinRequest) {
-    let pipe = new DatePipe("en-US");
-    const dialogRef = this.dialog.open(CreateJoinRequestComponent, {
-      data: {
-        name: editJoinRequest.user.name,
-        username: "hassaMnsew",
-        email: editJoinRequest.user.email,
-        date_of_birth: editJoinRequest.user.date_of_birth,
-        phone: editJoinRequest.user.phone,
-        gender: 1,
-        location: editJoinRequest.user.location,
-        job: editJoinRequest.user.job,
-        volunteering_history: editJoinRequest.user.volunteering_history,
-      },
-    });
-    dialogRef
-      .afterClosed()
-      .subscribe((joinRequestUpdated: JoinRequestDialogData) => {
-        console.log("this is roleResult");
-        console.log(joinRequestUpdated);
-        let formattedDate = pipe.transform(
-          joinRequestUpdated.date_of_birth,
-          "dd/MM/yyyy"
-        );
-        this._joinRequestGateway
-          .updateJoinRequest(editJoinRequest.id, {
-            name: joinRequestUpdated.name,
-            username: "hMssaMnsew",
-            email: joinRequestUpdated.email,
-            date_of_birth: joinRequestUpdated.date_of_birth,
-            phone: joinRequestUpdated.phone,
-            gender: joinRequestUpdated.gender,
-            location: joinRequestUpdated.location,
-            job: joinRequestUpdated.job,
-            volunteering_history: joinRequestUpdated.volunteering_history,
-          })
-          .subscribe((result: any) => {
-            if (result.status_code === 200) {
-              this.joinRequests.slice(
-                this.joinRequests.indexOf(
-                  this.joinRequests.find(
-                    (joinRequest) => joinRequest.id === editJoinRequest.id
-                  )
-                ),
-                1
-              );
-              this.joinRequests.push(JoinRequest.fromDTO(result.data));
-            }
-          });
-      });
-  } */
-
-  /* openDialog(): void {
-    let pipe = new DatePipe("en-US");
-    const dialogRef = this.dialog.open(CreateJoinRequestComponent, {
-      data: {},
-    });
-    dialogRef.afterClosed().subscribe((result: JoinRequestDialogData) => {
-      if (result !== undefined) {
-        let formattedDate = pipe.transform(result.date_of_birth, "yyyy-MM-dd");
-        this._joinRequestGateway
-          .postJoinRequest({
-            name: result.name,
-            username: "hassaMnsew",
-            email: result.email,
-            date_of_birth: formattedDate,
-            phone: result.phone,
-            gender: result.gender,
-            location: result.location,
-            job: result.job,
-            volunteering_history: result.volunteering_history,
-          })
-          .subscribe((result: any) => {
-            if (result.status_code === 200) {
-              this.joinRequests.push(JoinRequest.fromDTO(result.data));
-            }
-          });
-      }
-    });
-  } */
 }
 
 export interface VolunteerFilter {

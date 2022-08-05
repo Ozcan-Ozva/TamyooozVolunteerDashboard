@@ -1,0 +1,47 @@
+<div class="card">
+  <p style="text-align:left; font-size: 30px; font-weight:bold; color:black">Show Inventory Data</p>
+  <div class="card-content">
+    <div class="row">
+      <div class="column-50">
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Inventory Name</label>
+          <input type="text" disabled [(ngModel)]="data.name" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Description</label>
+          <input type="text" disabled [(ngModel)]="data.description" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+        <!--<div class="form-group" style="margin-left: 60px">
+              <mat-form-field appearance="fill">
+                <mat-label style="color: black;">Choose a date</mat-label>
+                <input type="date" [(ngModel)]="data.date_of_birth" class="form-control" style="color: black;" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle style="color: black;" matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>-->
+        <div class="form-group" style="margin-left: 60px">
+          <label class="labelInput" for="exampleInputEmail1">Shortcut</label>
+          <input disabled [(ngModel)]="data.shortcut" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter">
+        </div>
+      </div>
+      <div class="column-50">
+        <div class="trait-header">
+          Traits
+        </div>
+        <div class="permission-drop-down">
+          <ul id="myUL">
+            <li (click)="addPermissions($event)" *ngFor="let trait of data.traits"><a>{{trait.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="float: left; position: relative; top: 20px;">
+    <button class="btn btn-primary">Save</button>
+    <button class="btn cancelButton" (click)="onNoClick()">Cancel</button>
+  </div>
+</div>

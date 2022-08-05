@@ -61,7 +61,12 @@ export class AdminVolunteersComponent implements OnInit {
   volunteerProfilePage(id: number) {
     console.log("this is id");
     console.log(id);
-    this.router.navigate(['/user-profile', id]);
+    let volunteerData = {
+      id: id,
+      type : 'Admin'
+    }
+    /* this.router.navigate(['/user-profile', volunteerData]); */
+    this.router.navigateByUrl('/user-profile', { state: volunteerData });
   }
 
   private async fetchAdmins(filter: VolunteerFilter) {
