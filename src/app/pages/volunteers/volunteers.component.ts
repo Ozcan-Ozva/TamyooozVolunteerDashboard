@@ -38,11 +38,6 @@ export class VolunteersComponent implements OnInit {
   public links: any[] = [];
   public total: number = 0;
   public loader: boolean = true;
-  public datasets: any;
-  public data: any;
-  public salesChart;
-  public clicked: boolean = true;
-  public clicked1: boolean = false;
 
   constructor(
     public _userGateway: UserGateway,
@@ -53,14 +48,15 @@ export class VolunteersComponent implements OnInit {
   ngOnInit() {
     document.getElementById("defaultOpen").click();
 
-    this.datasets = [[0, 20, 10, 30, 15, 40, 20, 60, 60]];
-    this.data = this.datasets[0];
-
     parseOptions(Chart, chartOptions());
 
-    var chartSales = document.getElementById("chart-sales") as ChartItem;
+    var chartSales = document.getElementById("gender-distribuation") as ChartItem;
+    var volunteersFrequency = document.getElementById("volunteers-frequency") as ChartItem;
+    var ageDistribution = document.getElementById(
+      "age-distribution"
+    ) as ChartItem;
 
-    this.salesChart = new Chart(chartSales, {
+    const doughnutChart = new Chart(chartSales, {
       type: "doughnut",
       data: {
         labels: ["Girl", "Boy"],
@@ -68,21 +64,78 @@ export class VolunteersComponent implements OnInit {
           {
             label: "My First Dataset",
             data: [300, 50],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-            ],
+            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
             hoverOffset: 4,
           },
         ],
       },
     });
+
+    const stackedBar = new Chart(ageDistribution, {
+      type: "bar",
+      data: {
+        labels: ["18-24", "25-30", "30-34", "35-39", "40-50", "50-59", "+60"],
+        datasets: [
+          {
+            label: "Age Distribution",
+            data: [65, 59, 80, 81, 56, 55, 40],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+              "rgba(255, 205, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(201, 203, 207, 0.2)",
+            ],
+            borderColor: [
+              "rgb(255, 99, 132)",
+              "rgb(255, 159, 64)",
+              "rgb(255, 205, 86)",
+              "rgb(75, 192, 192)",
+              "rgb(54, 162, 235)",
+              "rgb(153, 102, 255)",
+              "rgb(201, 203, 207)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    const stackedLine = new Chart(volunteersFrequency, {
+      type: "line",
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Frequency',
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            stacked: true,
+          },
+        },
+      },
+    });
   }
 
-  public updateOptions() {
+  /* public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;
     this.salesChart.update();
-  }
+  } */
 
   /* ngAfterViewInit() {
     this.inputSub = this.valueChanged

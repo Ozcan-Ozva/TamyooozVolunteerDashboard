@@ -1,12 +1,18 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
-      <div style="width: 40%;" class="card bg-gradient-default shadow">
-        <div class="card-header bg-transparent">
+      <div style="display: flex;
+      width: fit-content;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;" class="card bg-gradient-default shadow">
+        <div style="border: 1px solid; border-radius: 20px; margin: 2vh;" class="card-header bg-transparent">
           <div class="row align-items-center">
             <div class="col">
               <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
-              <h2 class="text-white mb-0">Age Distribution</h2>
+              <h2 class="text-white mb-0">Male | Female</h2>
             </div>
             <div class="col">
               <div class="first-one">
@@ -27,7 +33,65 @@
             <!-- Chart -->
             <div class="chart">
               <!-- Chart wrapper -->
-              <canvas id="chart-sales" class="chart-canvas"></canvas>
+              <canvas id="gender-distribuation" class="chart-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div style="border: 1px solid; border-radius: 20px; margin: 2vh;" class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+              <h2 class="text-white mb-0">Age Distribution</h2>
+            </div>
+            <!-- <div class="col">
+              <div class="first-one">
+                <div class="row">
+                  <div style="background-color: #36A2EB;" class="color-of"></div>
+                  <div style="color: white">Boy: 50</div>
+                </div>
+              </div>
+              <div class="first-one">
+                <div class="row">
+                  <div style="background-color: #FF6384;" class="color-of"></div>
+                  <div style="color: white">Girl: 300</div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+          <div class="card-body">
+            <!-- Chart -->
+            <div class="chart">
+              <!-- Chart wrapper -->
+              <canvas id="age-distribution" class="chart-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div style="border: 1px solid; border-radius: 20px; margin: 2vh; width: 90%;" class="card-header bg-transparent">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+              <h2 class="text-white mb-0">New Volunteers Over Time</h2>
+            </div>
+            <!-- <div class="col">
+              <div class="first-one">
+                <div class="row">
+                  <div style="background-color: #36A2EB;" class="color-of"></div>
+                  <div style="color: white">Boy: 50</div>
+                </div>
+              </div>
+              <div class="first-one">
+                <div class="row">
+                  <div style="background-color: #FF6384;" class="color-of"></div>
+                  <div style="color: white">Girl: 300</div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+          <div class="card-body">
+            <!-- Chart -->
+            <div class="chart">
+              <!-- Chart wrapper -->
+              <canvas id="volunteers-frequency" class="chart-canvas"></canvas>
             </div>
           </div>
         </div>

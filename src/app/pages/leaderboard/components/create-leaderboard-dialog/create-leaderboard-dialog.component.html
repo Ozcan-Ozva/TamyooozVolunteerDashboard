@@ -65,7 +65,7 @@
                   <option *ngFor="let operation of selectedMetricOperation.operations" value={{operation.id}}>{{operation.label}}</option>
                 </select>
             </div>
-            <div *ngIf="selectedMetricOperationCopmare && selectedMetricOperationCopmare.length > 0 " class="form-group" style="margin-left: 60px">
+            <div *ngIf="selectedMetricOperationCopmare && selectedMetricOperationCopmare.length > 0 " class="form-group" style="margin-left: 60px;">
               <label class="labelInput" for="exampleInputEmail1">Compare To</label>
                 <select (change)="onChangeCompareTo()" [(ngModel)]="selectedCompareOfId" class="form-control" id="sel1" name="sellist1">
                   <option value=""></option>
@@ -77,7 +77,7 @@
               <input type="number" [(ngModel)]="compareValue" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp" placeholder="Enter">
             </div> -->
-            <div *ngIf="metricEnums.length > 0" class="form-group" style="margin-left: 60px">
+            <div *ngIf="metricEnums.length > 0" class="form-group" style="margin-left: 60px;">
               <label class="labelInput" for="exampleInputEmail1">Compare Metric</label>
                 <select style="width: 300px;" [(ngModel)]="metricEnumId" class="form-control" id="sel1" name="sellist1">
                   <option value=""></option>

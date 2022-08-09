@@ -306,8 +306,8 @@ export const chartExample1 = {
   data: {
     labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [{
-      label: 'Performance',
-      data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+      label: 'Events',
+      data: [0, 20, 10, 30, 15, 40, 20, 10]
     }]
   }
 }
@@ -347,7 +347,7 @@ export const chartExample2 = {
     labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
-        label: "Sales",
+        label: "Volunteers",
         data: [25, 20, 30, 22, 17, 29],
         maxBarThickness: 10
       }
